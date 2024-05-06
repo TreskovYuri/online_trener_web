@@ -46,6 +46,7 @@ const days = ["вс", "пн", "вт", "ср", "чт", "пт", "сб"];
 const WeekCalendar = observer(() => {
   const router = useRouter()
   const [count, setCount] = useState(0);
+  const [weekCounter, serWeekCounter] = useState(0)
   let day = moment().subtract(1, "day").subtract(count, "week");
   // let day2 = moment().subtract(1, 'week');
   const daysArray = [...Array(7)].map(() => day.add(1, "day").clone());
@@ -153,7 +154,7 @@ const WeekCalendar = observer(() => {
         whileInView={{ opacity: 1 }}
         className={css.header}
       >
-        {monthArray[moment().format("MMMM")]},
+        {monthArray[moment().subtract(count, "week").format("MMMM")]},
         <span>{moment().format("YYYY")}</span>
         <div className={css.arrowContainer}>
           <Image
