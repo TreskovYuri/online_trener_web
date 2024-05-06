@@ -50,7 +50,7 @@ const Sidebar = observer(() => {
         <Link href='/admin/consultation' className={mobx.pageName==='Консультации'?`${css.link} ${css.active}`:`${css.link}`}><Image src={img9} className={css.img}/>Консультации</Link>
       </div>
       <div className={css.exitContainer}>
-        <Link href='/admin/settings' className={mobx.page==='settings'?`${css.link} ${css.active}`:`${css.link}`}><Image src={settings} className={css.img} onClick={()=>mobx.setPage('settings')}/>Настройки</Link>
+        <Link href='/' className={mobx.page==='settings'?`${css.link} ${css.active}`:`${css.link}`}><Image src={settings} className={css.img} onClick={()=>mobx.setPage('settings')}/>Настройки</Link>
         <div onClick={exit} className={`${css.link} ${css.exit}`}><Image src={ex} className={css.img}/>Выход</div>
       </div>
 

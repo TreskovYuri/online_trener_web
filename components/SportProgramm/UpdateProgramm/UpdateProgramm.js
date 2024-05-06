@@ -25,35 +25,44 @@ import WeekCalendar from './WeekCalendar/WeekCalendar'
 export const dynamic = 'force-dynamic'
 
 const pluralize = (number, one, two, five) => {
-  if (number % 10 === 1 && number % 100 !== 11) {
-    return one;
-  } else if ([2, 3, 4].includes(number % 10) && ![12, 13, 14].includes(number % 100)) {
-    return two;
-  } else {
-    return five;
-  }
+  try {
+    if (number % 10 === 1 && number % 100 !== 11) {
+      return one;
+    } else if ([2, 3, 4].includes(number % 10) && ![12, 13, 14].includes(number % 100)) {
+      return two;
+    } else {
+      return five;
+    }
+  } catch (e) { console.log(e) }
+
 };
 
 const countHandler = (one, two, three, four, five, six, seven) => {
-  let count = 0;
-  one && count++;
-  two && count++;
-  three && count++;
-  four && count++;
-  five && count++;
-  six && count++;
-  seven && count++;
-  return `${count} ${pluralize(count, 'прием', 'приема', 'приемов')} пищи`;
+  try {
+    let count = 0;
+    one && count++;
+    two && count++;
+    three && count++;
+    four && count++;
+    five && count++;
+    six && count++;
+    seven && count++;
+    return `${count} ${pluralize(count, 'прием', 'приема', 'приемов')} пищи`;
+  } catch (e) { console.log(e) }
+
 };
 
 const countHandler1 = (id) => {
-  let count = 0;
-  mobx.trainingBelongs.forEach(belong => {
-    if (belong.programmId == id) {
-      count++
-    }
-  })
-  return `${count} ${pluralize(count, 'упражнение', 'упражнения', 'упражнений')}`;
+  try {
+    let count = 0;
+    mobx.trainingBelongs.forEach(belong => {
+      if (belong.programmId == id) {
+        count++
+      }
+    })
+    return `${count} ${pluralize(count, 'упражнение', 'упражнения', 'упражнений')}`;
+  } catch (e) { console.log(e) }
+
 };
 
 
@@ -71,81 +80,94 @@ const UpdateProgramm = observer(() => {
 
 
   useEffect(() => {
-    PatternUtills.getAllNutrition()
-    TrainingUtills.getTrainingPattern()
-    TrainingUtills.getTrainingBelongs()
-    TrainingUtills.getExercise()
-    GroupUtills.getTests()
-    TrainingUtills.getTestTrainingPatternBelongs()
-    GroupUtills.getGroups()
-    UserUtills.getSportsmans()
-    mobx.setFinalExersiceArrayOnDragAndDrop([])
-    mobx.setFinalNutritionArrayOnDragAndDrop ([])
-    mobx.setFinalTestsArrayOnDragAndDrop([])
-    mobx.setFinalUsersArrayOnDragAndDrop([])
+    try {
+      PatternUtills.getAllNutrition()
+      TrainingUtills.getTrainingPattern()
+      TrainingUtills.getTrainingBelongs()
+      TrainingUtills.getExercise()
+      GroupUtills.getTests()
+      TrainingUtills.getTestTrainingPatternBelongs()
+      GroupUtills.getGroups()
+      UserUtills.getSportsmans()
+      mobx.setFinalExersiceArrayOnDragAndDrop([])
+      mobx.setFinalNutritionArrayOnDragAndDrop([])
+      mobx.setFinalTestsArrayOnDragAndDrop([])
+      mobx.setFinalUsersArrayOnDragAndDrop([])
+    } catch (e) { console.log(e) }
+
   }, [])
 
- useEffect(()=>{
-  setName(mobx.oneSprotProgramm.name)
-  setDescription(mobx.oneSprotProgramm.description)
- },[mobx.oneSprotProgramm])
+  useEffect(() => {
+    try {
+      setName(mobx.oneSprotProgramm.name)
+      setDescription(mobx.oneSprotProgramm.description)
+    } catch (e) { console.log(e) }
 
- useEffect(()=>{
-  if(mobx.sportprogrammUsers.length>0 && mobx.sportsmans.length>0){
-    mobx.sportprogrammUsers.forEach(user => {
-      if(!mobx.finalUsersArrayOnDragAndDrop.find(el => el.id == user.userId)){
-        mobx.setFinalUsersArrayOnDragAndDrop([... mobx.finalUsersArrayOnDragAndDrop, mobx.sportsmans.find(el => el.id == user.userId)])
+  }, [mobx.oneSprotProgramm])
+
+  useEffect(() => {
+    try {
+      if (mobx.sportprogrammUsers.length > 0 && mobx.sportsmans.length > 0) {
+        mobx.sportprogrammUsers.forEach(user => {
+          if (!mobx.finalUsersArrayOnDragAndDrop.find(el => el?.id == user?.userId)) {
+            const newUser = mobx.sportsmans.find(el => el?.id == user?.userId)
+            if (newUser) {
+              mobx.setFinalUsersArrayOnDragAndDrop([...mobx.finalUsersArrayOnDragAndDrop, mobx.sportsmans.find(el => el?.id == user?.userId)])
+            }
+
+          }
+        })
       }
-    })
-  }
- },[mobx.sportprogrammUsers,mobx.sportsmans])
+    } catch (e) { console.log(e) }
+
+  }, [mobx.sportprogrammUsers, mobx.sportsmans])
 
   const nextPage = () => {
-    if (page === 2) {
-      setPage(3)
-    } else {
-      setPage(2)
-      mobx.setPageName(name)
-    }
+    try {
+      if (page === 2) {
+        setPage(3)
+      } else {
+        setPage(2)
+        mobx.setPageName(name)
+      }
+    } catch (e) { console.log(e) }
+
   }
 
   const prevPage = () => {
-    if (page === 2) {
-      setPage(1)
-    } else {
-      setPage(2)
-    }
+    try {
+      if (page === 2) {
+        setPage(1)
+      } else {
+        setPage(2)
+      }
+    } catch (e) { console.log(e) }
+
   }
 
 
-  
+
 
 
 
   const save = async () => {
-    // mobx.finalExersiceArrayOnDragAndDrop.forEach(el => {
-    //   console.log(el.date)
-    // })
-    // mobx.finalNutritionArrayOnDragAndDrop.forEach(el => {
-    //   console.log(el.date)
-    // })
-    // mobx.finalTestsArrayOnDragAndDrop.forEach(el => {
-    //   console.log(el.date)
-    // })
+    try {
+      const formData = new FormData();
+      mobx.oneSprotProgramm.id && formData.append('id', mobx.oneSprotProgramm.id)
+      name && formData.append('name', name)
+      description && formData.append('description', description)
+      mobx.finalExersiceArrayOnDragAndDrop && formData.append('exersices', JSON.stringify(mobx.finalExersiceArrayOnDragAndDrop))
+      mobx.finalNutritionArrayOnDragAndDrop && formData.append('nutritions', JSON.stringify(mobx.finalNutritionArrayOnDragAndDrop))
+      mobx.finalTestsArrayOnDragAndDrop && formData.append('tests', JSON.stringify(mobx.finalTestsArrayOnDragAndDrop))
+      mobx.finalUsersArrayOnDragAndDrop && formData.append('users', JSON.stringify(mobx.finalUsersArrayOnDragAndDrop))
+  
+      const data = await SportProgrammUtills.update(formData)
+      if (data === 'ok') {
+        router.push('/admin/sportprogramm')
+      }
+    } catch (e) { console.log(e) }
 
-    const formData = new FormData();
-    mobx.oneSprotProgramm.id && formData.append('id', mobx.oneSprotProgramm.id) 
-    name && formData.append('name', name) 
-    description && formData.append('description', description) 
-    mobx.finalExersiceArrayOnDragAndDrop && formData.append('exersices', JSON.stringify(mobx.finalExersiceArrayOnDragAndDrop)) 
-    mobx.finalNutritionArrayOnDragAndDrop && formData.append('nutritions', JSON.stringify(mobx.finalNutritionArrayOnDragAndDrop)) 
-    mobx.finalTestsArrayOnDragAndDrop && formData.append('tests', JSON.stringify(mobx.finalTestsArrayOnDragAndDrop)) 
-    mobx.finalUsersArrayOnDragAndDrop && formData.append('users', JSON.stringify(mobx.finalUsersArrayOnDragAndDrop)) 
 
-    const data = await SportProgrammUtills.update(formData)
-    if (data === 'ok') {
-      router.push('/admin/sportprogramm')
-    }
   }
 
 
@@ -159,7 +181,7 @@ const UpdateProgramm = observer(() => {
 
         {page == 1 && <Page1 router={router} nextPage={nextPage} prevPage={prevPage} name={name} setName={setName} description={description} setDescription={setDescription} />}
         {page == 2 && <Page2 nextPage={nextPage} prevPage={prevPage} />}
-        {page == 3 && <Page3  nextPage={nextPage} prevPage={prevPage} save={save}/>}
+        {page == 3 && <Page3 nextPage={nextPage} prevPage={prevPage} save={save} />}
 
 
       </motion.div>
@@ -174,19 +196,25 @@ export default UpdateProgramm
 
 
 
-function Page1({ name, setName, description, setDescription ,nextPage,router}) {
+function Page1({ name, setName, description, setDescription, nextPage, router }) {
 
   const next = () => {
-    if( name ){
-      nextPage()
-    }else{
-      ErrorHandler('Введите название программы!')
-    }
+    try {
+      if (name) {
+        nextPage()
+      } else {
+        ErrorHandler('Введите название программы!')
+      }
+    } catch (e) { console.log(e) }
+   
   }
 
   const deleteProgramm = async () => {
-    const response = await SportProgrammUtills.delete(mobx.oneSprotProgramm?.id)
-    if(response && response=='ok'){router.push('/admin/sportprogramm')}
+    try {
+      const response = await SportProgrammUtills.delete(mobx.oneSprotProgramm?.id)
+      if (response && response == 'ok') { router.push('/admin/sportprogramm') }
+    } catch (e) { console.log(e) }
+
   }
 
 
@@ -227,74 +255,89 @@ const Page2 = observer(({ nextPage, prevPage }) => {
 
 
   const searchHandler = (e) => {
-    setSearch(e)
-    if (page === 'Питание'){
-      if (e) {
-        const results = mobx.nutritions.filter(nutrition =>
-          nutrition.name?.toLowerCase().includes(e.toLowerCase())
-        );
-        setNutritions(results);
-      } else {
-        setNutritions(mobx.nutritions);
+    try {
+      setSearch(e)
+      if (page === 'Питание') {
+        if (e) {
+          const results = mobx.nutritions.filter(nutrition =>
+            nutrition.name?.toLowerCase().includes(e.toLowerCase())
+          );
+          setNutritions(results);
+        } else {
+          setNutritions(mobx.nutritions);
+        }
+      } else if (page === 'Тренировки') {
+        if (e) {
+          const results = mobx.trainingPatterns.filter(trainingPattern =>
+            trainingPattern.name?.toLowerCase().includes(e.toLowerCase())
+          );
+          setTrainingPatterns(results);
+        } else {
+          setTrainingPatterns(mobx.trainingPatterns);
+        }
+      } else if (page === 'Упражнения') {
+        if (e) {
+          const results = mobx.exercises.filter(exercise =>
+            exercise.nameRu?.toLowerCase().includes(e.toLowerCase())
+          );
+          setExercises(results);
+        } else {
+          setExercises(mobx.exercises);
+        }
+      } else if (page === 'Тесты') {
+        if (e) {
+          const results = mobx.tests.filter(test =>
+            test.name?.toLowerCase().includes(e.toLowerCase())
+          );
+          setTests(results);
+        } else {
+          setTests(mobx.tests);
+        }
       }
-    }else if (page === 'Тренировки'){
-      if (e) {
-        const results = mobx.trainingPatterns.filter(trainingPattern =>
-          trainingPattern.name?.toLowerCase().includes(e.toLowerCase())
-        );
-        setTrainingPatterns(results);
-      } else {
-        setTrainingPatterns(mobx.trainingPatterns);
-      }
-    }else if (page === 'Упражнения'){
-      if (e) {
-        const results = mobx.exercises.filter(exercise =>
-          exercise.nameRu?.toLowerCase().includes(e.toLowerCase())
-        );
-        setExercises(results);
-      } else {
-        setExercises(mobx.exercises);
-      }
-    }else if (page === 'Тесты'){
-      if (e) {
-        const results = mobx.tests.filter(test =>
-          test.name?.toLowerCase().includes(e.toLowerCase())
-        );
-        setTests(results);
-      } else {
-        setTests(mobx.tests);
-      }
-    }
+    } catch (e) { console.log(e) }
     
+
   }
 
 
-  useEffect(()=>{
-    setNutritions(mobx.nutritions)
-  },[mobx.nutritions])
-  useEffect(()=>{
-    setTrainingPatterns(mobx.trainingPatterns)
-  },[mobx.trainingPatterns])
-  useEffect(()=>{
-    setExercises(mobx.exercises)
-  },[mobx.exercises])
-  useEffect(()=>{
-    setTests(mobx.tests)
-  },[mobx.tests])
+  useEffect(() => {
+    try{
+      setNutritions(mobx.nutritions)
+    }catch (e) { console.log(e) }
+  }, [mobx.nutritions])
+  useEffect(() => {
+    try{
+      setTrainingPatterns(mobx.trainingPatterns)
+    }catch (e) { console.log(e) }
+  }, [mobx.trainingPatterns])
+  useEffect(() => {
+    try{
+      setExercises(mobx.exercises)
+    }catch (e) { console.log(e) }
+  }, [mobx.exercises])
+  useEffect(() => {
+    try{
+      setTests(mobx.tests)
+    }catch (e) { console.log(e) }
+  }, [mobx.tests])
 
 
 
   const openUpdateModal = async (exercise) => {
-    const obj = await setsObject.find(obj => obj.id === exercise.id)
-    if (obj) {
-      setSets(obj.sets)
-      setTime(obj.time)
-    } else {
-      setSets('4x15')
-      setTime('30 сек')
-    }
-    setModalUpdateExercise(true)
-    setUpdateCard(exercise)
+    try{
+      if (obj) {
+        setSets(obj.sets)
+        setTime(obj.time)
+      } else {
+        setSets('4x15')
+        setTime('30 сек')
+      }
+      setModalUpdateExercise(true)
+      setUpdateCard(exercise)
+      const obj = await setsObject.find(obj => obj.id === exercise.id)
+    } catch (e) { console.log(e) }
+
+
   }
 
 
@@ -309,7 +352,7 @@ const Page2 = observer(({ nextPage, prevPage }) => {
           <Image src={favorite} alt='Онлайн-Тренер' className={css.img} />
         </div>
       </div>
-      <div  viewport={{ once: true }} className={css.searchContainer}>
+      <div viewport={{ once: true }} className={css.searchContainer}>
         <Image src={searchImg} className={css.search} alt='Онлайн-Тренер' />
         <input placeholder='Найти...' type='text' className={css.inputSearch} value={search} onChange={e => searchHandler(e.target.value)} />
       </div>
@@ -346,8 +389,8 @@ const Page2 = observer(({ nextPage, prevPage }) => {
                   draggable={true}
                   onDrag={(e) => {
                     mobx.setDragValue({
-                      'training':mobx.trainingBelongs.filter(el => el.programmId == card.id),
-                      "tests":mobx.testBelongs.filter(el => el.programmId == card.id)
+                      'training': mobx.trainingBelongs.filter(el => el.programmId == card.id),
+                      "tests": mobx.testBelongs.filter(el => el.programmId == card.id)
                     }
                     );
                     mobx.setDragFlag(true)
@@ -375,30 +418,30 @@ const Page2 = observer(({ nextPage, prevPage }) => {
         <div className={css.cardContainer} onDragOver={(e) => e.preventDefault()}>
           {
             exercises?.map(exercise => (
-              <div key={exercise.id} className={exesiceId.includes(exercise.id) ? `${css.exerciseCard} ${css.exerciseCardAdded}` : `${css.exerciseCard}`} draggable={globalExersicesArray.find(el => el.exerciseId == exercise.id)?true:false} onDrag={(e) => {
+              <div key={exercise.id} className={exesiceId.includes(exercise.id) ? `${css.exerciseCard} ${css.exerciseCardAdded}` : `${css.exerciseCard}`} draggable={globalExersicesArray.find(el => el.exerciseId == exercise.id) ? true : false} onDrag={(e) => {
                 mobx.setDragExersicesValue(
                   globalExersicesArray.find(el => el.exerciseId == exercise.id)
                 );
                 mobx.setDragExersicesFlag(true)
               }}>
-                
+
                 <div className={css.row}>
-                    <div className={css.imgBox}>
-                      <Image src={`${process.env.NEXT_PUBLIC_STATIC_URL}/assets/${exercise.img}`} className={css.img1} width={20} height={20} unoptimized />
-                    </div>
-                    <div className={css.textContainer}>
-                      <h2 className={css.exerciseName}>{TextWrang1(exercise.nameRu+ ' / ' + exercise.nameEng)}</h2>
-                      {
-                        globalExersicesArray.find(el => el.exerciseId == exercise.id) &&
-                        <span className={css.cardPreHeader}>{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets?.length}x{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets[0]?.diapazonOt
-                        }/{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets[0]?.diapazonDo}</span>
-                      }
-                    </div>
+                  <div className={css.imgBox}>
+                    <Image src={`${process.env.NEXT_PUBLIC_STATIC_URL}/assets/${exercise.img}`} className={css.img1} width={20} height={20} unoptimized />
                   </div>
-                      <div className={css.buttonContainer}>
-                        <span className={css.updateBtn} onClick={() => openUpdateModal(exercise)}>Изменить</span>
-                        {globalExersicesArray.find(el => el.exerciseId == exercise.id)&&<span className={css.addBtn} >Добавить</span>}
-                      </div>
+                  <div className={css.textContainer}>
+                    <h2 className={css.exerciseName}>{TextWrang1(exercise.nameRu + ' / ' + exercise.nameEng)}</h2>
+                    {
+                      globalExersicesArray.find(el => el.exerciseId == exercise.id) &&
+                      <span className={css.cardPreHeader}>{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets?.length}x{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets[0]?.diapazonOt
+                      }/{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets[0]?.diapazonDo}</span>
+                    }
+                  </div>
+                </div>
+                <div className={css.buttonContainer}>
+                  <span className={css.updateBtn} onClick={() => openUpdateModal(exercise)}>Изменить</span>
+                  {globalExersicesArray.find(el => el.exerciseId == exercise.id) && <span className={css.addBtn} >Добавить</span>}
+                </div>
               </div>
             ))
           }
@@ -418,9 +461,9 @@ const Page2 = observer(({ nextPage, prevPage }) => {
           }
         </div>
       }
-        {modalUpdateExercise &&
-          <SetsModalCard updateCard={updateCard} setModalUpdateExercise={setModalUpdateExercise} globalExersicesArray={globalExersicesArray} setGlobalExersicesArray={setGlobalExersicesArray} />
-        }
+      {modalUpdateExercise &&
+        <SetsModalCard updateCard={updateCard} setModalUpdateExercise={setModalUpdateExercise} globalExersicesArray={globalExersicesArray} setGlobalExersicesArray={setGlobalExersicesArray} />
+      }
       <div className={css.btnSave} onClick={nextPage}>Далее</div>
     </>
 
@@ -601,52 +644,57 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
   ]
 
   useEffect(() => {
-    let count = 0
-    globalExersicesArray.find(el => el.exerciseId == updateCard.id)?.sets?.forEach(set => {
-      array[set.set - 1][2](set.diapazonOt)
-      array[set.set - 1][4](set.diapazonDo)
-      set.pokazatel2 && array[set.set - 1][6](set.pokazatel2)
-      set.pokazatel3 && array[set.set - 1][8](set.pokazatel3)
-      set.pokazatel4 && array[set.set - 1][10](set.pokazatel4)
-      set.pokazatel5 && array[set.set - 1][12](set.pokazatel5)
-      count++
-    })
-    setTime(globalExersicesArray.find(el => el.exerciseId == updateCard.id)?.time)
-    setSetCount(setCount + count)
+    try{
+      let count = 0
+      globalExersicesArray.find(el => el.exerciseId == updateCard.id)?.sets?.forEach(set => {
+        array[set.set - 1][2](set.diapazonOt)
+        array[set.set - 1][4](set.diapazonDo)
+        set.pokazatel2 && array[set.set - 1][6](set.pokazatel2)
+        set.pokazatel3 && array[set.set - 1][8](set.pokazatel3)
+        set.pokazatel4 && array[set.set - 1][10](set.pokazatel4)
+        set.pokazatel5 && array[set.set - 1][12](set.pokazatel5)
+        count++
+      })
+      setTime(globalExersicesArray.find(el => el.exerciseId == updateCard.id)?.time)
+      setSetCount(setCount + count)
+    }catch(e){console.log(e)}
   }, [])
 
   const addExersicePokazaleli = () => {
-    const newSets = []; // Создаем новый массив для новых объектов sets
-    array.slice(0, setCount).forEach(card => {
-
-      if (card[1] && card[3]) {
-        const set = {};
-        set.set = card[0];
-        set.diapazonOt = card[1];
-        set.diapazonDo = card[3];
-        if (card[5]) set.pokazatel2 = card[5];
-        if (card[7]) set.pokazatel3 = card[7];
-        if (card[9]) set.pokazatel4 = card[9];
-        if (card[11]) set.pokazatel5 = card[11];
-        newSets.push(set); // Добавляем новый объект set в новый массив newSets
+    try{
+      const newSets = []; // Создаем новый массив для новых объектов sets
+      array.slice(0, setCount).forEach(card => {
+  
+        if (card[1] && card[3]) {
+          const set = {};
+          set.set = card[0];
+          set.diapazonOt = card[1];
+          set.diapazonDo = card[3];
+          if (card[5]) set.pokazatel2 = card[5];
+          if (card[7]) set.pokazatel3 = card[7];
+          if (card[9]) set.pokazatel4 = card[9];
+          if (card[11]) set.pokazatel5 = card[11];
+          newSets.push(set); // Добавляем новый объект set в новый массив newSets
+        }
+  
+      });
+  
+      if (globalExersicesArray.find(el => el.exerciseId == updateCard.id)) {
+        setGlobalExersicesArray([...globalExersicesArray.filter(el => el.exerciseId != updateCard.id), {
+          "exerciseId": updateCard.id,
+          "sets": newSets, // Используем новый массив newSets для добавления в глобальный массив
+          "time": time
+        }]);
+      } else {
+        setGlobalExersicesArray([...globalExersicesArray, {
+          "exerciseId": updateCard.id,
+          "sets": newSets, // Используем новый массив newSets для добавления в глобальный массив
+          "time": time
+        }]);
       }
-
-    });
-
-    if (globalExersicesArray.find(el => el.exerciseId == updateCard.id)) {
-      setGlobalExersicesArray([...globalExersicesArray.filter(el => el.exerciseId != updateCard.id), {
-        "exerciseId": updateCard.id,
-        "sets": newSets, // Используем новый массив newSets для добавления в глобальный массив
-        "time": time
-      }]);
-    } else {
-      setGlobalExersicesArray([...globalExersicesArray, {
-        "exerciseId": updateCard.id,
-        "sets": newSets, // Используем новый массив newSets для добавления в глобальный массив
-        "time": time
-      }]);
-    }
-    setModalUpdateExercise(false)
+      setModalUpdateExercise(false)
+    }catch(e){console.log(e)}
+    
   }
 
   return (
@@ -671,8 +719,8 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
           />
         ))}
 
-        <div className={css.AddSetsBtn} onClick={() => setSetCount(setCount>0 ?setCount - 1: 0)}><span>-</span>Удалить сет</div>
-        <div className={`${css.AddSetsBtn} ${css.AddSetsBtn1}`} onClick={() => setSetCount(setCount>19 ?20: setCount + 1)}><span>+</span>Добавить сет</div>
+        <div className={css.AddSetsBtn} onClick={() => setSetCount(setCount > 0 ? setCount - 1 : 0)}><span>-</span>Удалить сет</div>
+        <div className={`${css.AddSetsBtn} ${css.AddSetsBtn1}`} onClick={() => setSetCount(setCount > 19 ? 20 : setCount + 1)}><span>+</span>Добавить сет</div>
         <span className={css.label}>Время отдыха</span>
         <input type='number' min={0} className={`${css.input} ${css.name} ${css.ipdateInput}`} placeholder='Продолжительность' id="password" value={time} onChange={e => setTime(e.target.value)} />
         <div className={css.buttonContainer}>
@@ -686,7 +734,7 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
 function SetsRow({ setNum, updateCard,
   diapazonOt, setDiapazonOt, diapazonDo, setDiapazonDo, pokazatel2, setPokazatel2, pokazatel3, setPokazatel3, pokazatel4, setPokazatel4, pokazatel5, setPokazatel5
 }) {
-  useEffect(()=>{
+  useEffect(() => {
     return () => {
       setDiapazonDo('')
       setDiapazonOt('')
@@ -695,7 +743,7 @@ function SetsRow({ setNum, updateCard,
       setPokazatel4('')
       setPokazatel5('')
     }
-  },[])
+  }, [])
   return (
     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} className={css.rowContainer}>
       <span className={css.setNum}>{setNum}</span>
@@ -715,19 +763,25 @@ function SetsRow({ setNum, updateCard,
 
 
 function TextWrang(text) {
-  if (text && text?.length <= 4) {
-    return text;
-  } else if (text) {
-    return text?.slice(0, 4) + "..";
-  } else return ''
+  try{
+    if (text && text?.length <= 4) {
+      return text;
+    } else if (text) {
+      return text?.slice(0, 4) + "..";
+    } else return ''
+  }catch(e){console.log(e)}
+  
 }
 
 function TextWrang1(text) {
-  if (text && text?.length <= 28) {
-    return text;
-  } else if (text) {
-    return text?.slice(0, 28) + "..";
-  } else return ''
+  try{
+    if (text && text?.length <= 28) {
+      return text;
+    } else if (text) {
+      return text?.slice(0, 28) + "..";
+    } else return ''
+  }catch(e){console.log(e)}
+
 }
 
 
@@ -735,37 +789,44 @@ function TextWrang1(text) {
 
 
 
-const  Page3 = observer(({ nextPage, prevPage,save }) => {
+const Page3 = observer(({ nextPage, prevPage, save }) => {
   const [search, setSearch] = useState('')
   const [userArray, setUserArray] = useState([])
   const [userAllArray, setUserAllArray] = useState([])
 
   useEffect(() => {
-    setUserAllArray(mobx.sportsmans)
+    try{
+      setUserAllArray(mobx.sportsmans)
+    }catch(e){console.log(e)}
   }, [mobx.sportsmans])
 
   const addUser = (user) => {
-    mobx.setFinalUsersArrayOnDragAndDrop([... mobx.finalUsersArrayOnDragAndDrop, user])
+    try{
+      mobx.setFinalUsersArrayOnDragAndDrop([...mobx.finalUsersArrayOnDragAndDrop, user])
+    }catch(e){console.log(e)}
+
   }
 
   const deleteUser = (user) => {
-    setUserArray(userArray.filter(el => el.id !== user.id))
+    try{
+      setUserArray(userArray.filter(el => el.id !== user?.id))
+    }catch(e){console.log(e)}
+
   }
 
   const searchUsers = (e) => {
-    setSearch(e)
-    if (e) {
-      // Фильтрация пользователей по полю name
-      const results = mobx.sportsmans.filter(user =>
-        user.name?.toLowerCase().includes(e.toLowerCase())
-      );
-      setUserAllArray(results);
-    } else {
-      setUserAllArray(mobx.sportsmans);
-    }
-
-
-
+    try{
+      setSearch(e)
+      if (e) {
+        // Фильтрация пользователей по полю name
+        const results = mobx.sportsmans.filter(user =>
+          user.name?.toLowerCase().includes(e.toLowerCase())
+        );
+        setUserAllArray(results);
+      } else {
+        setUserAllArray(mobx.sportsmans);
+      }
+    }catch(e){console.log(e)}
   }
 
 
@@ -784,20 +845,20 @@ const  Page3 = observer(({ nextPage, prevPage,save }) => {
       </div>
       <div className={css.finalUserContainer}>
         {mobx.finalUsersArrayOnDragAndDrop.slice(0, 10).map(man => (
-              man.img ?
-                <Image alt='' src={`${process.env.NEXT_PUBLIC_STATIC_URL}/assets/${man.img}`} width={10} height={10} unoptimized className={css.userImg} /> :
-                <Image alt='' src={user} width={10} height={10} unoptimized className={css.userImg} />
+          man.img ?
+            <Image alt='' src={`${process.env.NEXT_PUBLIC_STATIC_URL}/assets/${man?.img}`} width={10} height={10} unoptimized className={css.userImg} /> :
+            <Image alt='' src={user} width={10} height={10} unoptimized className={css.userImg} />
         ))}
-        
+
       </div>
-      <div  viewport={{ once: true }} className={css.searchContainer}>
+      <div viewport={{ once: true }} className={css.searchContainer}>
         <Image src={searchImg} className={css.search} alt='Онлайн-Тренер' />
         <input placeholder='Найти...' type='text' className={css.inputSearch} value={search} onChange={e => searchUsers(e.target.value)} />
       </div>
       <div className={css.searchUserCOntainer}>
         {userAllArray.map(man => (
-          <div key={man.id} className={css.searcgUserCard}>
-            { mobx.finalUsersArrayOnDragAndDrop.find(el => el.id == man.id) ?
+          <div key={man?.id} className={css.searcgUserCard}>
+            {mobx.finalUsersArrayOnDragAndDrop.find(el => el?.id == man?.id) ?
               <Image src={checkOn} onClick={() => deleteUser(man)} className={css.checkImg} /> :
               <Image src={checkOff} onClick={() => addUser(man)} className={css.checkImg} />}
             {
