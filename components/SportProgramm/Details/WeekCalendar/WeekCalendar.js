@@ -71,11 +71,11 @@ const WeekCalendar = observer(() => {
         try {
           mobx.setFinalExersiceArrayOnDragAndDrop(
             mobx.sportprogrammExersices.map(el => ({
-              id: el.id,
-              date: el.date,
+              id: el?.id,
+              date: el?.date,
               body: {
-                "exerciseId": el.exerciseId,
-                "sets": JSON.parse(el.sets)
+                "exerciseId": el?.exerciseId,
+                "sets": JSON.parse(el?.sets)
               }
             }))
           );
@@ -94,9 +94,9 @@ const WeekCalendar = observer(() => {
       if (mobx.sportprogrammNutritions.length > 0 && mobx.nutritions?.length > 0) {
         mobx.setFinalNutritionArrayOnDragAndDrop(
           mobx.sportprogrammNutritions.map(el => ({
-            id: el.id,
-            date: el.date,
-            body: mobx.nutritions.find(obj => obj.id == el.nutritionId)
+            id: el?.id,
+            date: el?.date,
+            body: mobx.nutritions.find(obj => obj?.id == el?.nutritionId)
           }))
         );
         return () => {
@@ -112,9 +112,9 @@ const WeekCalendar = observer(() => {
       if (mobx.sportprogrammTests.length > 0 && mobx.tests.length > 0) {
         mobx.setFinalTestsArrayOnDragAndDrop(
           mobx.sportprogrammTests.map(el => ({
-            id: el.id,
-            date: el.date,
-            body: mobx.tests.find(obj => obj.id == el.testId)
+            id: el?.id,
+            date: el?.date,
+            body: mobx.tests.find(obj => obj?.id == el?.testId)
           }))
         );
         return () => {
@@ -307,7 +307,7 @@ const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray, f
         mobx.dragValue?.tests.forEach((el) => {
           const id = Math.floor(Math.random() * 100001);
           array.push({ ...el, id: id });
-          mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop, { id: id, date: dayItem, body: mobx.tests.find(obj => obj.id == el.testId) },]);
+          mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop, { id: id, date: dayItem, body: mobx.tests.find(obj => obj?.id == el?.testId) },]);
         });
         mobx.setDragValue({});
         mobx.setDropValue({});
@@ -361,11 +361,11 @@ const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray, f
 
               <span className={css.cardHeader}>
                 {TextWrang(
-                  mobx.exercises?.find((el) => el.id == item.body?.exerciseId)
+                  mobx.exercises?.find((el) => el?.id == item.body?.exerciseId)
                     ?.nameRu +
                   " / " +
                   TextWrang(
-                    mobx.exercises?.find((el) => el.id == item.body?.exerciseId)?.nameEng
+                    mobx.exercises?.find((el) => el?.id == item.body?.exerciseId)?.nameEng
                   )
                 )}
 
@@ -396,7 +396,7 @@ const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray, f
                   mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameRu +
                   " / " +
                   TextWrang(
-                    mobx.exercises?.find((el) => el.id == item.body?.exerciseId)?.nameEng
+                    mobx.exercises?.find((el) => el?.id == item.body?.exerciseId)?.nameEng
                   )
                 )}
               </span>

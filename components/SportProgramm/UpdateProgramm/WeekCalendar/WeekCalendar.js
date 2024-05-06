@@ -61,11 +61,11 @@ const WeekCalendar = observer(() => {
       try{
         mobx.setFinalExersiceArrayOnDragAndDrop(
           mobx.sportprogrammExersices.map(el => ({
-            id: el.id,
-            date: el.date,
+            id: el?.id,
+            date: el?.date,
             body: {
-              "exerciseId":el.exerciseId,
-              "sets":JSON.parse(el.sets)
+              "exerciseId":el?.exerciseId,
+              "sets":JSON.parse(el?.sets)
             }
           }))
         );
@@ -81,9 +81,9 @@ const WeekCalendar = observer(() => {
     if(mobx.sportprogrammNutritions.length>0 && mobx.nutritions?.length>0){
       mobx.setFinalNutritionArrayOnDragAndDrop(
         mobx.sportprogrammNutritions.map(el => ({
-          id: el.id,
-          date: el.date,
-          body: mobx.nutritions.find(obj => obj.id == el.nutritionId)
+          id: el?.id,
+          date: el?.date,
+          body: mobx.nutritions.find(obj => obj?.id == el?.nutritionId)
         }))
       );
       return ()=>{
@@ -96,9 +96,9 @@ const WeekCalendar = observer(() => {
     if(mobx.sportprogrammTests.length>0 && mobx.tests.length>0){
       mobx.setFinalTestsArrayOnDragAndDrop(
         mobx.sportprogrammTests.map(el => ({
-          id: el.id,
-          date: el.date,
-          body: mobx.tests.find(obj => obj.id == el.testId)
+          id: el?.id,
+          date: el?.date,
+          body: mobx.tests.find(obj => obj?.id == el?.testId)
         }))
       );
       return ()=>{
@@ -113,8 +113,8 @@ const WeekCalendar = observer(() => {
   useEffect(()=>{
     if(mobx.sportprogrammUsers.length>0 && mobx.sportsmans.length>0){
       mobx.sportprogrammUsers.forEach(user => {
-        if(!users.find(el => el.id == user.userId)){
-          setUsers([...users, mobx.sportsmans.find(el => el.id == user.userId)])
+        if(!users.find(el => el?.id == user?.userId)){
+          setUsers([...users, mobx.sportsmans.find(el => el?.id == user?.userId)])
         }
       })
     }
@@ -241,7 +241,7 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       mobx.dragValue?.tests.forEach((el) => {
         const id = Math.floor(Math.random() * 100001);
         array.push({ ...el, id: id });
-        mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop,{id: id,date: dayItem,body: mobx.tests.find(obj => obj.id == el.testId)},]);
+        mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop,{id: id,date: dayItem,body: mobx.tests.find(obj => obj?.id == el?.testId)},]);
       });
       mobx.setDragValue({});
       mobx.setDropValue({});
@@ -259,7 +259,7 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
     }
     if (mobx.dragNutritionFlag) {
       const id = Math.floor(Math.random() * 100001);
-      mobx.setFinalNutritionArrayOnDragAndDrop([...mobx.finalNutritionArrayOnDragAndDrop.filter( (el) => el.date != dayItem ),{id: id,date: dayItem,body: mobx.dropAndDropArrayNutrition},]);
+      mobx.setFinalNutritionArrayOnDragAndDrop([...mobx.finalNutritionArrayOnDragAndDrop.filter( (el) => el?.date != dayItem ),{id: id,date: dayItem,body: mobx.dropAndDropArrayNutrition},]);
       mobx.setDragNutritionFlag(false);
       mobx.setDropAndDropArrayNutrition({});
       setShowDrop(false);
@@ -273,11 +273,11 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
     }
   };
 
-  const deleteExercises = (id) => {mobx.setFinalExersiceArrayOnDragAndDrop(mobx.finalExersiceArrayOnDragAndDrop.filter((el) => el.id != id));};
+  const deleteExercises = (id) => {mobx.setFinalExersiceArrayOnDragAndDrop(mobx.finalExersiceArrayOnDragAndDrop.filter((el) => el?.id != id));};
 
-  const deleteNutritions = (id) => { mobx.setFinalNutritionArrayOnDragAndDrop(mobx.finalNutritionArrayOnDragAndDrop.filter((el) => el.id != id));};
+  const deleteNutritions = (id) => { mobx.setFinalNutritionArrayOnDragAndDrop(mobx.finalNutritionArrayOnDragAndDrop.filter((el) => el?.id != id));};
 
-  const deleteTests = (id) => {mobx.setFinalTestsArrayOnDragAndDrop(mobx.finalTestsArrayOnDragAndDrop.filter((el) => el.id != id));};
+  const deleteTests = (id) => {mobx.setFinalTestsArrayOnDragAndDrop(mobx.finalTestsArrayOnDragAndDrop.filter((el) => el?.id != id));};
 
   return (
     <motion.div
@@ -298,16 +298,16 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
               <Image
                 src={deleteImg}
                 className={css.deleteImg}
-                onClick={() => deleteExercises(item.id)}
-                key={item.id}
+                onClick={() => deleteExercises(item?.id)}
+                key={item?.id}
               />
               <span className={css.cardHeader}>
                 {TextWrang(
-                  mobx.exercises?.find((el) => el.id == item.body?.exerciseId)
+                  mobx.exercises?.find((el) => el?.id == item.body?.exerciseId)
                     ?.nameRu +
                     " / " +
                     TextWrang(
-                      mobx.exercises?.find((el) => el.id == item.body?.exerciseId)?.nameEng
+                      mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameEng
                     )
                 )}
                 
@@ -331,19 +331,19 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
             Упражнения <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {exercicesArray?.slice(0, 2)?.map(item => (
-            <div key={item.id} className={css.trainingCard}>
+            <div key={item?.id} className={css.trainingCard}>
               <Image
                 src={deleteImg}
                 className={css.deleteImg}
-                onClick={() => deleteExercises(item.id)}
-                key={item.id}
+                onClick={() => deleteExercises(item?.id)}
+                key={item?.id}
               />
               <span className={css.cardHeader}>
                 {TextWrang(
                   mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameRu +
                     " / " +
                     TextWrang(
-                      mobx.exercises?.find((el) => el.id == item.body?.exerciseId)?.nameEng
+                      mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameEng
                     )
                 )}
               </span>
@@ -370,7 +370,7 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
             alt=""
               src={deleteImg}
               className={css.deleteImg}
-              onClick={() => deleteNutritions(nutritionsArray.id)}
+              onClick={() => deleteNutritions(nutritionsArray?.id)}
             />
             <span className={css.cardHeader}>
               {TextWrang(nutritionsArray?.body?.name)}
@@ -399,12 +399,12 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
             <Image
               src={deleteImg}
               className={css.deleteImg}
-              onClick={() => deleteTests(item.id)}
-              key={item.id}
+              onClick={() => deleteTests(item?.id)}
+              key={item?.id}
             />
             <span className={css.cardHeader}>{TextWrang(item.body?.name)}</span>
             <span className={css.cardTypes}>
-              Норматив: {item.body?.item} {item.body?.type}
+              Норматив: {item?.body?.item} {item?.body?.type}
             </span>
           </div>
           ))}
@@ -428,12 +428,12 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
               <Image
                 src={deleteImg}
                 className={css.deleteImg}
-                onClick={() => deleteTests(item.id)}
-                key={item.id}
+                onClick={() => deleteTests(item?.id)}
+                key={item?.id}
               />
-              <span className={css.cardHeader}>{TextWrang(item.body?.name)}</span>
+              <span className={css.cardHeader}>{TextWrang(item?.body?.name)}</span>
               <span className={css.cardTypes}>
-                Норматив: {item.item} {item.type}
+                Норматив: {item?.item} {item?.type}
               </span>
             </div>
           ))}

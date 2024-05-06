@@ -809,7 +809,7 @@ const Page3 = observer(({ nextPage, prevPage, save }) => {
 
   const deleteUser = (user) => {
     try{
-      setUserArray(userArray.filter(el => el.id !== user?.id))
+      setUserArray(userArray.filter(el => el?.id !== user?.id))
     }catch(e){console.log(e)}
 
   }
