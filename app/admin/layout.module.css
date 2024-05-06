@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    width: 100%;
+    height: auto;
+    background-color: #EBEEF7;
+    min-height: 100vh;
+    
+}
+.column{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}

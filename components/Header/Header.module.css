@@ -1,0 +1,111 @@
+.container{
+    width: 100%;
+    height: 5.5vw;
+    position: relative;
+    padding: 1vw 3vw;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.container1{
+    display: flex;
+    flex-direction: column;
+    gap:.7vw;
+}
+.border{
+    height: 1px;
+    width: 94%;
+    position: absolute;
+    bottom: 0;
+    left: 3%;
+    background-color: rgb(214, 213, 213);
+}
+.header{
+    margin: 0;
+    font-size: 1.2vw;
+    font-weight: 600;
+    height: 1.5vw;
+}
+.exit{
+    color: var(--blue);
+    font-size: .7vw;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all .3s;
+}
+.exit:hover{
+    color: var(--blue-hover);
+}
+.container2{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    width: 40%;
+    gap: 2vw;
+}
+.input{
+    background-color: #DDE1EE;
+    border: none;
+    outline: none;
+    width: 17vw;
+    height: 2.2vw;
+    border-radius: .5vw;
+    font-size: .7vw;
+    padding: 0 1vw;
+}
+.search{
+    position: absolute;
+    height: 30%;
+    width: auto;
+    top: 35%;
+    right: 3%;
+    cursor: pointer;
+    transition: all .3S;
+}
+.search:hover{
+    transform: scale(103%);
+}
+.searchContainer{
+    position: relative;
+}
+.profileontainer{
+    display: flex;
+    align-items: center;
+    gap:1vw;
+    width: auto;
+}
+
+.userImg{
+    width: 2.5vw;
+    height: 2.5vw;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: all .3s;
+}
+.userImg:hover{
+    transform: scale(103%);
+    opacity: .9;
+}
+.descrContainer{
+    display: flex;
+    flex-direction: column;
+}
+.Username{
+    font-size: .7vw;
+    font-weight: 600;
+    margin: 0;
+}
+.row{
+    display: flex;
+    gap: .5vw;
+    margin-top: 0.5vw;
+    width: 12vw;
+}
+.posts{
+    background-color: #DDE1EE;
+    padding: .2vw .7vw;
+    border-radius: 10vw;
+    font-size: .7vw;
+    width: auto;
+}

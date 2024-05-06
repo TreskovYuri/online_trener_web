@@ -1,0 +1,50 @@
+.container{
+    width: 100%;
+    height: auto;
+    padding: 2vw;
+    box-sizing: border-box;
+    position: relative;
+    min-height: 89vh;
+    
+}
+.navbar{
+    display: flex;
+    position: absolute;
+    top: 2vw;
+    right: 3vw;
+    gap: .3vw;
+}
+.add{
+    background-color: white;
+    padding: 0 1vw;
+    border-radius: 10vw;
+    font-size: .6vw;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: .3vw;
+    cursor: pointer;
+    transition: all .3s;
+}
+.add span{
+    font-size: 1.5vw;
+}
+.btn{
+    background-color: white;
+    border-radius: 10vw;
+    width: 2vw;
+    height: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
+}
+.img{
+    height: .8vw;
+    width:  auto;
+    margin: 0;
+}
+.add:hover, .btn:hover{
+    background-color: rgb(250, 250, 250);
+}

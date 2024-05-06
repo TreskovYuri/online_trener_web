@@ -1,0 +1,81 @@
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    flex-shrink: 1vw;
+    font-weight: 500;
+    font-size: 1.1vw;
+    margin: 0;
+    height: 1vw;
+}
+.cardContainer{
+    display: flex;
+    gap: 1vw;
+    margin-top: 2vw;
+    flex-wrap: wrap;
+}
+.card{
+    width: 24%;
+    height: auto;
+    padding: 1vw;
+    background-color: #DDE1EE;
+    border-radius: .5vw;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all .3s;
+}
+.card:hover{
+    background-color: #d3d7e4;
+}
+.cardName{
+    font-size: .9vw;
+    font-weight: 600;
+    overflow: hidden;
+    margin: 0;
+}
+.cardEmail{
+    font-size: .7vw;
+    font-weight: 400;
+    overflow: hidden;
+    margin: 0;
+}
+.count{
+    color: white;
+    background: linear-gradient(90deg, #4A82F0 0%, #3651FA 100%);
+    padding: .2vw 1vw;
+    border-radius: 10vw;
+    font-size: .7vw;
+    width: 44%;
+    text-align: center;
+}
+.descrHeader{
+    font-size: .7vw;
+    margin-top: 1vw;
+    opacity: .5;
+}
+.description{
+    font-size: .7vw;
+    margin-top: 0.5vw;
+}
+.row{
+    display: flex;
+    gap: 1vw ;
+}
+.img{
+    border-radius: 10vw;
+}
+.typesContainer{
+    display: flex;
+    gap: .5vw;
+    margin-top: 1vw;
+}
+.typesContainer span{
+    background-color: rgba(255, 255, 255, 0.492);
+    padding: .2vw 1.2vw;
+    border-radius: 1vw;
+    font-size: .7vw;
+}

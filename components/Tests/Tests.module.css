@@ -1,0 +1,70 @@
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 0vw;
+}
+.header{
+    flex-shrink: 1vw;
+    font-weight: 500;
+    font-size: 1.1vw;
+    margin: 0;
+    height: 1vw;
+}
+.cardContainer{
+    display: flex;
+    gap: 1vw;
+    margin-top: 2vw;
+    flex-wrap: wrap;
+}
+.card{
+    width: 31.8%;
+    height: auto;
+    padding: 1vw;
+    background-color: #DDE1EE;
+    border-radius: .5vw;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all .3s;
+}
+.card:hover{
+    background-color: #d3d7e4;
+}
+.cardName{
+    font-size: .8vw;
+    overflow: hidden;
+    height: 2vw;
+}
+.type{
+    background: rgb(74,131,240);
+    background: radial-gradient(circle, rgba(74,131,240,1) 0%, rgba(54,82,250,1) 100%);
+    color: white;
+    padding: .3vw 1.2vw;
+    border-radius: 1vw;
+    font-size: .7vw;
+    font-weight: 600;
+}
+.label{
+    font-size: .7vw;
+    margin-top: 0.6vw;
+    font-weight: 600;
+    opacity: .6;
+}
+.description{
+    font-size: .8vw;
+    margin-top: 0.6vw;
+    font-weight: 600;
+    opacity: 1;
+    height: 3.1vw;
+    overflow: hidden;
+}
+.norm{
+    margin-top: 1vw;
+    font-size: .9vw;
+    font-weight: 600;
+    opacity: 1;
+}

@@ -1,0 +1,70 @@
+.container{
+    width: 100%;
+    height: auto;
+    min-height: 80vh;
+}
+.calendar{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(6,1fr);
+}
+.cell{
+    width: 100%;
+    height: 7vw;
+    border: 1px solid #DDE2EA;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding:.5vw .3vw;
+    box-sizing: border-box;
+}
+.date{
+    width: 100%;
+    text-align: right;
+    font-size: .7vw;
+    font-weight: 600;
+}
+.dateNow{
+    width: 100%;
+    text-align: right;
+    font-size: .7vw;
+    font-weight: 600;
+}
+.dateNow span{
+    background: linear-gradient(90deg, #4A82F0 0%, #3651FA 100%);
+    padding: .3vw;
+    color: white;
+    border-radius: .2vw;
+}
+
+.weekend{
+    color: var(--blue);
+}
+.header{
+    font-size: 1vw;
+    font-weight: 600;
+}
+.header span{
+    opacity: .3;
+    margin-left: 0.3vw;
+}
+.calendarHeader{
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-top: 1vw;
+}
+.day{
+ width: 100%;
+ height: 2vw;
+ display: flex;
+ justify-content: flex-start;
+ align-items: center;
+    padding: 0 .5vw;
+}
+.day span{
+    border: 1px solid #DBDFE8;
+    border-radius: 10vw;
+    padding: .1vw .6vw;
+    font-size: 0.6vw;
+    font-weight: 800;
+}

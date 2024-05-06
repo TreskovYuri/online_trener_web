@@ -1,0 +1,191 @@
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1vw 0;
+    box-sizing: border-box;
+    min-height: 88vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    background-color: rgba(0, 0, 0, 0.418);
+    margin: 0;
+}
+.modalWind{
+    display: flex;
+    width: 95%;
+    height: 20vw;
+    background-color: white;
+    border-radius: 1vw;
+    padding: 2vw;
+    box-sizing: border-box;
+}
+.imgContainer{
+    width: 25%;
+    padding-top: 4vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.descrContainer{
+    display: flex;
+    flex-direction: column;
+}
+.row{
+    display: flex;
+    justify-content: center;
+    gap: .3vw;
+}
+.Username{
+    font-size: .9vw;
+    font-weight: 400;
+    text-align: center;
+}
+.userImg{
+    width: 6vw;
+    height:  6vw;
+}
+.posts{
+    background-color: #DDE1EE;
+    padding: .3vw .7vw;
+    border-radius: 10vw;
+    font-size: .6vw;
+}
+.formContainer{
+    width: 37%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: 1vw;
+    box-sizing: border-box;
+}
+.formHeader{
+    font-size: .7vw;
+    opacity: .8;
+}
+.inputContainer{
+    width: 100%;
+    height: auto;
+    position: relative;
+    box-sizing: border-box;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.7vw;
+}
+.input{
+    width: 100%;
+    height: 2.7vw;
+    padding: .5vw .7vw 0 .7vw;
+    border-radius: .7vw;
+    border: 1px solid rgb(228, 228, 228);
+    outline: none;
+    font-size: .8vw;
+    background-color: white;
+}
+.label{
+font-size: .6vw ;
+  position: absolute;
+  font-weight: 500;
+  top: 7%;
+  left: .7vw;
+  pointer-events: none;
+  opacity: .7;
+}
+.btnContainer{
+    font-weight: 600;
+    margin-top: auto;
+    display: flex;
+    gap: 2vw;
+}
+.delete{
+    color: red;
+    font-size: .7vw;
+    cursor: pointer;
+    transition: all .3s;
+}
+.save{
+    font-size: .7vw;
+    color: rgb(69, 171, 255);
+    cursor: pointer;
+}
+.delete:hover .save:hover{
+    opacity: .8;
+}
+.file {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    position: absolute;
+  }
+.labelFile{
+    color: var(--blue);
+    font-family: var(--semibold);
+    width: 70%;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: .8vw;
+}
+.postModal{
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    height:5vw; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: white;
+    z-index: 89;
+    border: 1px solid rgba(128, 128, 128, 0.293);
+    border-radius: .5vw;
+    padding: 0vw 0;
+    overflow-y: auto;
+}
+.postModal span{
+    text-align: center;
+    width: 100%;
+    padding: .3vw 0;
+}
+.postModal span:hover{
+    background-color: rgb(240, 240, 240);
+}
+.input1{
+    width: 100%;
+    height: 2.7vw;
+    border-radius: .7vw;
+    border: 1px solid rgb(228, 228, 228);
+    outline: none;
+    font-size: .8vw;
+    background-color: white;
+    padding: 0 1vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.593);
+    cursor: pointer;
+    position: relative;
+    margin-top: .2vw;
+}
+.label1{
+    font-size: 0.7vw;
+    font-weight: 400;
+    opacity: .7;
+    margin-top: 0.5vw;
+}
+.arrow{
+    width: .9vw;
+    height: auto;
+    cursor: pointer;
+    transition: all .3s;
+}
+.arrow:hover{
+    opacity: .8;
+}

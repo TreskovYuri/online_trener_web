@@ -1,0 +1,240 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.168);
+    z-index: 99;
+    display: flex;
+    justify-content: flex-end;
+}
+.modalWind{
+    height: 100vh;
+    width: 20vw;
+    min-height: 90vh;
+    background-color: white;
+    border-radius: 1vw 0 0 1vw;
+    display: flex;
+    flex-direction: column;
+    padding: 0vw 1.3vw 5vw 1.3vw;
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: relative;
+}
+.headerContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2vw;
+    margin-bottom: 1vw;
+}
+.header{
+    font-size: 1vw;
+    font-weight: 500;
+}
+.input{
+    width: 90%;
+    height: 11.8vw;
+    padding:0 .7vw;
+    border-radius: .7vw;
+    border: 1px solid rgb(228, 228, 228);
+    outline: none;
+    font-size: .65vw;
+    background-color: white;
+    opacity: .9;
+    resize: none;
+}
+.descr{
+    height: 7vw;
+    margin-bottom: 0;
+    padding-top: .9vw;
+
+}
+.descr::placeholder{
+    font-weight: 100;
+    opacity: .7;
+    font-size: .7vw;
+    font-weight: 100;
+    font-weight: normal;
+}
+.name{
+    display: flex;
+    align-items: center;
+    height: 2.3vw;
+    margin-top: 0.3vw;
+    font-size: .8vw;
+    opacity: 1;
+    padding: 1vw .5vw;
+}
+.date{
+    display: flex;
+    align-items: center;
+    height: 2.3vw;
+    font-size: .6vw;
+    opacity: 1;
+    margin-top: 0.3vw;
+}
+.name::placeholder .date::placeholder{
+    font-weight: 100;
+    opacity: .7;
+    font-size: .6vw;
+    font-weight: 100;
+    font-weight: normal;
+}
+.btnSave{
+    width: 16.7vw;
+    background-color: var(--blue);
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 2vw;
+    right: 1.9vw;
+    font-size: .8vw ;
+    border-radius: 10vw;
+    padding: .5vw 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s;
+}
+.btnSave:hover{
+    transform: scale(101%);
+    background-color: var(--blue-hover);
+}
+.label{
+    font-size: .6vw;
+    margin-top: 0.8vw;
+    font-weight: 400;
+    opacity: .7;
+}
+.usersContainer{
+    /* height: 7vw; */
+    min-height: 5vw;
+    border-top: 1px solid rgb(230, 230, 230);
+    border-bottom: 1px solid rgb(230, 230, 230);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1vw 0;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+.placeholder{
+    font-size: .7vw;
+    font-weight: 600;
+    opacity: .5;
+}
+.search{
+    position: absolute;
+    height: 30%;
+    width: auto;
+    top: 35%;
+    right: 8%;
+    cursor: pointer;
+    transition: all .3S;
+}
+.search:hover{
+    transform: scale(103%);
+}
+.searchContainer{
+    position: relative;
+    margin-top: 1vw;
+}
+.inputSearch{
+    background-color: #DDE1EE;
+    border: none;
+    outline: none;
+    width: 17vw;
+    height: 2.2vw;
+    border-radius: .5vw;
+    font-size: .7vw;
+    padding: 0 1vw;
+}
+.allUsersContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 1vw .2vw;
+}
+.userCard{
+    display: flex;
+    align-items: center;
+    gap: .8vw;
+    margin-top: 0.5vw;
+}
+.checkBox{
+    height: 1.3vw;
+    width: 1.3vw;
+    border-radius: 100%;
+    border: 1px solid rgb(182, 182, 182);
+    cursor: pointer;
+    transition: all .1s;
+}
+.checkBoxActive{
+    background-color: var(--blue);
+    opacity: .8;
+}
+.checkBox:hover{
+    background-color: rgb(249, 249, 249);
+}
+.checkBoxActive:hover{
+    background-color: var(--blue-hover);
+}
+.cardImg{
+    border-radius: 100%;
+    width: 1.7vw;
+    height: auto;
+}
+.cardName{
+    font-size: .7vw;
+    font-weight: 600;
+}
+.userCard1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 1vw 0;
+    height: auto;
+}
+.row{
+    display: flex;
+    gap: 1vw;
+    width: 100%;
+}
+.cardImg1{
+    width: 2.2vw;
+    height: auto;
+    border-radius: 100%;
+}
+.textContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+.card1Row{
+    display: flex;
+    align-items: center;
+    gap: .5vw;
+    width: 100%;
+    font-size: .65vw;
+    font-weight: 400;
+    margin-top: 0.3vw;
+
+}
+.typeContainer{
+    display: flex;
+    gap: .5vw;
+    margin-top: 0.5vw;
+}
+.type{
+    background-color: #DDE1EE;
+    padding: .2vw .7vw;
+    border-radius: 10vw;
+    font-size: .65vw;
+    font-weight: 400;
+    color: rgb(101, 101, 101);
+}

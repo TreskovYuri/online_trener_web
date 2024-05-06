@@ -1,0 +1,103 @@
+.container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top: 0vw;
+}
+.header{
+    flex-shrink: 1vw;
+    font-weight: 500;
+    font-size: 1.1vw;
+    margin: 0;
+    height: 1vw;
+}
+.cardContainer{
+    display: flex;
+    gap: 1vw;
+    margin-top: 2vw;
+    flex-wrap: wrap;
+}
+.card{
+    width: 31.7%;
+    height: auto;
+    padding: 1vw;
+    background-color: #DDE1EE;
+    border-radius: .5vw;
+    box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    cursor: pointer;
+    transition: all .3s;
+}
+.card:hover{
+    background-color: #d3d7e4;
+}
+.hraderContainer{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+}
+.cardName{
+    font-size: .8vw;
+    overflow: hidden;
+    width: 90%;
+}
+.cardName span{
+    opacity: .3;
+    margin-left: .3vw;
+}
+.favoriteContainer{
+    width: 1.5vw;
+    height: 1.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .4vw;
+    border-radius: 10vw;
+    transition: all .3s;
+}
+.favoriteContainer:hover{
+    background-color: #adb1be5b;
+}
+.img{
+    width: 100%;
+    height: auto;
+}
+.stageContainer{
+    display: flex;
+    gap: .6vw;
+}
+.equipmentContainer{
+    display: flex;
+    gap: .6vw;
+    margin-top: 1vw;
+}
+.stage{
+    color: white;
+    background: linear-gradient(90deg, #4A82F0 0%, #3651FA 100%);
+    padding: .2vw 1vw;
+    border-radius: 10vw;
+    font-size: .7vw;
+    text-align: center;
+}
+.equipment{
+    color: rgb(0, 0, 0);
+    background-color: #EBEEF7;
+    padding: .2vw 1vw;
+    border-radius: 10vw;
+    font-size: .7vw;
+    text-align: center;
+}
+.label{
+    font-size: .6vw;
+    opacity: .7;
+    margin-top: 1vw;
+}
+.description{
+    font-size: 0.7vw;
+    font-weight: 600;
+    height: 2vw;
+}

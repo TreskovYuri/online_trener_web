@@ -1,0 +1,538 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.168);
+    z-index: 99;
+    display: flex;
+    justify-content: flex-end;
+}
+.exit{
+    font-size: .7vw;
+    font-weight: 600;
+    color: #4D8AEE;
+    cursor: pointer;
+    user-select: none;
+    transition: all .3s;
+}
+.exit:hover{
+    color: #4580de;
+}
+.modalWind{
+    height: 100vh;
+    width: 20vw;
+    background-color: white;
+    border-radius: 1vw 0 0 1vw;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw 1.3vw 6vw 1.3vw;
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: relative;
+}
+.modalWind::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f4f2f2;
+  }
+  
+.modalWind::-webkit-scrollbar-thumb {
+border-radius: 10px;
+background-color: rgba(124, 154, 176, 0.5);
+
+}
+
+.modalWind::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+border-radius: 10px;
+background-color: #ffffff;
+}
+.headerContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+.header{
+    font-size: 1vw;
+    font-weight: 500;
+}
+.btn{
+    background-color: rgb(240, 240, 240);
+    border-radius: 10vw;
+    width: 2vw;
+    height: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
+}
+.btnContainer{
+    display: flex;
+    gap: .3vw   ;
+}
+.img{
+    height: .8vw;
+    width:  auto;
+}
+.add:hover, .btn:hover{
+    background-color: rgb(209, 209, 209);
+    opacity: .9;
+}
+.cardContainer{
+    border-top: 1px solid rgb(217, 217, 217);
+    padding: .4vw 0;
+}
+.cardContainer1{
+    padding: .4vw 0;
+    margin: 0;
+}
+.input{
+    width: 100%;
+    height: 11.8vw;
+    padding:0 .7vw;
+    border-radius: .7vw;
+    border: 1px solid rgb(228, 228, 228);
+    outline: none;
+    font-size: .65vw;
+    background-color: white;
+    margin-top: .8vw;
+    opacity: .9;
+    resize: none;
+}
+.input::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f4f2f2;
+  }
+  
+.input::-webkit-scrollbar-thumb {
+border-radius: 10px;
+background-color: rgba(124, 154, 176, 0.5);
+
+}
+
+.input::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+border-radius: 10px;
+background-color: #ffffff;
+}
+.name{
+    display: flex;
+    align-items: center;
+    height: 2.3vw;
+    margin: .2vw 0 0 0 ;
+    font-size: .7vw;
+    opacity: 1;
+}
+.name::placeholder{
+    font-weight: 100;
+    opacity: .7;
+    font-size: .6vw;
+    font-weight: 400;
+    font-weight: normal;
+}
+.descr{
+    height: 7vw;
+    margin-bottom: 0;
+    padding-top: .9vw;
+
+}
+.descr::placeholder{
+    font-weight: 100;
+    opacity: .7;
+    font-size: .7vw;
+    font-weight: 100;
+    font-weight: normal;
+}
+.btnSave{
+    width: 16.7vw;
+    background-color: var(--blue);
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 2vw;
+    right: 1.9vw;
+    font-size: .8vw ;
+    border-radius: 10vw;
+    padding: .5vw 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s;
+}
+.btnSave:hover{
+    transform: scale(101%);
+    background-color: var(--blue-hover);
+}
+.fileInput{
+    width: 16vw;
+    height: 7vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1vw;
+    overflow: hidden;
+    border-radius: .5vw;
+    transition: all .3s;
+}
+.fileInput:hover{
+    transform: scale(101%);
+    box-shadow:  0px 3px 4px 4px rgba(200, 200, 200, 0.13)
+}
+.file {
+    opacity: 0;
+    width: 0.1px;
+    height: 0.1px;
+    /* position: absolute; */
+  }
+.labelFile{
+    color: var(--blue);
+    font-family: var(--semibold);
+    width: 100%;
+    cursor: pointer;
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: .8vw;
+
+}
+.trainingImg{
+    width: 100%;
+    height: auto;
+    border-radius: 1vw;
+    /* border: 1px solid rgba(128, 128, 128, 0.155); */
+
+}
+
+.trainingVideo{
+    width: 100%;
+    height: auto;
+    border-radius: 1vw;
+}
+.preHeader{
+    font-size: .8vw;
+    font-weight: 400;
+    opacity: .8;
+    margin-top: 1vw;
+}
+.inputTypeContainer{
+    display: flex;
+    gap: .5vw;
+    margin-top: 0.5vw;
+    margin-bottom: 1vw;
+}
+.inputTypeLabel{
+    font-size: .8vw;
+    font-weight: 600;
+    opacity: .6;
+    cursor: pointer;
+    transition: all .3s;
+    user-select: none;
+}
+.activeInputTypeLabel{
+    opacity: 1;
+}
+.equipmentLabel{
+    font-size: 1vw;
+    font-weight: 500;
+    margin-top: 1vw;
+}
+.equipmentContainner{
+    display: flex;
+    flex-direction: column;
+    background-color: #EBEEF7;
+    padding: 1vw;
+    box-sizing: border-box;
+    border-radius: .5vw;
+    gap: .4vw   ;
+}
+.equipment{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: .7vw;
+    font-weight: 600;
+    user-select: none;
+}
+.stageContainer{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .3vw   ;
+}
+.stage{
+    font-size: .6vw;
+    font-weight: 600;
+    padding: .4vw 1vw;
+    border-radius: 1vw;
+    background-color: #EBEEF7;
+    cursor: pointer;
+    transition: all .3s;
+    margin-top: 0.3vw;
+}
+.stage:hover{
+    background-color: #d7dce9;
+}
+.stageActive{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #4D8AEE;
+}
+.addEqModalContainer{
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 20vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.553);
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.addEqModal{
+    background-color: white;
+    padding: 1vw;
+    width: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: .5vw;
+    gap: .5vw;
+}
+.btnAddEq{
+    width: 90%;
+    background-color: var(--blue);
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 2vw;
+    right: 1.9vw;
+    font-size: .6vw ;
+    border-radius: 10vw;
+    padding: .5vw 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s;
+}
+.frameContainer{
+    width: 100%;
+    position: relative;
+    margin-top: 2vw;
+}
+.frame{
+    width: 100%;
+    height: auto;
+}
+.frameAbs{
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: auto;
+}
+.groupCatdContainer{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: .5vw;
+    margin-top: 2vw;
+    user-select: none;
+}
+.groupCard{
+    width: 30%;
+    height: 2vw;
+    font-size: .7vw;
+    font-weight: 600;
+    border-radius: 1vw;
+    background-color: #EBEEF7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.groupCard:hover{
+    background-color: #d7dce9;
+}
+.groupCardActive{
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #4D8AEE;
+}
+.novideImg{
+    width: 100%;
+    height: auto;
+    transition: all .3s;
+}
+
+.preHeader{
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding-right: 1vw;
+    font-size: .7vw;
+    font-weight: 500;
+    opacity: .8;
+    margin-bottom: 1vw;
+}
+.burgerContainer{
+    height: 2.4vw;
+    padding: 0 .7vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    margin: .3vw 0;
+    color: rgba(0, 0, 0, 0.74);
+    position: relative;
+    opacity: 1;
+    z-index: 999;
+}
+.label1{
+    font-size: 0.6vw;
+    font-weight: 500;
+    opacity: .7;
+    margin-top: 1vw;
+}
+.pageContainer{
+    display: flex;
+    flex-direction: column;
+}
+.modalUpdateType{
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 1);
+    z-index: 9999;
+    border: 1px solid rgba(128, 128, 128, 0.627);
+    border-radius: .3vw;
+}
+.modalUpdateType span{
+    padding: .5vw .7vw;
+    width: 100%;
+}
+.modalUpdateType span:hover{
+    background-color: rgb(248, 248, 248);
+    
+}
+.spContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 0vw;
+    margin-top: 1vw;
+    align-items: center;
+}
+.spContainer span{
+    font-size: 0.8vw;
+    font-weight: 500;
+}
+.spFlagImg{
+    height: 1.4vw;
+    width: auto;
+    cursor: pointer;
+    transition: all .3s;
+    user-select: none;
+}
+.miniInput{
+    width: 8vw;
+    outline: none;
+    border: 1px solid rgba(128, 128, 128, 0.645);
+    height: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1vw;
+    box-sizing: border-box;
+    border-radius: .3vw;
+    font-size: .7vw;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.619);
+    cursor: pointer;
+    position: relative;
+}
+.miniInput2{
+    width: 100%;
+}
+.miniInput::placeholder{
+    font-weight: 500;
+}
+.miniInputLabel{
+    font-size: .57vw;
+    font-weight: 600;
+    opacity: .7;
+}
+.arrowSvg{
+    width: 1vw;
+    height: 1vw;
+    cursor: pointer;
+    transition: all .3s;
+}
+.arrowSvg:hover{
+    opacity: .7;
+    transform: scale(103%);
+}
+.typeModal{
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    z-index: 99;
+    border: 1px solid rgba(128, 128, 128, 0.627);
+    border-radius: .3vw;
+}
+.typeModal span{
+    padding: .4vw 0;
+    width: 100%;
+    text-align: center;
+    
+}
+.typeModal span:hover{
+    background-color: rgb(246, 246, 246);
+}
+.addNewGroup{
+    font-size: .7vw;
+    color: #4D8AEE;
+    font-weight: 600;
+    margin-top: .7vw;
+    cursor: pointer;
+    margin-bottom: 1vw;
+}
+.addNewGroupModal{
+    cursor: pointer;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+}
+.addNewGroupButton{
+    background-color: var(--blue);
+    color: white;
+    padding: .3vw 1vw;
+    border-radius: 1vw;
+    margin-top: .7vw;
+    width: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all .3s;
+    font-size: .7vw;
+}
+.addNewGroupButton:hover{
+    background-color: var(--blue-hover);
+}

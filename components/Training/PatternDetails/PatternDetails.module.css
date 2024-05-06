@@ -1,0 +1,130 @@
+.container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: rgba(0, 0, 0, 0.168);
+    z-index: 99;
+    display: flex;
+    justify-content: flex-end;
+}
+.modalWind{
+    height: 100vh;
+    width: 20vw;
+    background-color: white;
+    border-radius: 1vw 0 0 1vw;
+    display: flex;
+    flex-direction: column;
+    padding: 0vw 1.3vw;
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: relative;
+}
+.modalWind::-webkit-scrollbar {
+    width: 10px;
+    background-color: #f4f2f2;
+  }
+  
+.modalWind::-webkit-scrollbar-thumb {
+border-radius: 10px;
+background-color: rgba(124, 154, 176, 0.5);
+
+}
+
+.modalWind::-webkit-scrollbar-track {
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.2);
+border-radius: 10px;
+background-color: #ffffff;
+}
+.headerContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2vw;
+}
+.header{
+    font-size: .8vw;
+    font-weight: 500;
+    width:70%;
+}
+.btnRow{
+    display: flex;
+    gap: .2vw;
+}
+.btn{
+    background-color: rgb(233, 233, 233);
+    border-radius: 10vw;
+    width: 1.7vw;
+    height: 1.7vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
+}
+.img{
+    height: .6vw;
+    width:  auto;
+    transition: all .3s;
+}
+.imgArrow{
+    transition: all .3s;
+    transform: rotate(180deg);
+}
+.btn:hover{
+    background-color: rgb(224, 224, 224);
+}
+.label{
+    font-size: .6vw;
+    opacity: .7;
+    margin-top: 1vw;
+    margin-bottom: 0.3vw;
+}
+.description{
+    font-size: .8vw;
+    margin-top: 0.3vw;
+}
+.cardNameButton{
+    display: flex;
+    gap: .3vw;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 1vw;
+}
+.cardName{
+    font-weight: 600;
+    font-size: .7vw;
+}
+.cardDescription{
+    margin-top: 1vw;
+    padding-left: 1vw;
+    opacity: .8;
+    font-size: .7vw;
+}
+
+.trainingsContainer{
+    display: flex;
+    flex-direction: column;
+    gap: .4vw;
+}
+.trainingCard{
+    background-color: #DDE1EE;
+    padding: 1vw;
+    border-radius: .5vw;
+    display: flex;
+    flex-direction: column;
+}
+.cardHeader{
+    font-size: .8vw;
+    font-weight: 600;
+    margin-bottom: 0.5vw;
+}
+.cardHeader span{
+    opacity: .4;
+}
+.cardTypes{
+    font-size: .65vw;
+    font-weight: 600;
+    opacity: .8;
+}
