@@ -162,7 +162,7 @@ const UpdateProgramm = observer(() => {
       mobx.finalNutritionArrayOnDragAndDrop && formData.append('nutritions', JSON.stringify(mobx.finalNutritionArrayOnDragAndDrop))
       mobx.finalTestsArrayOnDragAndDrop && formData.append('tests', JSON.stringify(mobx.finalTestsArrayOnDragAndDrop))
       mobx.finalUsersArrayOnDragAndDrop && formData.append('users', JSON.stringify(mobx.finalUsersArrayOnDragAndDrop))
-  
+
       const data = await SportProgrammUtills.update(formData)
       if (data === 'ok') {
         router.push('/admin/sportprogramm')
@@ -185,7 +185,7 @@ const UpdateProgramm = observer(() => {
         {page == 2 && <Page2 nextPage={nextPage} prevPage={prevPage} />}
         {page == 3 && <Page3 nextPage={nextPage} prevPage={prevPage} save={save} />}
 
-      {mobx.cardUpdateExerciseFlag&&<Modal/>}
+        {mobx.cardUpdateExerciseFlag && <Modal />}
       </motion.div>
     </motion.div>
   )
@@ -208,7 +208,7 @@ function Page1({ name, setName, description, setDescription, nextPage, router })
         ErrorHandler('Введите название программы!')
       }
     } catch (e) { console.log(e) }
-   
+
   }
 
   const deleteProgramm = async () => {
@@ -297,36 +297,37 @@ const Page2 = observer(({ nextPage, prevPage }) => {
         }
       }
     } catch (e) { console.log(e) }
-    
+
 
   }
 
 
   useEffect(() => {
-    try{
+    try {
       setNutritions(mobx.nutritions)
-    }catch (e) { console.log(e) }
+    } catch (e) { console.log(e) }
   }, [mobx.nutritions])
   useEffect(() => {
-    try{
+    try {
       setTrainingPatterns(mobx.trainingPatterns)
-    }catch (e) { console.log(e) }
+    } catch (e) { console.log(e) }
   }, [mobx.trainingPatterns])
   useEffect(() => {
-    try{
+    try {
+      console.log(mobx.exercises[0])
       setExercises(mobx.exercises)
-    }catch (e) { console.log(e) }
+    } catch (e) { console.log(e) }
   }, [mobx.exercises])
   useEffect(() => {
-    try{
+    try {
       setTests(mobx.tests)
-    }catch (e) { console.log(e) }
+    } catch (e) { console.log(e) }
   }, [mobx.tests])
 
 
 
   const openUpdateModal = async (exercise) => {
-    try{
+    try {
       const obj = await setsObject.find(obj => obj.id === exercise.id)
       setModalUpdateExercise(true)
       setUpdateCard(exercise)
@@ -426,11 +427,36 @@ const Page2 = observer(({ nextPage, prevPage }) => {
                   </div>
                   <div className={css.textContainer}>
                     <h2 className={css.exerciseName}>{TextWrang1(exercise.nameRu + ' / ' + exercise.nameEng)}</h2>
-                    {
-                      globalExersicesArray.find(el => el.exerciseId == exercise.id) &&
-                      <span className={css.cardPreHeader}>{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets?.length}x{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets[0]?.diapazonOt
-                      }/{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets[0]?.diapazonDo}</span>
+                    {globalExersicesArray.find(el => el.exerciseId == exercise.id) &&
+                      <>
+                        <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel1Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`||'').join(' / ')}`)}</span>
+                        {exercise.pocazatel2Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel2Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel2}`||'').join(' / ')}`)}</span>
+                        }
+                        {exercise.pocazatel3Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel3Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel3}`||'').join(' / ')}`)}</span>
+                        }
+                        {exercise.pocazatel4Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel4Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel4}`||'').join(' / ')}`)}</span>
+                        }
+                        {exercise.pocazate52Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel5Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel5}`||'').join(' / ')}`)}</span>
+                        }
+                      </>
                     }
+
+                    {/* {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
+                } */}
                   </div>
                 </div>
                 <div className={css.buttonContainer}>
@@ -650,7 +676,7 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
 
   useEffect(() => {
     const exercise = globalExersicesArray.find(el => el.exerciseId == updateCard.id)
-    if(exercise && exercise.sets){
+    if (exercise && exercise.sets) {
 
       (async () => {
         for (let i = 0; i < exercise.sets.length; i++) {
@@ -658,16 +684,16 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
         }
       })();
       setTime(exercise.time)
-      setSetCount(exercise.sets.length+1)
+      setSetCount(exercise.sets.length + 1)
     }
 
   }, [])
 
   const addExersicePokazaleli = () => {
-    try{
+    try {
       const newSets = []; // Создаем новый массив для новых объектов sets
       array.slice(0, setCount).forEach(card => {
-  
+
         if (card[1] && card[3]) {
           const set = {};
           set.set = card[0];
@@ -679,9 +705,9 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
           if (card[11]) set.pokazatel5 = card[11];
           newSets.push(set); // Добавляем новый объект set в новый массив newSets
         }
-  
+
       });
-  
+
       if (globalExersicesArray.find(el => el.exerciseId == updateCard.id)) {
         setGlobalExersicesArray([...globalExersicesArray.filter(el => el.exerciseId != updateCard.id), {
           "exerciseId": updateCard.id,
@@ -696,8 +722,8 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
         }]);
       }
       setModalUpdateExercise(false)
-    }catch(e){console.log(e)}
-    
+    } catch (e) { console.log(e) }
+
   }
 
   return (
@@ -766,27 +792,34 @@ function SetsRow({ setNum, updateCard,
 
 
 function TextWrang(text) {
-  try{
+  try {
     if (text && text?.length <= 4) {
       return text;
     } else if (text) {
       return text?.slice(0, 4) + "..";
     } else return ''
-  }catch(e){console.log(e)}
-  
+  } catch (e) { console.log(e) }
+
 }
 
 function TextWrang1(text) {
-  try{
+  try {
     if (text && text?.length <= 28) {
       return text;
     } else if (text) {
       return text?.slice(0, 28) + "..";
     } else return ''
-  }catch(e){console.log(e)}
+  } catch (e) { console.log(e) }
 
 }
 
+function TextWrang2(text) {
+  if (text && text?.length <= 35) {
+    return text;
+  } else if (text) {
+    return text?.slice(0, 35) + "..";
+  } else return "";
+}
 
 
 
@@ -798,27 +831,27 @@ const Page3 = observer(({ nextPage, prevPage, save }) => {
   const [userAllArray, setUserAllArray] = useState([])
 
   useEffect(() => {
-    try{
+    try {
       setUserAllArray(mobx.sportsmans)
-    }catch(e){console.log(e)}
+    } catch (e) { console.log(e) }
   }, [mobx.sportsmans])
 
   const addUser = (user) => {
-    try{
+    try {
       mobx.setFinalUsersArrayOnDragAndDrop([...mobx.finalUsersArrayOnDragAndDrop, user])
-    }catch(e){console.log(e)}
+    } catch (e) { console.log(e) }
 
   }
 
   const deleteUser = (user) => {
-    try{
+    try {
       setUserArray(userArray.filter(el => el?.id !== user?.id))
-    }catch(e){console.log(e)}
+    } catch (e) { console.log(e) }
 
   }
 
   const searchUsers = (e) => {
-    try{
+    try {
       setSearch(e)
       if (e) {
         // Фильтрация пользователей по полю name
@@ -829,7 +862,7 @@ const Page3 = observer(({ nextPage, prevPage, save }) => {
       } else {
         setUserAllArray(mobx.sportsmans);
       }
-    }catch(e){console.log(e)}
+    } catch (e) { console.log(e) }
   }
 
 

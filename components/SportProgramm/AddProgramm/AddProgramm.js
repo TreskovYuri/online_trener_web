@@ -364,11 +364,23 @@ const Page2 = observer(({ nextPage, prevPage }) => {
                     </div>
                     <div className={css.textContainer}>
                       <h2 className={css.exerciseName}>{TextWrang1(exercise.nameRu+ ' / ' + exercise.nameEng)}</h2>
-                      {
-                        globalExersicesArray.find(el => el.exerciseId == exercise.id) &&
-                        <span className={css.cardPreHeader}>{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets?.length}x{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets[0]?.diapazonOt
-                        }/{globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets[0]?.diapazonDo}</span>
-                      }
+                      {globalExersicesArray.find(el => el.exerciseId == exercise.id) &&
+                      <>
+                        <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel1Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`||'').join(' / ')}`)}</span>
+                        {exercise.pocazatel2Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel2Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel2}`||'').join(' / ')}`)}</span>
+                        }
+                        {exercise.pocazatel3Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel3Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel3}`||'').join(' / ')}`)}</span>
+                        }
+                        {exercise.pocazatel4Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel4Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel4}`||'').join(' / ')}`)}</span>
+                        }
+                        {exercise.pocazate52Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel5Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel5}`||'').join(' / ')}`)}</span>
+                        }
+                      </>
+                    }
                     </div>
                   </div>
                       <div className={css.buttonContainer}>
@@ -716,7 +728,13 @@ function TextWrang1(text) {
     return text?.slice(0, 28) + "..";
   } else return ''
 }
-
+function TextWrang2(text) {
+  if (text && text?.length <= 35) {
+    return text;
+  } else if (text) {
+    return text?.slice(0, 35) + "..";
+  } else return "";
+}
 
 
 
