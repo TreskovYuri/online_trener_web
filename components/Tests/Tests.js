@@ -7,7 +7,7 @@ import {motion} from 'framer-motion'
 
 import GroupUtills from '@/http/GroupUtills'
 
-const Tests = observer(() => {
+const Tests = observer(({currentTestGroup}) => {
 
   useEffect(()=>{
     GroupUtills.getTests()
@@ -22,7 +22,7 @@ const Tests = observer(() => {
     <div className={css.container}>
         <div className={css.cardContainer}>
             {mobx.testsSearch&&
-              mobx.testsSearch.map((card,index) => (
+              mobx.testsSearch.filter(e => e.groupId == currentTestGroup || currentTestGroup =='Все').map((card,index) => (
                 <motion.div initial={{opacity:0}} whileInView={{opacity:1}} key={card.id} className={css.card} onClick={()=> {mobx.setOneTest(card);mobx.setTestDetails(true)}}>
                     <h3 className={css.cardName}>{card.name}</h3>
                     <span className={css.type}>{mobx.testGroups.find(el => el.id == card.groupId)?.name}</span>

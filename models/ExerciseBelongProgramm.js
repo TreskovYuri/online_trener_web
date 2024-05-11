@@ -9,8 +9,8 @@ const ExerciseBelongProgramm = sequelize.define('ExerciseBelongProgramm', {
     exerciseId: {type: DataTypes.INTEGER},
     userId: {type: DataTypes.INTEGER},
     timing:{type: DataTypes.STRING, allowNull:true},
-    sets:{type: DataTypes.STRING, allowNull:true},
-    date: {type: DataTypes.TEXT, allowNull:true},
+    sets:{type: DataTypes.TEXT, allowNull:true},
+    date: {type: DataTypes.STRING, allowNull:true},
 })
 
 

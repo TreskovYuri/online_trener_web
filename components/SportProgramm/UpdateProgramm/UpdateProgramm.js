@@ -18,9 +18,11 @@ import checkOff from './img/checkOff.svg'
 import checkOn from './img/checkOn.svg'
 import user from './img/user.jpg'
 import deleteImg from './img/delete.svg'
+
 import SportProgrammUtills from '@/http/SportProgrammUtills'
 import { useRouter } from 'next/navigation'
 import WeekCalendar from './WeekCalendar/WeekCalendar'
+import Modal from '../AddProgramm/Modal'
 
 export const dynamic = 'force-dynamic'
 
@@ -183,7 +185,7 @@ const UpdateProgramm = observer(() => {
         {page == 2 && <Page2 nextPage={nextPage} prevPage={prevPage} />}
         {page == 3 && <Page3 nextPage={nextPage} prevPage={prevPage} save={save} />}
 
-
+      {mobx.cardUpdateExerciseFlag&&<Modal/>}
       </motion.div>
     </motion.div>
   )
@@ -325,20 +327,13 @@ const Page2 = observer(({ nextPage, prevPage }) => {
 
   const openUpdateModal = async (exercise) => {
     try{
-      if (obj) {
-        setSets(obj.sets)
-        setTime(obj.time)
-      } else {
-        setSets('4x15')
-        setTime('30 сек')
-      }
+      const obj = await setsObject.find(obj => obj.id === exercise.id)
       setModalUpdateExercise(true)
       setUpdateCard(exercise)
-      const obj = await setsObject.find(obj => obj.id === exercise.id)
+
     } catch (e) { console.log(e) }
-
-
   }
+
 
 
 
@@ -643,21 +638,29 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
 
   ]
 
+  const setSets = async (set) => {
+    await array[set.set - 1][2](set.diapazonOt)
+    await array[set.set - 1][4](set.diapazonDo)
+    await set.pokazatel2 && array[set.set - 1][6](set.pokazatel2)
+    await set.pokazatel3 && array[set.set - 1][8](set.pokazatel3)
+    await set.pokazatel4 && array[set.set - 1][10](set.pokazatel4)
+    await set.pokazatel5 && array[set.set - 1][12](set.pokazatel5)
+
+  }
+
   useEffect(() => {
-    try{
-      let count = 0
-      globalExersicesArray.find(el => el.exerciseId == updateCard.id)?.sets?.forEach(set => {
-        array[set.set - 1][2](set.diapazonOt)
-        array[set.set - 1][4](set.diapazonDo)
-        set.pokazatel2 && array[set.set - 1][6](set.pokazatel2)
-        set.pokazatel3 && array[set.set - 1][8](set.pokazatel3)
-        set.pokazatel4 && array[set.set - 1][10](set.pokazatel4)
-        set.pokazatel5 && array[set.set - 1][12](set.pokazatel5)
-        count++
-      })
-      setTime(globalExersicesArray.find(el => el.exerciseId == updateCard.id)?.time)
-      setSetCount(setCount + count)
-    }catch(e){console.log(e)}
+    const exercise = globalExersicesArray.find(el => el.exerciseId == updateCard.id)
+    if(exercise && exercise.sets){
+
+      (async () => {
+        for (let i = 0; i < exercise.sets.length; i++) {
+          await setSets(exercise.sets[i]);
+        }
+      })();
+      setTime(exercise.time)
+      setSetCount(exercise.sets.length+1)
+    }
+
   }, [])
 
   const addExersicePokazaleli = () => {
@@ -702,7 +705,7 @@ function SetsModalCard({ updateCard, setModalUpdateExercise, globalExersicesArra
 
       <div className={css.modalUpdateWind} >
         <div className={css.exit} onClick={() => setModalUpdateExercise(false)}>{`< Назад`}</div>
-        <h2 className={css.modalHeader}>Изменить упражнение</h2>
+        <h2 className={css.header}>Изменить упражнение</h2>
         <div className={css.modalHeaderNavCotainer}>
           <span className={css.flex1}>Сет</span>
           <span className={css.flex2}>{TextWrang(updateCard.pocazatel1Name)},{updateCard.pocazatel1Type}/диапазон</span>

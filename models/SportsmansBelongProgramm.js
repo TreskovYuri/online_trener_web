@@ -8,7 +8,7 @@ const SportsmansBelongProgramm = sequelize.define('SportsmansBelongProgramm', {
     programmId: {type: DataTypes.INTEGER},
     sportsmanId: {type: DataTypes.INTEGER},
     userId: {type: DataTypes.INTEGER},
-    date: {type: DataTypes.TEXT, allowNull:true},
+    date: {type: DataTypes.STRING, allowNull:true},
 })
 
 

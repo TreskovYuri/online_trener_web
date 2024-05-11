@@ -120,7 +120,11 @@
     height: 1vw;
     width: 1vw;
     transform: rotate(-90deg);
-    
+}
+.arrowEnd{
+    height: 1vw;
+    width: 1vw;
+    transform: rotate(90deg);
 }
 .counter{
     background: rgb(74,131,240);
@@ -134,4 +138,72 @@
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.filterContainer{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    gap: .3vw;
+    position: relative;
+}
+.filterBox{
+    width: 1.5vw;
+    height: 1.5vw;
+    background-color: white;
+    border-radius: 10vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.filterModal{
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 10vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.211);
+    border-radius: .5vw;
+    z-index: 999;
+    box-sizing: border-box;
+    padding: 0;
+}
+.filterModal span{
+    padding: .5vw 1vw;
+    cursor: pointer;
+    width: 100%;
+    transition: all .3s;
+    margin: 0;
+    font-size: .7vw;
+    font-weight: 600;
+    opacity: .9;
+}
+.filterSpanActive{
+    color: #4D8AEE;
+}
+.filterModal span:hover{
+    background-color: rgb(229, 229, 229);
+}
+.filterBox:hover{
+    background-color: rgb(240, 240, 240);
+}
+.filter{
+    width: 40%;
+    height: auto;
+}
+.filterSpanBetween{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.filterSpanEnd{
+    border-top: 1px solid rgba(128, 128, 128, 0.155);
+}
+.filterSpan{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
 }

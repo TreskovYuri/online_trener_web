@@ -371,6 +371,19 @@ const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray, f
                 )}
 
               </span>
+              <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
+                 <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}:</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
+                 <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}:</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
+                 <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}:</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
+                 <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}:</span>
+                }
 
             </div>
           ))}
@@ -390,7 +403,7 @@ const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray, f
             Упражнения <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {exercicesArray?.slice(0, 2)?.map(item => (
-            <div key={item.id} className={css.trainingCard}>
+            <div key={item.id} className={css.trainingCard} >
 
               <span className={css.cardHeader}>
                 {TextWrang(
@@ -401,7 +414,20 @@ const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray, f
                   )
                 )}
               </span>
-              <span className={css.cardTypes}>{item.body?.sets?.length}x{item.body?.sets[0]?.diapazonOt}/{item.body?.sets[0]?.diapazonDo}</span>
+
+              <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
+                 <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}:</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
+                 <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}:</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
+                 <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}:</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
+                 <span className={css.cardTypes}>{TextWrang(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}:</span>
+                }
             </div>
           ))}
           {exercicesArray?.length > 2 && (
@@ -496,4 +522,11 @@ function TextWrang(text) {
     } else return "";
   }catch(e){}
 
+}
+function TextWrang1(text) {
+  if (text && text?.length <= 5) {
+    return text;
+  } else if (text) {
+    return text?.slice(0, 5) + "..";
+  } else return "";
 }

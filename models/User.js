@@ -15,7 +15,7 @@ const User = sequelize.define('user', {
     weight: {type: DataTypes.STRING,allowNull:true},
     date: {type: DataTypes.STRING,allowNull:true},
     img:{type: DataTypes.STRING, allowNull: true},
-    secret: {type: DataTypes.STRING,unique: true},
+    secret: {type: DataTypes.TEXT,unique: true},
     password: {type: DataTypes.STRING,allowNull:true},
     activationCode: {type: DataTypes.STRING,allowNull:true},
     trenerId:{type: DataTypes.INTEGER, allowNull:true},

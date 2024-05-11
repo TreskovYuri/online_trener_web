@@ -521,3 +521,7 @@ background-color: #ffffff;
     display: flex;
     flex-direction: column;
 }
+.exitRow{
+    display: flex;
+    justify-content: space-between;
+}

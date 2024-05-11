@@ -9,6 +9,7 @@ import { observer } from "mobx-react-lite";
 import leftArrow from "./img/leftArrow.svg";
 import rightArrow from "./img/rightArrow.svg";
 import deleteImg from "./img/delete.svg";
+import pencill from './img/pencil.svg'
 
 const monthArray = {
   January: "Январь",
@@ -203,6 +204,32 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       mobx.setDropAndDropArrayTests({});
       setShowDrop(false);
     }
+    if (mobx.dragOnWeekExerciseFlag) {
+      const training = { ...mobx.dragOnWeekExerciseValue }
+      training.date = dayItem
+      console.log(training)
+      mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop.filter(e => e.id != training.id), training])
+      mobx.setDragOnWeekExerciseFlag(false);
+      mobx.setDragOnWeekExerciseValue({})
+      setShowDrop(false);
+    }
+    if (mobx.dragOnWeekNutritionFlag) {
+      const nutrition = { ...mobx.dragOnWeekNutritionValue }
+      nutrition.date = dayItem
+      mobx.setFinalNutritionArrayOnDragAndDrop([...mobx.finalNutritionArrayOnDragAndDrop.filter(e => e.id != nutrition.id), nutrition])
+      mobx.setDragOnWeekNutritionFlag(false);
+      mobx.setDragOnWeekNutritionValue({})
+      setShowDrop(false);
+    }
+    if (mobx.dragOnWeekTextFlag) {
+      const test = { ...mobx.dragOnWeekTextValue }
+      test.date = dayItem
+      console.log(test)
+      mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop.filter(e => e.id != test.id), test])
+      mobx.setDragOnWeekTextFlag(false);
+      mobx.setDragOnWeekTextValue({})
+      setShowDrop(false);
+    }
   };
 
   const deleteExercises = (id) => {mobx.setFinalExersiceArrayOnDragAndDrop(mobx.finalExersiceArrayOnDragAndDrop.filter((el) => el.id != id));};
@@ -219,6 +246,7 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       onDrop={() => drop()}
       onDragEnter={() => setShowDrop(true)}
       onDragLeave={() => setShowDrop(false)}
+      onDragOver={(e) => e.preventDefault()}
     >
       {allExesice && exercicesArray?.length > 0 && (
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
@@ -226,24 +254,46 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
             Упражнения <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {exercicesArray?.map((item, index) => (
-            <div key={index} className={css.trainingCard}>
-              <Image
-                src={deleteImg}
-                className={css.deleteImg}
-                onClick={() => deleteExercises(item.id)}
-              />
-              <span className={css.cardHeader}>
-                {TextWrang(
-                  mobx.exercises?.find((el) => el.id == item.body?.exerciseId)
-                    ?.nameRu +
-                    " / " +
-                    TextWrang(
-                      mobx.exercises?.find((el) => el.id == item.body?.exerciseId)?.nameEng
-                    )
-                )}
-                
-              </span>
+            <div key={index} className={css.trainingCard} draggable onDrag={() => {
+              mobx.setDragOnWeekExerciseValue(item),
+                mobx.setDragOnWeekExerciseFlag(true)
+            }}
+            >
 
+              <span className={item.updateFlag?`${css.cardHeader} ${css.updateHeader}`:css.cardHeader}>
+                {TextWrang(
+                  mobx.exercises?.find((el) => el?.id == item.body?.exerciseId)
+                    ?.nameRu +
+                  " / " +
+                  TextWrang(
+                    mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameEng
+                  )
+                )}
+              <div className={css.ImgUpdateBox} onClick={() => {
+                mobx.setCardUpdateExercise(item),
+                  mobx.setCardUpdateExerciseFlag(true)
+              }}>
+                <Image
+                  src={pencill}
+                  className={css.updateImg}
+
+                  key={item?.id}
+                />
+              </div>
+              </span>
+              <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
+                }
             </div>
           ))}
           {exercicesArray?.length > 2 && (
@@ -262,23 +312,46 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
             Упражнения <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {exercicesArray?.slice(0, 2)?.map(item => (
-            <div key={item.id} className={css.trainingCard}>
-              <Image
-                src={deleteImg}
-                className={css.deleteImg}
-                onClick={() => deleteExercises(item.id)}
-              />
+            <div key={item?.id} className={css.trainingCard} draggable onDrag={() => {
+              mobx.setDragOnWeekExerciseValue(item),
+                mobx.setDragOnWeekExerciseFlag(true)
+            }}
+            >
 
-              <span className={css.cardHeader}>
+
+              <span className={item.updateFlag?`${css.cardHeader} ${css.updateHeader}`:css.cardHeader}>
                 {TextWrang(
                   mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameRu +
-                    " / " +
-                    TextWrang(
-                      mobx.exercises?.find((el) => el.id == item.body?.exerciseId)?.nameEng
-                    )
+                  " / " +
+                  TextWrang(
+                    mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameEng
+                  )
                 )}
+                              <div className={css.ImgUpdateBox} onClick={() => {
+                mobx.setCardUpdateExercise(item),
+                  mobx.setCardUpdateExerciseFlag(true)
+              }}>
+                <Image
+                  src={pencill}
+                  className={css.updateImg}
+
+                  key={item?.id}
+                />
+              </div>
               </span>
-              <span className={css.cardTypes}>{item.body?.sets?.length}x{item.body?.sets[0]?.diapazonOt}/{item.body?.sets[0]?.diapazonDo}</span>
+              <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
+                }
             </div>
           ))}
           {exercicesArray?.length > 2 && (
@@ -296,15 +369,18 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
           <span className={css.type}>
             Питание <Image src={arrow} alt="" className={css.arrow} />
           </span>
-          <div className={css.trainingCard}>
-            <Image
-            alt=""
-              src={deleteImg}
-              className={css.deleteImg}
-              onClick={() => deleteNutritions(nutritionsArray.id)}
-            />
+          <div className={css.trainingCard} draggable onDrag={() => { mobx.setDragOnWeekNutritionValue(nutritionsArray), mobx.setDragOnWeekNutritionFlag(true) }} >
+
+
+
             <span className={css.cardHeader}>
               {TextWrang(nutritionsArray?.body?.name)}
+              <div className={css.ImgUpdateBox} onClick={() => { deleteNutritions(nutritionsArray?.id) }}>
+              <Image
+                src={deleteImg}
+                className={css.updateImg}
+              />
+            </div>
             </span>
             <span className={css.cardTypes}>
               {countHandler(
@@ -320,24 +396,26 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
           </div>
         </>
       )}
-      {!allTests && testsArray?.length>0 && (
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+      {!allTests && testsArray?.length > 0 && (
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} >
           <span className={css.type}>
             Тесты <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {testsArray?.slice(0, 1)?.map((item, index) => (
-            <div className={css.trainingCard}>
-            <Image
-              src={deleteImg}
-              className={css.deleteImg}
-              onClick={() => deleteTests(item.id)}
-              key={item.id}
-            />
-            <span className={css.cardHeader}>{TextWrang(item.body?.name)}</span>
-            <span className={css.cardTypes}>
-              Норматив: {item.body?.item} {item.body?.type}
-            </span>
-          </div>
+            <div className={css.trainingCard} draggable onDrag={() => { mobx.setDragOnWeekTextValue(item), mobx.setDragOnWeekTextFlag(true) }}>
+
+              <span className={css.cardHeader}>{TextWrang(item.body?.name)}
+              <div className={css.ImgUpdateBox} onClick={() => deleteTests(item?.id)}>
+                <Image
+                  src={deleteImg}
+                  className={css.updateImg}
+                />
+              </div>
+              </span>
+              <span className={css.cardTypes}>
+                Норматив: {item?.body?.item} {item?.body?.type}
+              </span>
+            </div>
           ))}
           {testsArray?.length > 1 && (
             <span
@@ -349,22 +427,24 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
           )}
         </motion.div>
       )}
-      {allTests && testsArray?.length>0 && (
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+      {allTests && testsArray?.length > 0 && (
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} >
           <span className={css.type}>
             Тесты <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {testsArray?.map((item, index) => (
-            <div className={css.trainingCard}>
-              <Image
-                src={deleteImg}
-                className={css.deleteImg}
-                onClick={() => deleteTests(item.id)}
-                key={item.id}
-              />
-              <span className={css.cardHeader}>{TextWrang(item.body?.name)}</span>
+            <div className={css.trainingCard} draggable onDrag={() => { mobx.setDragOnWeekTextValue(item), mobx.setDragOnWeekTextFlag(true) }}>
+
+              <span className={css.cardHeader}>{TextWrang(item?.body?.name)}
+              <div className={css.ImgUpdateBox} onClick={() => deleteTests(item?.id)}>
+                <Image
+                  src={deleteImg}
+                  className={css.updateImg}
+                />
+              </div>
+              </span>
               <span className={css.cardTypes}>
-                Норматив: {item.item} {item.type}
+                Норматив: {item?.item} {item?.type}
               </span>
             </div>
           ))}
@@ -387,5 +467,19 @@ function TextWrang(text) {
     return text;
   } else if (text) {
     return text?.slice(0, 22) + "...";
+  } else return "";
+}
+function TextWrang1(text) {
+  if (text && text?.length <= 5) {
+    return text;
+  } else if (text) {
+    return text?.slice(0, 5) + "..";
+  } else return "";
+}
+function TextWrang2(text) {
+  if (text && text?.length <= 30) {
+    return text;
+  } else if (text) {
+    return text?.slice(0, 30) + "..";
   } else return "";
 }

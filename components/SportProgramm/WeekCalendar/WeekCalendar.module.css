@@ -123,6 +123,7 @@
     padding: .2vw .5vw;
     border-radius: .5vw;
     position: relative;
+    cursor: grab;
 }
 .deleteImg{
     position: absolute;
@@ -137,9 +138,34 @@
 .deleteImg:hover{
     opacity: 1;
 }
+.ImgUpdateBox{
+    position: absolute;
+    height: 1vw;
+    width: 1vw;
+    top: 0;
+    right: -.2vw;
+    cursor: pointer;
+    opacity: .3;
+    transition: all .3s;
+    background-color: rgba(240, 240, 240, 0.623);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ImgUpdateBox:hover{
+    opacity: 1;
+}
+.updateImg{
+    height: 70%;
+}
 .cardHeader{
     font-size: 0.5vw;
     font-weight: 600;
+    position: relative;
+}
+.updateHeader{
+    color: #4D8AEE;
 }
 .cardTypes{
     font-size: 0.5vw;

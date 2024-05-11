@@ -9,6 +9,9 @@ import { observer } from "mobx-react-lite";
 import leftArrow from "./img/leftArrow.svg";
 import rightArrow from "./img/rightArrow.svg";
 import deleteImg from "./img/delete.svg";
+import pencill from './img/pencil.svg'
+
+
 
 const monthArray = {
   January: "Январь",
@@ -56,29 +59,29 @@ const WeekCalendar = observer(() => {
   }, []);
 
 
-  useEffect(()=>{
-    if(mobx.sportprogrammExersices.length>0 && mobx.exercises.length>0){
-      try{
+  useEffect(() => {
+    if (mobx.sportprogrammExersices.length > 0 && mobx.exercises.length > 0) {
+      try {
         mobx.setFinalExersiceArrayOnDragAndDrop(
           mobx.sportprogrammExersices.map(el => ({
             id: el?.id,
             date: el?.date,
             body: {
-              "exerciseId":el?.exerciseId,
-              "sets":JSON.parse(el?.sets)
+              "exerciseId": el?.exerciseId,
+              "sets": JSON.parse(el?.sets)
             }
           }))
         );
-      }catch(e){console.log(e)}
+      } catch (e) { console.log(e) }
 
-      return ()=>{
+      return () => {
         mobx.setFinalExersiceArrayOnDragAndDrop([])
       }
     }
-  },[mobx.sportprogrammExersices, mobx.exercises])
+  }, [mobx.sportprogrammExersices, mobx.exercises])
 
-  useEffect(()=>{
-    if(mobx.sportprogrammNutritions.length>0 && mobx.nutritions?.length>0){
+  useEffect(() => {
+    if (mobx.sportprogrammNutritions.length > 0 && mobx.nutritions?.length > 0) {
       mobx.setFinalNutritionArrayOnDragAndDrop(
         mobx.sportprogrammNutritions.map(el => ({
           id: el?.id,
@@ -86,14 +89,14 @@ const WeekCalendar = observer(() => {
           body: mobx.nutritions.find(obj => obj?.id == el?.nutritionId)
         }))
       );
-      return ()=>{
+      return () => {
         mobx.setFinalNutritionArrayOnDragAndDrop([])
       }
     }
-  },[mobx.sportprogrammNutritions, mobx.nutritions])
+  }, [mobx.sportprogrammNutritions, mobx.nutritions])
 
-  useEffect(()=>{
-    if(mobx.sportprogrammTests.length>0 && mobx.tests.length>0){
+  useEffect(() => {
+    if (mobx.sportprogrammTests.length > 0 && mobx.tests.length > 0) {
       mobx.setFinalTestsArrayOnDragAndDrop(
         mobx.sportprogrammTests.map(el => ({
           id: el?.id,
@@ -101,24 +104,24 @@ const WeekCalendar = observer(() => {
           body: mobx.tests.find(obj => obj?.id == el?.testId)
         }))
       );
-      return ()=>{
+      return () => {
         mobx.setFinalTestsArrayOnDragAndDrop([])
       }
     }
-  },[mobx.sportprogrammTests, mobx.tests])
+  }, [mobx.sportprogrammTests, mobx.tests])
 
 
 
 
-  useEffect(()=>{
-    if(mobx.sportprogrammUsers.length>0 && mobx.sportsmans.length>0){
+  useEffect(() => {
+    if (mobx.sportprogrammUsers.length > 0 && mobx.sportsmans.length > 0) {
       mobx.sportprogrammUsers.forEach(user => {
-        if(!users.find(el => el?.id == user?.userId)){
+        if (!users.find(el => el?.id == user?.userId)) {
           setUsers([...users, mobx.sportsmans.find(el => el?.id == user?.userId)])
         }
       })
     }
-  },[mobx.sportprogrammUsers,mobx.sportsmans])
+  }, [mobx.sportprogrammUsers, mobx.sportsmans])
 
 
 
@@ -151,7 +154,7 @@ const WeekCalendar = observer(() => {
       >
         {daysArray.map((dayItem) => (
           <div className={css.card} key={dayItem.format("DDMMYYYY")}>
-            <div className={css.dateContainer}>
+            <div className={css.dateContainer} onClick={() => mobx.setCardUpdateExerciseFlag()}>
               <span
                 className={
                   moment().format("DDMMYYYY") === dayItem.format("DDMMYYYY")
@@ -164,14 +167,14 @@ const WeekCalendar = observer(() => {
               <span className={css.headerWeek}>{days[dayItem.day()]}</span>
             </div>
             <div className={css.cell} onDragOver={(e) => e.preventDefault()}>
-            <Card dayItem={dayItem.format("DD.MM.YYYY")} exercicesArray={mobx.finalExersiceArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))} testsArray={mobx.finalTestsArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))}
-              nutritionsArray={mobx.finalNutritionArrayOnDragAndDrop.find(el=> el.date == dayItem.format("DD.MM.YYYY"))}  />
+              <Card dayItem={dayItem.format("DD.MM.YYYY")} exercicesArray={mobx.finalExersiceArrayOnDragAndDrop.filter(el => el.date == dayItem.format("DD.MM.YYYY"))} testsArray={mobx.finalTestsArrayOnDragAndDrop.filter(el => el.date == dayItem.format("DD.MM.YYYY"))}
+                nutritionsArray={mobx.finalNutritionArrayOnDragAndDrop.find(el => el.date == dayItem.format("DD.MM.YYYY"))} />
             </div>
           </div>
         ))}
         {daysArray2.map((dayItem) => (
           <div className={css.card} key={dayItem.format("DDMMYYYY")}>
-            <div className={css.dateContainer}>
+            <div className={css.dateContainer} onClick={() => mobx.setCardUpdateExerciseFlag()}>
               <span
                 className={
                   moment().format("DDMMYYYY") === dayItem.format("DDMMYYYY")
@@ -183,9 +186,9 @@ const WeekCalendar = observer(() => {
               </span>
               <span className={css.headerWeek}>{days[dayItem.day()]}</span>
             </div>
-            <div className={css.cell} onDragOver={(e) => e.preventDefault()}>
-              <Card dayItem={dayItem.format("DD.MM.YYYY")} exercicesArray={mobx.finalExersiceArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))} testsArray={mobx.finalTestsArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))}
-              nutritionsArray={mobx.finalNutritionArrayOnDragAndDrop.find(el=> el.date == dayItem.format("DD.MM.YYYY"))}  />
+            <div className={css.cell} onDragOver={(e) => e.preventDefault()} >
+              <Card dayItem={dayItem.format("DD.MM.YYYY")} exercicesArray={mobx.finalExersiceArrayOnDragAndDrop.filter(el => el.date == dayItem.format("DD.MM.YYYY"))} testsArray={mobx.finalTestsArrayOnDragAndDrop.filter(el => el.date == dayItem.format("DD.MM.YYYY"))}
+                nutritionsArray={mobx.finalNutritionArrayOnDragAndDrop.find(el => el.date == dayItem.format("DD.MM.YYYY"))} />
             </div>
           </div>
         ))}
@@ -196,7 +199,7 @@ const WeekCalendar = observer(() => {
 
 export default WeekCalendar;
 
-const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) => {
+const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray }) => {
   const [showDrop, setShowDrop] = useState(false);
   const [allExesice, setAllExersice] = useState(false);
   const [allTests, setAllTests] = useState(false);
@@ -236,12 +239,12 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       mobx.dragValue?.training?.forEach((el) => {
         const id = Math.floor(Math.random() * 100001);
         array.push({ ...el, id: id });
-        mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop,{id: id,date: dayItem, body: el,},]);
+        mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop, { id: id, date: dayItem, body: el, },]);
       });
       mobx.dragValue?.tests.forEach((el) => {
         const id = Math.floor(Math.random() * 100001);
         array.push({ ...el, id: id });
-        mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop,{id: id,date: dayItem,body: mobx.tests.find(obj => obj?.id == el?.testId)},]);
+        mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop, { id: id, date: dayItem, body: mobx.tests.find(obj => obj?.id == el?.testId) },]);
       });
       mobx.setDragValue({});
       mobx.setDropValue({});
@@ -251,7 +254,7 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
     if (mobx.dragExersicesFlag) {
       const id = Math.floor(Math.random() * 100001);
       console.log(mobx.dragExersicesValue)
-      mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop,{id: id,date: dayItem,body: mobx.dragExersicesValue,},]);
+      mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop, { id: id, date: dayItem, body: mobx.dragExersicesValue, },]);
       mobx.setDropValue({});
       mobx.setDragExersicesValue({});
       mobx.setDragExersicesFlag(false);
@@ -259,25 +262,51 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
     }
     if (mobx.dragNutritionFlag) {
       const id = Math.floor(Math.random() * 100001);
-      mobx.setFinalNutritionArrayOnDragAndDrop([...mobx.finalNutritionArrayOnDragAndDrop.filter( (el) => el?.date != dayItem ),{id: id,date: dayItem,body: mobx.dropAndDropArrayNutrition},]);
+      mobx.setFinalNutritionArrayOnDragAndDrop([...mobx.finalNutritionArrayOnDragAndDrop.filter((el) => el?.date != dayItem), { id: id, date: dayItem, body: mobx.dropAndDropArrayNutrition },]);
       mobx.setDragNutritionFlag(false);
       mobx.setDropAndDropArrayNutrition({});
       setShowDrop(false);
     }
     if (mobx.dragTestsFlag) {
       const id = Math.floor(Math.random() * 100001);
-      mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop,{id: id,date: dayItem,body: mobx.dropAndDropArrayTests},]);
+      mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop, { id: id, date: dayItem, body: mobx.dropAndDropArrayTests },]);
       mobx.setDragTestsFlag(false);
       mobx.setDropAndDropArrayTests({});
       setShowDrop(false);
     }
+    if (mobx.dragOnWeekExerciseFlag) {
+      const training = { ...mobx.dragOnWeekExerciseValue }
+      training.date = dayItem
+      console.log(training)
+      mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop.filter(e => e.id != training.id), training])
+      mobx.setDragOnWeekExerciseFlag(false);
+      mobx.setDragOnWeekExerciseValue({})
+      setShowDrop(false);
+    }
+    if (mobx.dragOnWeekNutritionFlag) {
+      const nutrition = { ...mobx.dragOnWeekNutritionValue }
+      nutrition.date = dayItem
+      mobx.setFinalNutritionArrayOnDragAndDrop([...mobx.finalNutritionArrayOnDragAndDrop.filter(e => e.id != nutrition.id), nutrition])
+      mobx.setDragOnWeekNutritionFlag(false);
+      mobx.setDragOnWeekNutritionValue({})
+      setShowDrop(false);
+    }
+    if (mobx.dragOnWeekTextFlag) {
+      const test = { ...mobx.dragOnWeekTextValue }
+      test.date = dayItem
+      console.log(test)
+      mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop.filter(e => e.id != test.id), test])
+      mobx.setDragOnWeekTextFlag(false);
+      mobx.setDragOnWeekTextValue({})
+      setShowDrop(false);
+    }
   };
 
-  const deleteExercises = (id) => {mobx.setFinalExersiceArrayOnDragAndDrop(mobx.finalExersiceArrayOnDragAndDrop.filter((el) => el?.id != id));};
+  const deleteExercises = (id) => { mobx.setFinalExersiceArrayOnDragAndDrop(mobx.finalExersiceArrayOnDragAndDrop.filter((el) => el?.id != id)); };
 
-  const deleteNutritions = (id) => { mobx.setFinalNutritionArrayOnDragAndDrop(mobx.finalNutritionArrayOnDragAndDrop.filter((el) => el?.id != id));};
+  const deleteNutritions = (id) => { mobx.setFinalNutritionArrayOnDragAndDrop(mobx.finalNutritionArrayOnDragAndDrop.filter((el) => el?.id != id)); };
 
-  const deleteTests = (id) => {mobx.setFinalTestsArrayOnDragAndDrop(mobx.finalTestsArrayOnDragAndDrop.filter((el) => el?.id != id));};
+  const deleteTests = (id) => { mobx.setFinalTestsArrayOnDragAndDrop(mobx.finalTestsArrayOnDragAndDrop.filter((el) => el?.id != id)); };
 
   return (
     <motion.div
@@ -287,35 +316,57 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       onDrop={() => drop()}
       onDragEnter={() => setShowDrop(true)}
       onDragLeave={() => setShowDrop(false)}
+      onDragOver={(e) => e.preventDefault()}
     >
- {allExesice && exercicesArray?.length > 0  && (
+            {allExesice && exercicesArray?.length > 0 && (
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
           <span className={css.type}>
             Упражнения <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {exercicesArray?.map((item, index) => (
-            <div key={index} className={css.trainingCard}>
-              <Image
-                src={deleteImg}
-                className={css.deleteImg}
-                onClick={() => deleteExercises(item?.id)}
-                key={item?.id}
-              />
-              <span className={css.cardHeader}>
+            <div key={index} className={css.trainingCard} draggable onDrag={() => {
+              mobx.setDragOnWeekExerciseValue(item),
+                mobx.setDragOnWeekExerciseFlag(true)
+            }}
+            >
+
+              <span className={item.updateFlag?`${css.cardHeader} ${css.updateHeader}`:css.cardHeader}>
                 {TextWrang(
                   mobx.exercises?.find((el) => el?.id == item.body?.exerciseId)
                     ?.nameRu +
-                    " / " +
-                    TextWrang(
-                      mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameEng
-                    )
+                  " / " +
+                  TextWrang(
+                    mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameEng
+                  )
                 )}
-                
-              </span>
+              <div className={css.ImgUpdateBox} onClick={() => {
+                mobx.setCardUpdateExercise(item),
+                  mobx.setCardUpdateExerciseFlag(true)
+              }}>
+                <Image
+                  src={pencill}
+                  className={css.updateImg}
 
+                  key={item?.id}
+                />
+              </div>
+              </span>
+              <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
+                }
             </div>
           ))}
-          {exercicesArray?.length > 2 &&  (
+          {exercicesArray?.length > 2 && (
             <span
               className={css.cardOver}
               onClick={() => setAllExersice(!allExesice)}
@@ -331,23 +382,46 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
             Упражнения <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {exercicesArray?.slice(0, 2)?.map(item => (
-            <div key={item?.id} className={css.trainingCard}>
-              <Image
-                src={deleteImg}
-                className={css.deleteImg}
-                onClick={() => deleteExercises(item?.id)}
-                key={item?.id}
-              />
-              <span className={css.cardHeader}>
+            <div key={item?.id} className={css.trainingCard} draggable onDrag={() => {
+              mobx.setDragOnWeekExerciseValue(item),
+                mobx.setDragOnWeekExerciseFlag(true)
+            }}
+            >
+
+
+              <span className={item.updateFlag?`${css.cardHeader} ${css.updateHeader}`:css.cardHeader}>
                 {TextWrang(
                   mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameRu +
-                    " / " +
-                    TextWrang(
-                      mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameEng
-                    )
+                  " / " +
+                  TextWrang(
+                    mobx.exercises?.find((el) => el?.id == item?.body?.exerciseId)?.nameEng
+                  )
                 )}
+                              <div className={css.ImgUpdateBox} onClick={() => {
+                mobx.setCardUpdateExercise(item),
+                  mobx.setCardUpdateExerciseFlag(true)
+              }}>
+                <Image
+                  src={pencill}
+                  className={css.updateImg}
+
+                  key={item?.id}
+                />
+              </div>
               </span>
-              <span className={css.cardTypes}>{item.body?.sets?.length}x{item.body?.sets[0]?.diapazonOt}/{item.body?.sets[0]?.diapazonDo}</span>
+              <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
+                }
+                {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
+                }
             </div>
           ))}
           {exercicesArray?.length > 2 && (
@@ -365,15 +439,18 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
           <span className={css.type}>
             Питание <Image src={arrow} alt="" className={css.arrow} />
           </span>
-          <div className={css.trainingCard}>
-            <Image
-            alt=""
-              src={deleteImg}
-              className={css.deleteImg}
-              onClick={() => deleteNutritions(nutritionsArray?.id)}
-            />
+          <div className={css.trainingCard} draggable onDrag={() => { mobx.setDragOnWeekNutritionValue(nutritionsArray), mobx.setDragOnWeekNutritionFlag(true) }} >
+
+
+
             <span className={css.cardHeader}>
               {TextWrang(nutritionsArray?.body?.name)}
+              <div className={css.ImgUpdateBox} onClick={() => { deleteNutritions(nutritionsArray?.id) }}>
+              <Image
+                src={deleteImg}
+                className={css.updateImg}
+              />
+            </div>
             </span>
             <span className={css.cardTypes}>
               {countHandler(
@@ -389,24 +466,26 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
           </div>
         </>
       )}
-      {!allTests && testsArray?.length>0 && (
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+      {!allTests && testsArray?.length > 0 && (
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} >
           <span className={css.type}>
             Тесты <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {testsArray?.slice(0, 1)?.map((item, index) => (
-            <div className={css.trainingCard}>
-            <Image
-              src={deleteImg}
-              className={css.deleteImg}
-              onClick={() => deleteTests(item?.id)}
-              key={item?.id}
-            />
-            <span className={css.cardHeader}>{TextWrang(item.body?.name)}</span>
-            <span className={css.cardTypes}>
-              Норматив: {item?.body?.item} {item?.body?.type}
-            </span>
-          </div>
+            <div className={css.trainingCard} draggable onDrag={() => { mobx.setDragOnWeekTextValue(item), mobx.setDragOnWeekTextFlag(true) }}>
+
+              <span className={css.cardHeader}>{TextWrang(item.body?.name)}
+              <div className={css.ImgUpdateBox} onClick={() => deleteTests(item?.id)}>
+                <Image
+                  src={deleteImg}
+                  className={css.updateImg}
+                />
+              </div>
+              </span>
+              <span className={css.cardTypes}>
+                Норматив: {item?.body?.item} {item?.body?.type}
+              </span>
+            </div>
           ))}
           {testsArray?.length > 1 && (
             <span
@@ -418,20 +497,22 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
           )}
         </motion.div>
       )}
-      {allTests && testsArray?.length>0 && (
-        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+      {allTests && testsArray?.length > 0 && (
+        <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} >
           <span className={css.type}>
             Тесты <Image src={arrow} alt="" className={css.arrow} />
           </span>
           {testsArray?.map((item, index) => (
-            <div className={css.trainingCard}>
-              <Image
-                src={deleteImg}
-                className={css.deleteImg}
-                onClick={() => deleteTests(item?.id)}
-                key={item?.id}
-              />
-              <span className={css.cardHeader}>{TextWrang(item?.body?.name)}</span>
+            <div className={css.trainingCard} draggable onDrag={() => { mobx.setDragOnWeekTextValue(item), mobx.setDragOnWeekTextFlag(true) }}>
+
+              <span className={css.cardHeader}>{TextWrang(item?.body?.name)}
+              <div className={css.ImgUpdateBox} onClick={() => deleteTests(item?.id)}>
+                <Image
+                  src={deleteImg}
+                  className={css.updateImg}
+                />
+              </div>
+              </span>
               <span className={css.cardTypes}>
                 Норматив: {item?.item} {item?.type}
               </span>
@@ -456,5 +537,19 @@ function TextWrang(text) {
     return text;
   } else if (text) {
     return text?.slice(0, 22) + "...";
+  } else return "";
+}
+function TextWrang1(text) {
+  if (text && text?.length <= 5) {
+    return text;
+  } else if (text) {
+    return text?.slice(0, 5) + "..";
+  } else return "";
+}
+function TextWrang2(text) {
+  if (text && text?.length <= 30) {
+    return text;
+  } else if (text) {
+    return text?.slice(0, 30) + "..";
   } else return "";
 }

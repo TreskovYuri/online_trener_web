@@ -157,8 +157,24 @@ class Mobx {
     setDragValue(dragValue) { this.dragValue = dragValue }
     setDragValueDropId(id) { this.dragValue.forEach(element => {element.id = id}); }
 
+    dragOnWeekExerciseValue = {}
+    setDragOnWeekExerciseValue(dragValue) { this.dragOnWeekExerciseValue = dragValue }
+    dragOnWeekExerciseFlag = false
+    setDragOnWeekExerciseFlag(bool) { this.dragOnWeekExerciseFlag = bool }
+
+    dragOnWeekNutritionValue = {}
+    setDragOnWeekNutritionValue(dragValue) { this.dragOnWeekNutritionValue = dragValue }
+    dragOnWeekNutritioneFlag = false
+    setDragOnWeekNutritionFlag(bool) { this.dragOnWeekNutritionFlag = bool }
+
+    dragOnWeekTextValue = {}
+    setDragOnWeekTextValue(dragValue) { this.dragOnWeekTextValue = dragValue }
+    dragOnWeekTextFlag = false
+    setDragOnWeekTextFlag(bool) { this.dragOnWeekTextFlag = bool }
+
     dropValue = {}
     setDropValue(dropValue) { this.dropValue = dropValue }
+    
 
     dragExersicesValue = {}
     setDragExersicesValue(dragExersicesValue) { this.dragExersicesValue = dragExersicesValue }
@@ -226,7 +242,10 @@ class Mobx {
     sportprogrammUsers = []
     setSportprogrammUsers(sportprogrammUsers) { this.sportprogrammUsers = sportprogrammUsers }
 
-
+    cardUpdateExercise = {}
+    setCardUpdateExercise(card){this.cardUpdateExercise = card}
+    cardUpdateExerciseFlag = false
+    setCardUpdateExerciseFlag(bool){this.cardUpdateExerciseFlag = bool}
     
 
 }
