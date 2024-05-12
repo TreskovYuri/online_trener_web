@@ -169,7 +169,11 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       mobx.dragValue?.training?.forEach((el) => {
         const id = Math.floor(Math.random() * 100001);
         array.push({ ...el, id: id });
-        mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop,{id: id,date: dayItem, body: el,},]);
+        mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop, { id: id, date: dayItem, body: {
+          "exerciseId":el.exerciseId,
+          "time":el.time,
+          "sets":JSON.parse(el.sets)
+        }, },]);
       });
       mobx.dragValue?.tests.forEach((el) => {
         const id = Math.floor(Math.random() * 100001);
@@ -281,18 +285,18 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
                 />
               </div>
               </span>
-              <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
+              <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body?.sets?.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
                 {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
-                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body?.sets?.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
                 }
                 {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
-                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body?.sets?.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
                 }
                 {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
-                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body?.sets?.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
                 }
                 {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
-                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body?.sets?.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
                 }
             </div>
           ))}
@@ -339,18 +343,18 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
                 />
               </div>
               </span>
-              <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
+              <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body?.sets?.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
                 {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name&&
-                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body.sets.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel2Name)}: ${item.body?.sets?.map(e => `${e.pokazatel2}`).join(' / ')}`)}</span>
                 }
                 {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name&&
-                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body.sets.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel3Name)}: ${item.body?.sets?.map(e => `${e.pokazatel3}`).join(' / ')}`)}</span>
                 }
                 {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name&&
-                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body.sets.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel4Name)}: ${item.body?.sets?.map(e => `${e.pokazatel4}`).join(' / ')}`)}</span>
                 }
                 {mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name&&
-                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body.sets.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
+                 <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel5Name)}: ${item.body?.sets?.map(e => `${e.pokazatel5}`).join(' / ')}`)}</span>
                 }
             </div>
           ))}

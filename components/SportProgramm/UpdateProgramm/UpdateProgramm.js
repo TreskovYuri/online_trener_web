@@ -385,23 +385,23 @@ const Page2 = observer(({ nextPage, prevPage }) => {
                   draggable={true}
                   onDrag={(e) => {
                     mobx.setDragValue({
-                      'training': mobx.trainingBelongs.filter(el => el.programmId == card.id),
-                      "tests": mobx.testBelongs.filter(el => el.programmId == card.id)
+                      'training': mobx.trainingBelongs.filter(el => el.programmId == card?.id),
+                      "tests": mobx.testBelongs.filter(el => el.programmId == card?.id)
                     }
                     );
                     mobx.setDragFlag(true)
                   }}
                   initial={{ opacity: 0 }}
                   whileInView={{ opacity: 1 }}
-                  key={card.id}
+                  key={card?.id}
                   className={css.card}
                   onClick={() => {
                     mobx.setOneTrainingPattern(card);
                     mobx.setTrainongDetails(true);
                   }}
                 >
-                  <h3 className={css.cardHeader}>{card.name}</h3>
-                  <span className={css.count}>{countHandler1(card.id)}</span>
+                  <h3 className={css.cardHeader}>{card?.name}</h3>
+                  <span className={css.count}>{countHandler1(card?.id)}</span>
                 </motion.div>
               ))}
 
@@ -414,33 +414,33 @@ const Page2 = observer(({ nextPage, prevPage }) => {
         <div className={css.cardContainer} onDragOver={(e) => e.preventDefault()}>
           {
             exercises?.map(exercise => (
-              <div key={exercise.id} className={exesiceId.includes(exercise.id) ? `${css.exerciseCard} ${css.exerciseCardAdded}` : `${css.exerciseCard}`} draggable={globalExersicesArray.find(el => el.exerciseId == exercise.id) ? true : false} onDrag={(e) => {
+              <div key={exercise.id} className={exesiceId.includes(exercise?.id) ? `${css.exerciseCard} ${css.exerciseCardAdded}` : `${css.exerciseCard}`} draggable={globalExersicesArray.find(el => el.exerciseId == exercise?.id) ? true : false} onDrag={(e) => {
                 mobx.setDragExersicesValue(
-                  globalExersicesArray.find(el => el.exerciseId == exercise.id)
+                  globalExersicesArray.find(el => el.exerciseId == exercise?.id)
                 );
                 mobx.setDragExersicesFlag(true)
               }}>
 
                 <div className={css.row}>
                   <div className={css.imgBox}>
-                    <Image src={`${process.env.NEXT_PUBLIC_STATIC_URL}/assets/${exercise.img}`} className={css.img1} width={20} height={20} unoptimized />
+                    <Image src={`${process.env.NEXT_PUBLIC_STATIC_URL}/assets/${exercise?.img}`} className={css.img1} width={20} height={20} unoptimized />
                   </div>
                   <div className={css.textContainer}>
-                    <h2 className={css.exerciseName}>{TextWrang1(exercise.nameRu + ' / ' + exercise.nameEng)}</h2>
-                    {globalExersicesArray.find(el => el.exerciseId == exercise.id) &&
+                    <h2 className={css.exerciseName}>{TextWrang1(exercise?.nameRu + ' / ' + exercise?.nameEng)}</h2>
+                    {globalExersicesArray.find(el => el.exerciseId == exercise?.id) &&
                       <>
-                        <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel1Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`||'').join(' / ')}`)}</span>
-                        {exercise.pocazatel2Name &&
-                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel2Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel2}`||'').join(' / ')}`)}</span>
+                        <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel1Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise?.id)?.sets.map(e => `${e.diapazonOt}/${e.diapazonDo}`||'').join(' / ')}`)}</span>
+                        {exercise?.pocazatel2Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel2Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise?.id)?.sets.map(e => `${e.pokazatel2}`||'').join(' / ')}`)}</span>
                         }
-                        {exercise.pocazatel3Name &&
-                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel3Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel3}`||'').join(' / ')}`)}</span>
+                        {exercise?.pocazatel3Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel3Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise?.id)?.sets.map(e => `${e.pokazatel3}`||'').join(' / ')}`)}</span>
                         }
-                        {exercise.pocazatel4Name &&
-                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel4Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel4}`||'').join(' / ')}`)}</span>
+                        {exercise?.pocazatel4Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel4Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise?.id)?.sets.map(e => `${e.pokazatel4}`||'').join(' / ')}`)}</span>
                         }
-                        {exercise.pocazate52Name &&
-                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel5Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise.id)?.sets.map(e => `${e.pokazatel5}`||'').join(' / ')}`)}</span>
+                        {exercise?.pocazate52Name &&
+                          <span className={css.cardPreHeader}>{TextWrang2(`${TextWrang1(exercise?.pocazatel5Name)}: ${globalExersicesArray.find(el => el.exerciseId == exercise?.id)?.sets.map(e => `${e.pokazatel5}`||'').join(' / ')}`)}</span>
                         }
                       </>
                     }
