@@ -45,7 +45,7 @@ export async function POST(req){
         try{
             for (let i = 0; i < exersices.length; i++){
                 const exersice = exersices[i]
-                await ExerciseBelongTrainingProgramm.create({ programmId: programm.id, exerciseId: exersice.body.exerciseId, userId: userSession.id, timing : exersice.body.timing  , sets : typeof exersice.body.sets === 'string'? exersice.body.sets : JSON.stringify(exersice.body.sets), date: exersice.date});
+                await ExerciseBelongTrainingProgramm.create({ programmId: programm.id, exerciseId: exersice.body.exerciseId, userId: userSession.id, time : exersice.body.timing  , sets : typeof exersice.body.sets === 'string'? exersice.body.sets : JSON.stringify(exersice.body.sets), date: exersice.date});
             }
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка при создании связей упражнения с программой'},{status:500})}
         try{
