@@ -11,7 +11,6 @@ import { decrypt, validateSession } from "@/service/UserService";
 import chalk from "chalk";
 import { headers } from "next/headers";
 
-
 export const dynamic = "force-dynamic";
 
 // Функция возвращает все шаблоны
@@ -20,8 +19,8 @@ export async function GET() {
     let finalArray = [];
     let session;
     try {
-      const headersList = headers()
-      session = headersList.get('session')
+      const headersList = headers();
+      session = headersList.get("session");
     } catch (e) {
       console.log(e);
       return Response.json({ message: "Ошибка во время получения сессии" }, { status: 401 });
@@ -43,7 +42,7 @@ export async function GET() {
       console.log(chalk.red(err));
       return Response.json({ message: "Возникла ошибка во время расшифровки токена" }, { status: 500 });
     }
-   
+
     // Получвем принадлежащие ему спортивные программы
     let sportpogramms;
     try {
@@ -54,7 +53,7 @@ export async function GET() {
     }
     let users;
     try {
-      users = await User.findAll({ where: { post: 'Спортсмен' } });
+      users = await User.findAll({ where: { post: "Спортсмен" } });
     } catch (err) {
       console.log(chalk.red(err));
       return Response.json({ message: "Возникла ошибка во получения спортивных программ" }, { status: 500 });
@@ -82,7 +81,7 @@ export async function GET() {
         // Получаем список упражнений из программы
         let exerciseBelongTrainingProgramm;
         try {
-          exerciseBelongTrainingProgramm =  await ExerciseBelongTrainingProgramm.findAll({
+          exerciseBelongTrainingProgramm = await ExerciseBelongTrainingProgramm.findAll({
             where: { programmId: programm.id },
           });
         } catch (err) {
@@ -141,17 +140,17 @@ export async function GET() {
               existingUser.nutrition = existingUser.nutrition.concat(newNutrition);
             } else {
               // Если такого обьекта нет, то добавляем новый обьект
-              const usr = users.find(el => el.id == sportsman.userId);
+              const usr = users.find((el) => el.id == sportsman.userId);
               finalArray.push({
-                "id":usr.id,
-                "name":usr.name,
-                "number":usr.number,
-                "email":usr.email,
-                "post":usr.post,
-                "team":usr.team,
-                'exercises': exerciseBelongTrainingProgramm,
-                'tests': testBelongProgramm,
-                'nutrition': nutritionBelongProgramm,
+                id: usr.id,
+                name: usr.name,
+                number: usr.number,
+                email: usr.email,
+                post: usr.post,
+                team: usr.team,
+                exercises: exerciseBelongTrainingProgramm,
+                tests: testBelongProgramm,
+                nutrition: nutritionBelongProgramm,
               });
             }
           }
