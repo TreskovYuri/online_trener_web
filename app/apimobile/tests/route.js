@@ -1,4 +1,5 @@
 import Test from "@/models/Test";
+import { decrypt } from "@/service/UserService";
 import chalk from "chalk";
 import { headers } from "next/headers";
 
@@ -28,12 +29,12 @@ export async function POST(request){
           return Response.json({ message: "Ошибка во время получения сессии" }, { status: 401 });
         }
         const formData = await request.formData();
-        const userId = formData.get("userId");
+        const userId = parseInt(formData.get("userId"));
         const name = formData.get("name");
         const description = formData.get("description");
         const type = formData.get("type");
         const item = formData.get("item");
-        const groupId = formData.get("groupId");
+        const groupId = parseInt(formData.get("groupId"));
 
 
 
