@@ -7,6 +7,7 @@ import { decrypt } from "@/service/UserService";
 import chalk from "chalk";
 import { cookies } from "next/headers";
 
+export const dynamic = "force-dynamic";
 
 // Функция возвращает одного 
 export async function GET(){

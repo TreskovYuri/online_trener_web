@@ -1,7 +1,7 @@
 import ExerciseBelongProgramm from "@/models/ExerciseBelongTrainingProgramm";
 import chalk from "chalk";
 
-
+export const dynamic = "force-dynamic";
 
 // Функция возвращает одного 
 export async function GET(req){
