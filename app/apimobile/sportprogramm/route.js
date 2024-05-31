@@ -72,7 +72,7 @@ export async function POST(req){
         try{
             for (let i = 0; i < users.length; i++){
                 const user = users[i]
-                await UsersBelongProgramm.create({ programmId: programm.id,  userId: user.id});
+                await UsersBelongProgramm.create({ programmId: programm.id,  userId: user.id,});
             }
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка при создании связей тестов с программой'},{status:500})}
 
