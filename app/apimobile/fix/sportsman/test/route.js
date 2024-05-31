@@ -6,7 +6,7 @@ import { headers } from "next/headers";
 
 
 
-
+export const dynamic = 'force-dynamic'
 
 
 // Функция возвращает все фиксации обратившегося спортсмена
@@ -35,7 +35,9 @@ export async function POST(request){
         const formData = await request.formData();
         const testId = parseInt(formData.get("testId"));
         const programmId = parseInt(formData.get("programmId"));
+        const trenerId = parseInt(formData.get("trenerId"));
         const result = parseInt(formData.get("result"));
+        const date = formData.get("date");
         let session;
         try {
           const headersList = headers();
@@ -51,7 +53,7 @@ export async function POST(request){
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время расшифровки токена'},{status:500})}
         let fix; // Достаем данные пользователя из токена
         try{
-            fix = await FixTests.create({sportsmanId:user.id, testId:testId,result:result, programmId:programmId})
+            fix = await FixTests.create({sportsmanId:user.id, testId:testId,result:result, programmId:programmId,date:date,trenerId:trenerId})
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время создания записи о фиксации в БД'},{status:500})}
 
         return Response.json(fix);
