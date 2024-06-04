@@ -21,14 +21,7 @@ export async function GET(){
 // Функция для создания нового пользователя 
 export async function POST(req){
     try{
-        let session;
-        try {
-          const headersList = header();
-          session = headersList.get("session");
-        } catch (e) {
-          console.log(e);
-          return Response.json({ message: "Ошибка во время получения сессии" }, { status: 401 });
-        }
+        const session = cookies().get('session').value
         const formData = await req.formData();
         const nameRu = formData.get("nameRu");
         const descriptionRu = formData.get("descriptionRu");
