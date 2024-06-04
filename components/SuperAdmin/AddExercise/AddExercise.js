@@ -460,7 +460,7 @@ const Page4 = observer(({
 
 
 function CardPokazatel ({name,setName,pocazatelType,setPocazatelType,pocazatelSPFlag,setPocazatelSPFlag}){
-  const [typesLst, setTypesLst] = useState(['кг', 'сек', 'мин', 'раз',])
+  const [typesLst, setTypesLst] = useState(['кг', 'сек', 'мин', 'раз','шт','см','процентов','км/ч',])
   const [type1Modal, setType1Modal] = useState(false)
 
   return (
