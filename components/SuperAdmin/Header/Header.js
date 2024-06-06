@@ -31,7 +31,7 @@ const Header = observer(() => {
 
         <div className={css.descrContainer}>
           {mobx.user.name ?
-            <motion.h2 initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} className={css.Username}>{`${mobx.user.name.split(' ')[0]} ${mobx.user.name.split(' ').length>1?mobx.user.name.split(' ')[1].charAt(0):''}.${mobx.user.name.split(' ').length>2?obx.user.name.split(' ')[2].charAt(0):''}.`}</motion.h2>:
+            <motion.h2 initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} className={css.Username}>{`${mobx.user.name.split(' ')[0]} ${mobx.user.name.split(' ').length>1?mobx.user.name.split(' ')[1].charAt(0):''}.${mobx.user.name.split(' ').length>2?mobx.user.name.split(' ')[2].charAt(0):''}.`}</motion.h2>:
             <motion.h2 initial={{opacity:0}} whileInView={{opacity:1}} viewport={{once:true}} className={css.Username}>Нет данных</motion.h2>
           }
           <div className={css.row}>
