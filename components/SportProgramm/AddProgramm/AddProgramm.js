@@ -169,7 +169,7 @@ function Page1({ name, setName, description, setDescription ,nextPage}) {
   return (
     <motion>
       <div className={css.headerContainer}>
-        <h2 className={css.header}>Новыя программа</h2>
+        <h2 className={css.header}>Новая программа</h2>
         <div className={css.btn}>
           <Image src={favorite} alt='Онлайн-Тренер' className={css.img} />
         </div>

@@ -10,6 +10,7 @@ const User = sequelize.define('user', {
     number: {type: DataTypes.STRING,allowNull:true},
     name: {type: DataTypes.STRING,allowNull:true},
     post: {type: DataTypes.STRING,allowNull:true,defaultValue: "Игрок"},
+    amplua: {type: DataTypes.STRING,allowNull:true},
     team: {type: DataTypes.STRING,allowNull:true},
     height: {type: DataTypes.STRING,allowNull:true},
     weight: {type: DataTypes.STRING,allowNull:true},

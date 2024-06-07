@@ -137,7 +137,7 @@ const UpdateUser = observer(() => {
                 {trenerModal &&
                   <motion.div initial={{ opacity: 0, height: '.1vw' }} whileInView={{ opacity: 1, height: '5vw' }} className={css.postModal}>
                     {mobx.treners.map(trener => (
-                      <span onClick={() => { setPostModal(false); setTrener(trener.name); setTrenerId(trener.id) }}>{trener.name}</span>
+                      <span onClick={() => {  setTrener(trener.name); setTrenerId(trener.id) }}>{trener.name}</span>
                     ))}
 
 
