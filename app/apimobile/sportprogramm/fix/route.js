@@ -21,7 +21,7 @@ export async function POST(req){
     }
         const formData = await req.formData();
         const exerciseId = parseInt(formData.get("exerciseId"));
-        const sets = JSON.stringify(formData.get("sets"));
+        const sets = formData.get("sets");
         const programmId = parseInt(formData.get("programmId"));
         const userId = parseInt(formData.get("userId"));
         const setId = parseInt(formData.get("setId"));
