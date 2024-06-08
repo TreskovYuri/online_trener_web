@@ -26,6 +26,7 @@ const AddPatern = observer(() => {
 
   const [globalExersicesArray, setGlobalExersicesArray] = useState([])
   const [finalglobalExersicesArray, setFinalGlobalExersicesArray] = useState([])
+  const [localExercises, setLocalExercises] = useState([])
 
   const [typePage, setTypePage] = useState('Упражнения')
 
@@ -84,6 +85,21 @@ const AddPatern = observer(() => {
       mobx.setAddPattern(false)
     }
   }
+  useEffect(()=>{
+    setLocalExercises(mobx.exercises)
+  },[])
+
+  const handleSarch = (e) => {
+    if (e) {
+      const results = mobx.exercises.filter(exercises =>
+        exercises.nameRu?.toLowerCase().includes(e.toLowerCase())
+      );
+      setLocalExercises(results);
+    }else{
+      setLocalExercises(mobx.exercises)
+
+    }
+  }
 
 
   return (
@@ -112,7 +128,7 @@ const AddPatern = observer(() => {
         {typePage == 'Упражнения' ?
           <div className={css.cardContainer}>
             {
-              mobx.exercises?.map(exercise => (
+             localExercises.map(exercise => (
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} key={exercise.id} className={exesiceId.includes(exercise.id) ? `${css.exerciseCard} ${css.exerciseCardAdded}` : `${css.exerciseCard}`}>
 
                   <div className={css.row}>
