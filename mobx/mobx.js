@@ -246,6 +246,10 @@ class Mobx {
     setCardUpdateExercise(card){this.cardUpdateExercise = card}
     cardUpdateExerciseFlag = false
     setCardUpdateExerciseFlag(bool){this.cardUpdateExerciseFlag = bool}
+
+
+    journal = []
+    setJournal(newJournal) { this.journal = newJournal }
     
 
 }
