@@ -177,7 +177,7 @@ export async function POST(req){
             // Генерируем уникальное имя файла
             let fileName;
             do {
-                fileName = v4() + "." + 'acaca';
+                fileName = v4() + "." + fileExtension;
                 const filePath = await path.join(process.cwd(), "public/assets/", fileName);
                 // Проверяем, существует ли файл с таким именем
                 try {
@@ -369,7 +369,7 @@ export async function PUT(req){
             // Генерируем уникальное имя файла
             let fileName;
             do {
-                fileName = v4() + "." + 'acaca';
+                fileName = v4() + "." + fileExtension;
                 const filePath = await path.join(process.cwd(), "public/assets/", fileName);
                 // Проверяем, существует ли файл с таким именем
                 try {

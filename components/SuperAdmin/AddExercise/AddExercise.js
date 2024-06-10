@@ -375,8 +375,8 @@ const Page3 = ({ handleImageUpload, handleVideoUpload, imageURL, videoURL, file,
           }
         </label>
       </div>
-      <span className={css.preHeader}>или</span>
-      <input type='text' className={`${css.input} ${css.name}`} placeholder='Добавьте ссылку YouTube' id="password" value={link} onChange={e => setLink(e.target.value)} />
+      {/* <span className={css.preHeader}>или</span>
+      <input type='text' className={`${css.input} ${css.name}`} placeholder='Добавьте ссылку YouTube' id="password" value={link} onChange={e => setLink(e.target.value)} /> */}
 
       <div className={css.btnSave} onClick={next}>Далее</div>
     </div>

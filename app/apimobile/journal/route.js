@@ -118,7 +118,7 @@ export async function GET() {
           console.log(chalk.red(err));
           return Response.json(
             {
-              message: "Возникла ошибка во время получения списка свзей питания с программой",
+              message: "Возникла ошибка во время получения списка свзей тестов с программой",
             },
             { status: 500 }
           );
@@ -140,25 +140,27 @@ export async function GET() {
               existingUser.nutrition = existingUser.nutrition.concat(newNutrition);
             } else {
               // Если такого обьекта нет, то добавляем новый обьект
-              const usr = users.find((el) => el.id == sportsman.userId);
-              finalArray.push({
-                id: usr.id,
-                name: usr.name,
-                number: usr.number,
-                email: usr.email,
-                post: usr.post,
-                team: usr.team,
-                exercises: exerciseBelongTrainingProgramm,
-                tests: testBelongProgramm,
-                nutrition: nutritionBelongProgramm,
-              });
+              const usr = await users.find((el) => el.id == sportsman.userId);
+              if (usr) {
+                finalArray.push({
+                  id: usr.id,
+                  name: usr.name,
+                  number: usr.number,
+                  email: usr.email,
+                  post: usr.post,
+                  team: usr.team,
+                  exercises: exerciseBelongTrainingProgramm,
+                  tests: testBelongProgramm,
+                  nutrition: nutritionBelongProgramm,
+                });
+              }
             }
           }
         } catch (e) {
           console.log(e);
           return Response.json(
             {
-              message: "Возникла ошибка во время получения списка свзей питания с программой",
+              message: "Возникла ошибка во время формирования финального списка.",
             },
             { status: 500 }
           );
