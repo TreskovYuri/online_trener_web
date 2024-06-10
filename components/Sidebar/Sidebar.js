@@ -39,7 +39,7 @@ const Sidebar = observer(() => {
         </Link>
         <h1 className={css.header}>Онлайн тренер</h1>
       <div className={css.linkContainer}>
-      <Link href='' className={mobx.pageName==='Журнал'?`${css.link} ${css.active}`:`${css.link}`}><Image src={img1} className={css.img}/>Журнал</Link>
+      <Link href='/admin/journal' className={mobx.pageName==='Журнал'?`${css.link} ${css.active}`:`${css.link}`}><Image src={img1} className={css.img}/>Журнал</Link>
         <Link href='/admin/sportsmans' className={mobx.pageName==='Спортсмены'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img2} className={css.img}/>Спортсмены</Link>
         <Link href='' className={mobx.pageName==='Чаты'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img3} className={css.img}/>Чаты</Link>
         <Link href='/admin/guide' className={mobx.pageName==='Справочники'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img4} className={css.img}/>Справочники</Link>
