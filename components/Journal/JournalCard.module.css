@@ -1,4 +1,48 @@
 .container{
     display: flex;
     flex-direction: column;
+    margin-top: 1vw;
+}
+.name{
+    font-size: .8vw;
+    font-weight: 600;
+}
+.amluaContainer{
+    display: flex;
+    margin-top: 0.4vw;
+}
+.amluaItem{
+    font-size: .5vw;
+    background-color: var(--grey);
+    padding: .2vw .5vw ;
+    border-radius: 1vw;
+}
+.cardRow{
+    background-color: var(--grey);
+    padding: .4vw .7vw;
+    border-radius: .5vw;
+    display: flex;
+    align-items: center;
+    margin-top: 0.3vw;
+    cursor: pointer;
+    transition: all .3s;
+}
+.cardRow:hover{
+    background-color: var(--grey-hover);
+}
+.flag{
+    width: .3vw;
+    height: .3vw;
+    border-radius: 100%;
+    margin-right: .5vw;
+}
+.greenFlag{
+    background-color: green;
+}
+.redFlag{
+    background-color: red;
+}
+.CardRowText{
+    font-size: .6vw;
+    font-weight: 600;
 }

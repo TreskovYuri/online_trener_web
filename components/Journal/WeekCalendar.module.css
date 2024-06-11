@@ -218,17 +218,36 @@
     margin: 0;
     font-size: .7vw;
     opacity: .9;
+    justify-content: space-between;
 }
 .filterSpanActive{
     color: #4D8AEE;
 }
 .filterModal span:hover{
-    background-color: rgb(229, 229, 229);
+    background-color: rgb(245, 245, 245);
 }
 .filterBox:hover{
-    background-color: rgb(240, 240, 240);
+    background-color: rgb(247, 247, 247);
 }
 .filter{
     width: 40%;
     height: auto;
+}
+.arrowFilter{
+    transform: rotate(-90deg);
+    width: .7vw;
+    height: auto;
+}
+.filterSpanEnd{
+    border-top: 1px solid rgba(128, 128, 128, 0.24);
+    opacity: .5;
+    color: rgb(180, 180, 180);
+}
+.filterSpan{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.arrowFilter1{
+    transform: rotate(90deg);
 }
