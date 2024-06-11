@@ -72,6 +72,7 @@ export async function PUT(req){
         const post = formData.get("post");
         const team = formData.get("team");
         const number = formData.get("number");
+        const trenerId = formData.get("trenerId");
         const email = formData.get("email");
         const img = formData.get("img");
 
@@ -100,6 +101,7 @@ export async function PUT(req){
             number == 111  ? user.number = '' : null
             email && email != 111 ? user.email = email.toString() : null
             email == 111  ? user.email = '' : null
+            trenerId ? user.trenerId = parseInt(trenerId) : null
           } catch (err) {console.log(chalk.red(err));return Response.json({ message: "Ошибка при примвоении новых данных агенства..." }, { status: 500 });}
 
           if (img) {

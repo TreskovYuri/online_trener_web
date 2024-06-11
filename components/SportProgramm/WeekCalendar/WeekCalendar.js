@@ -63,7 +63,7 @@ const WeekCalendar = observer(() => {
         className={css.header}
       >
         {monthArray[moment().subtract(count, "week").format("MMMM")]},
-        <span>{moment().format("YYYY")}</span>
+        <span>{moment().subtract(count, "week").format("YYYY")}</span>
         <div className={css.arrowContainer}>
           <Image
             src={leftArrow}

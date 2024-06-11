@@ -191,7 +191,6 @@ const Modal = () => {
 
     useEffect(() => {
         setUpdateCard(mobx.cardUpdateExercise)
-        console.log(mobx.cardUpdateExercise)
         const sets = mobx.cardUpdateExercise?.body?.sets
         //   const exercise = globalExersicesArray.find(el => el.exerciseId == updateCard.id)
         if (sets) {

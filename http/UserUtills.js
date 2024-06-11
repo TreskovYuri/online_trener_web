@@ -207,8 +207,8 @@ class UserUtills{
                 // mobx.setUser(response.data)
                 mobx.setUpdateUser(false)
                 mobx.setLoading(false)
-                this.getUsers()
-                this.getSportsmans()
+                await this.getUsers()
+                await this.getSportsmans()
                 return 'ok'
             }
             if(!response){

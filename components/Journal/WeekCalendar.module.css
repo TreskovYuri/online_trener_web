@@ -251,3 +251,11 @@
 .arrowFilter1{
     transform: rotate(90deg);
 }
+.filterSpanEx{
+    display: flex;
+    justify-content: start;
+    gap: .3vw;
+    font-size: 0.7vw;
+    padding: .5vw .5vw;
+    cursor: pointer;
+}

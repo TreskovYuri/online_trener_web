@@ -250,6 +250,9 @@ class Mobx {
 
     journal = []
     setJournal(newJournal) { this.journal = newJournal }
+
+    testFix = []
+    setTestFix(newTestFix) { this.testFix = newTestFix }
     
 
 }

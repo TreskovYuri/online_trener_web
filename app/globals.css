@@ -9,6 +9,7 @@ html, body{
   --blue-hover:#2441d4;
   --grey:#DDE1EE;
   --grey-hover:#ced2e0;
+  --modal-bacground:#00000027;
 }
 *{
   box-sizing: border-box;

@@ -10,7 +10,7 @@ import JournalHeader from "./JournalHeader";
 import JournalCard from "./JournalCard";
 
 
-const WeekCalendar = observer(() => {
+const WeekCalendar = observer(({setTrainingModal,setNutritionModal,setTestModal}) => {
   const [count, setCount] = useState(0);
   let day = moment().subtract(1, "day").subtract(count, "week");
   const daysArray = [...Array(7)].map(() => day.add(1, "day").clone());
@@ -43,7 +43,7 @@ const WeekCalendar = observer(() => {
               <span className={css.headerWeek}>{RuDaysWeekOnInt({day:dayItem.day()})}</span>
             </div>
             <div className={css.cell} onDragOver={(e) => e.preventDefault()}>
-              <JournalCard dayItem={dayItem.format("DD.MM.YYYY")}filterValue={filterValue} />
+              <JournalCard dayItem={dayItem.format("DD.MM.YYYY")}filterValue={filterValue} setTrainingModal={setTrainingModal} setTestModal={setTestModal} setNutritionModal={setNutritionModal}/>
             </div>
           </div>
         ))}

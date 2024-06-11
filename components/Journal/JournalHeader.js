@@ -18,6 +18,7 @@ import ListConstants from '@/constants/lists';
 const JournalHeader = ({count,filterValue,setFilterValue,setCount}) => {
     const [filter2Modal, setFilter2Modal] = useState(false)
     const [filter2_Amplua_Modal, setFilter2_Amplua_Modal] = useState(false)
+    const [filter2_Comands_Modal, setFilter2_Comands_Modal] = useState(false)
     const [filter1Modal, setFilter1Modal] = useState(false)
     const [currentFilter1, setCurrentFiler1] = useState('Все')
     const [currentFilter2, setCurrentFiler2] = useState('Все')
@@ -35,6 +36,14 @@ const JournalHeader = ({count,filterValue,setFilterValue,setCount}) => {
           setCurrentFiler2(text)
           setFilter2_Amplua_Modal(true)
           break;
+        case 'Команда':
+          setCurrentFiler2(text)
+          setFilter2_Comands_Modal(true)
+          break;
+        case 'Назад':
+          setFilter2_Amplua_Modal(false)
+          setFilter2_Comands_Modal(false)
+          break;
       
         default:
           break;
@@ -47,7 +56,7 @@ const JournalHeader = ({count,filterValue,setFilterValue,setCount}) => {
     className={css.header}
   >
     {MonthEngStringToRusString({month:moment().subtract(count, "week").format("MMMM")})},
-    <span>{moment().format("YYYY")}</span>
+    <span>{moment().subtract(count, "week").format("YYYY")}</span>
     <div className={css.arrowContainer}>
       <Image
         src={leftArrow}
@@ -77,8 +86,9 @@ const JournalHeader = ({count,filterValue,setFilterValue,setCount}) => {
   
       </div>
       {filter1Modal && <FilterModalWind handleFilter1Click={handleFilter1Click} current={currentFilter1}  list={["Выполненные","Пропущенные","Все",]}/> }
-      {filter2Modal && <FilterModalWind handleFilter1Click={handleFilter2Click} type={2}  list={["Амплуа","Группа","Группа",]}/> }
-      {filter2_Amplua_Modal && <FilterModalWind handleFilter1Click={handleFilter1Click} current={currentFilter2} type={0}  list={ListConstants.Amplua}/> }
+      {filter2Modal && <FilterModalWind handleFilter1Click={handleFilter2Click} type={2}  list={["Амплуа","Группа","Команда",]}/> }
+      {filter2_Amplua_Modal && <FilterModalWind handleFilter1Click={handleFilter2Click} current={currentFilter2} type={11}  list={ListConstants.Amplua}/> }
+      {filter2_Comands_Modal && <FilterModalWind handleFilter1Click={handleFilter2Click} current={currentFilter2} type={11}  list={ListConstants.Comands}/> }
     </div>
   </motion.div>
   }
@@ -88,7 +98,7 @@ export default JournalHeader
 
 const FilterModalWind = ({handleFilter1Click, list, type = 1, current}) => {
   return  <motion.div initial={{ opacity: 1 }} whileInView={{ opacity: 1 }} className={css.filterModal}>
-    {type==0&& <span className={`${css.filterSpan} ${css.filterSpanNoBetween}`} onClick={() => handleFilter1Click('Назад')}><Image src={arrow} className={css.arrowFilter1} />{current}</span>}
+    {type==11&& <div className={`${css.filterSpanEx}`} onClick={() => handleFilter1Click('Назад')}><Image src={arrow} className={css.arrowFilter1} />{current}</div>}
     {
       list.map(el => <span key={el} className={`${css.filterSpan} ${css.filterSpanBetween} ${el == current&&css.filterSpanActive}`} onClick={() => handleFilter1Click(el)}>{el}{type>1&&<Image src={arrow} className={css.arrowFilter} />}</span>)
     }

@@ -5,9 +5,8 @@ import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import css from "./JournalCard.module.css";
 import Sokrashatel from "@/utils/Sokrashatel";
-import { isFloat } from "validator";
 
-const JournalCard = observer(({ dayItem, filterValue }) => {
+const JournalCard = observer(({ dayItem, filterValue, setTrainingModal,setNutritionModal,setTestModal }) => {
   const [sportsmans, setSportsmans] = useState([]);
 
   useEffect(() => {
@@ -17,9 +16,9 @@ const JournalCard = observer(({ dayItem, filterValue }) => {
   }, [mobx.journal]);
 
   return (
-    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
+    <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} style={{width:'100%'}}>
       {sportsmans.map((e) => (
-        <_UserCard sportsman={e} date={dayItem} />
+        <_UserCard sportsman={e} date={dayItem} setTrainingModal={setTrainingModal}  setTestModal={setTestModal} setNutritionModal={setNutritionModal}/>
       ))}
     </motion.div>
   );
@@ -27,14 +26,14 @@ const JournalCard = observer(({ dayItem, filterValue }) => {
 
 export default JournalCard;
 
-const _UserCard = observer(({ sportsman, date }) => {
+const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModal,setTestModal }) => {
   const exercices = sportsman.exercises.filter((el) => el.date == date);
   const nutritions = sportsman.nutrition.filter((el) => el.date == date);
   const sportprogramm = mobx.sportprogramms.find(
     (el) => el.id == exercices[0]?.programmId
   );
   const tests = sportsman.tests.filter((el) => el.date == date);
-  console.log(tests)
+
 
   if (exercices.length || nutritions.length || tests.length) {
     return (
@@ -46,19 +45,19 @@ const _UserCard = observer(({ sportsman, date }) => {
           <span className={css.amluaItem}>{sportsman.team}</span>
           <span className={css.amluaItem}>{sportsman.post}</span>
         </div>
-        <_CardRow isFlag={true} flag={true} text={sportprogramm?.name} />
+        {sportprogramm && <_CardRow callback={()=>setTrainingModal(true)} isFlag={true} flag={true} text={sportprogramm?.name} />}
         {tests?.map((el) => (
-          <_CardRow text={mobx.tests.find(e => e.id == el.testId)?.name} />
+          <_CardRow callback={()=>setTestModal(true)}  text={mobx.tests.find(e => e.id == el.testId)?.name} />
         ))}
-        <_CardRow isFlag={true} flag={false} text={"Еда на день"} />
+        {nutritions&&<_CardRow callback={()=>setNutritionModal(true)} isFlag={true} flag={false} text={"Еда на день"} />}
       </div>
     );
   }
 });
 
-const _CardRow = ({ text, isFlag = false, flag = false }) => {
+const _CardRow = ({ text, isFlag = false, flag = false, callback }) => {
   return (
-    <div className={css.cardRow}>
+    <div className={css.cardRow} onClick={callback?callback:()=>{}}>
       {isFlag && (
         <span
           className={`${css.flag} ${flag ? css.greenFlag : css.redFlag}`}

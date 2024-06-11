@@ -7,7 +7,6 @@ import { motion } from 'framer-motion'
 import UserUtills from '@/http/UserUtills'
 import Image from 'next/image'
 import user from './img/user.jpg'
-import UpdatePatern from '../Training/UpdatePatern/UpdatePatern'
 import UpdateUser from '../SuperAdmin/Users/UpdateUser/UpdateUser'
 import AddUser from '../SuperAdmin/Users/addUser/addUser'
 
@@ -16,29 +15,12 @@ const Sportsmans = observer(() => {
     useEffect(() => {
         UserUtills.getSportsmans()
     }, [])
-
-    const pluralize = (number, one, two, five) => {
-        if (number % 10 === 1 && number % 100 !== 11) {
-            return one;
-        } else if ([2, 3, 4].includes(number % 10) && ![12, 13, 14].includes(number % 100)) {
-            return two;
-        } else {
-            return five;
-        }
-    };
+    useEffect(()=>{
+        mobx.setSportsmansSearch(mobx.sportsmans)
+    },[mobx.sportsmans])
 
 
-    const Sportsmanas = (one, two, three, four, five, six, seven) => {
-        let count = 0;
-        one && count++;
-        two && count++;
-        three && count++;
-        four && count++;
-        five && count++;
-        six && count++;
-        seven && count++;
-        return `${count} ${pluralize(count, 'прием', 'приема', 'приемов')} пищи`;
-    };
+
 
 
     return (

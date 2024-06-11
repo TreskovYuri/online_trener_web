@@ -42,12 +42,6 @@ const WeekCalendar = () => {
   let day = moment().subtract(1, 'day');
   const daysArray = [...Array(7)].map(() => day.add(1, 'day').clone())
 
-  useEffect(()=>{
-    mobx.consultations.forEach(c => {
-      console.log(new Date(c.date))
-      console.log(new Date(c.date).getDate())
-    })
-  },[])
 
 
 

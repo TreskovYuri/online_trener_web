@@ -5,10 +5,6 @@ class MailService {
 
     // Инициализация почтового клиента
     constructor() {
-        console.log(process.env.SMTP_HOST)
-        console.log(process.env.SMTP_PORT)
-        console.log(process.env.SMTP_HOST)
-        console.log(process.env.SMTP_PASSWORD)
         this.transporter = nodemailer.createTransport({
             // Информация для авторизации в gmail для отправки писем
             host: process.env.SMTP_HOST,
