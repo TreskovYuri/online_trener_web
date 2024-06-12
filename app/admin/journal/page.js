@@ -12,6 +12,8 @@ import FixUtllls from '@/http/FixUtllls'
 import TrainingDetails from '@/components/Journal/TrainingDetails'
 import TestDetails from '@/components/Journal/TestDetails'
 import NutritionDetails from '@/components/Journal/NutritionDetails'
+import UserUtills from '@/http/UserUtills'
+import PatternUtills from '@/http/PatternUtills'
 
 const Journal = () => {
   const [trainingModal, setTrainingModal] = useState(false)
@@ -20,8 +22,11 @@ const Journal = () => {
   useEffect(() => {
     JournalUtills.getJournal()
     SportProgrammUtills.getProgramms()
-    GroupUtills.getTests()
+    FixUtllls.getFixTraining()
     FixUtllls.getGFixTest()
+    GroupUtills.getTests()
+    PatternUtills.getAllNutrition()
+    UserUtills.getSportsmans()
     mobx.setPageName('Журнал')
   },[])
   return (

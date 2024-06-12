@@ -1,0 +1,93 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+}
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.title{
+    font-size: 1.2vw;
+    font-weight: 500;
+}
+.smile{
+    width: 1.4vw;
+    height: auto;
+}
+.exerciseCard{
+    display: flex;
+    flex-direction: column;
+}
+.exerciseTitle{
+    font-size: .9vw;
+    font-weight: 500;
+}
+.setHeader{
+    display: flex;
+    margin-top: 1vw;
+}
+.setHeader span{
+    font-size: 0.6vw;
+    width: 100%;
+
+}
+.setRow{
+    display: flex;
+    margin-top: 0.3vw;
+    gap: .2vw;
+    height: 2vw;
+}
+.setRow span{
+    width: 100%;
+    padding: 0vw 1vw;
+    background-color: var(--input-bacground);
+    border-radius: .5vw;
+    display: flex;
+    align-items: center;
+    font-size: .8vw;
+}
+.between{
+    justify-content: space-between;
+}
+.setType{
+    font-size: .7vw;
+    font-weight: 600;
+    opacity: .5;
+}
+.commentContainer{
+    display: flex;
+    flex-direction: column;
+    gap: 1vw;
+}
+.comentCounter{
+    font-size: .7vw;
+    font-weight: 500;
+    opacity: .8;
+}
+.commentHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}
+.comment{
+    display: flex;
+    gap: .7vw    ;
+}
+.commentIconBox{
+    width: 2vw;
+    height: 2vw;
+}
+.column{
+    display: flex;
+    flex-direction: column;
+}
+.commentatorName{
+    font-size: .9vw;
+    font-weight: 600;
+}
+.message{
+    font-size: 0.8vw;
+}

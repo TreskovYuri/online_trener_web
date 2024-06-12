@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+}
+.star{
+    width: 1vw;
+    height: auto;
+    cursor: pointer;
+    transition: all .3s;
+}
+.star:hover{
+    transform: scale(113%);
+}

@@ -1,8 +1,8 @@
 
 
 
-const Sokrashatel = ({text}) => {
-    if(text.length==0) return ''
+const NameSokrashatel = ({text}) => {
+    if(!text || text.length==0) return ''
     const array = text.split(' ')
     switch (array.length) {
         case 1:
@@ -17,4 +17,4 @@ const Sokrashatel = ({text}) => {
     }
 }
 
-export default Sokrashatel
+export default NameSokrashatel

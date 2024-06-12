@@ -1,0 +1,39 @@
+.container{
+    display: flex;
+    gap: .3vw;
+}
+.input{
+    border: none;
+    background-color: var(--input-bacground);
+    border-radius: .5vw;
+    height: 2vw;
+    width: 100%;
+    padding: 0 1vw;
+}
+.input::placeholder{
+    font-size: .7vw;
+    font-weight: 500;
+    opacity: .6;
+}
+.input:focus{
+    border: none;
+    outline: none;
+}
+.btn{
+    width: 2vw;
+    height: 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #c8ccd79d;
+    border-radius: .5vw;
+    cursor: pointer;
+    transition: all .3s;
+}
+.btn:hover{
+    background-color: #C8CCD7;
+}
+.arrow{
+    width: 50%;
+    height: auto;
+}

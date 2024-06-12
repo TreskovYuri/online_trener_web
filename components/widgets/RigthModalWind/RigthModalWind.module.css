@@ -15,4 +15,5 @@
     width: 20vw;
     background-color: white;
     border-radius: 1vw 0 0 1vw;
+    overflow-y: auto;
 }

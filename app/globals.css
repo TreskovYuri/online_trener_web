@@ -10,6 +10,8 @@ html, body{
   --grey:#DDE1EE;
   --grey-hover:#ced2e0;
   --modal-bacground:#00000027;
+  --input-bacground: #858dad36;
+  --input-bacground-hover: #C8CCD7;
 }
 *{
   box-sizing: border-box;

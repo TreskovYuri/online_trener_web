@@ -11,8 +11,6 @@ import { observer } from 'mobx-react-lite'
 
 
 const PatternDetails = observer(() => {
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
 
   const [name1Flag, setName1Flag] = useState(false)
   const [name2Flag, setName2Flag] = useState(false)
@@ -112,7 +110,7 @@ const PatternDetails = observer(() => {
               }
             </>
             }
-            {mobx.OnePattern.nam76&&
+            {mobx.OnePattern.name7&&
             <>
               <div className={css.cardNameButton} onClick={()=>setName7Flag(!name7Flag)}>
                 <span className={css.cardName}>{mobx.OnePattern.name7}</span>

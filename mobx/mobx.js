@@ -139,7 +139,7 @@ class Mobx {
     setTreners(treners) { this.treners = treners }
 
     nutritions = []
-    setNutritions(nutritions) { this.nutritions = nutritions }
+    setNutritions(newNutritions) { this.nutritions = newNutritions }
 
     OneUser = {}
     setOneUser(OneUser) { this.OneUser = OneUser }
@@ -253,6 +253,26 @@ class Mobx {
 
     testFix = []
     setTestFix(newTestFix) { this.testFix = newTestFix }
+
+    trainingFix = []
+    setTrainingFix(newTrainingFix) { this.trainingFix = newTrainingFix }
+
+
+    currentTraining = {}
+    setCurrentTraining(newCurrentTraining) { this.currentTraining = newCurrentTraining }
+
+    currentTest = {}
+    setCurrentTest(newCurrentTest) { this.currentTest = newCurrentTest }
+
+    currentNutrition = {}
+    setCurrentNutrition(newCurrentNutrition) { this.currentNutrition = newCurrentNutrition }
+
+
+    currentDate = ''
+    setCurrentDate(newDate){this.currentDate = newDate}
+
+    comments = []
+    setComments(newComments){this.comments = newComments}
     
 
 }
