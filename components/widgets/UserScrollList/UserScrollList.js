@@ -11,7 +11,7 @@ const UserScrollList = ({users, currentUsers, setCurrentUsers}) => {
 
   return (
     <ListView 
-    height={15} 
+    height={20} 
     list={users} 
     builder={(user, index) => {
         return <div key={index} className={css.itemCard}>
@@ -19,7 +19,7 @@ const UserScrollList = ({users, currentUsers, setCurrentUsers}) => {
              <CircleChechBox flag={currentUsers.find(el => el.id == user.id)?true:false} setFlag={()=>setCurrentUsers(user)}/>
             </div>
             {<div className={css.icon}>{user.img ? <ImgIconCircle url={user.img} width='2vw'/> :<DefaultIconCircleOnName text={user.name}/>}</div>}
-            <span className={css.itemName}>{user.name!=''?user.name:'Не заполнено'}</span>
+            <span className={css.itemName}>{user.name?user.name:'Не заполнено'}</span>
         </div>;
       }} 
       />

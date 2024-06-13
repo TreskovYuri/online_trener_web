@@ -11,7 +11,7 @@ const UserIconsRow = ({
         <OpacityDiv className={css.container}>{placeholder}</OpacityDiv>
       )}else{
         return (
-            <OpacityDiv className={css.container}>{users.slice(0, 10).map(el => <_Icon user={el}/> )}</OpacityDiv>
+            <OpacityDiv className={css.container}>{users.slice(0, 8).map(el => <_Icon user={el}/> )}</OpacityDiv>
         )
       }
   

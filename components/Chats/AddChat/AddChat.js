@@ -21,7 +21,7 @@ const AddChat = observer(({setModal}) => {
     const [serchText, setSearchText] = useState('')
 
     useEffect(()=>{
-        if(mobx.users)setSearchUsers(mobx.users)
+        if(mobx.users)setSearchUsers(mobx.users.filter(el => el.id != mobx.user.id))
     },[mobx.users])
 
 
@@ -43,7 +43,7 @@ const AddChat = observer(({setModal}) => {
             }}/>
             <SizedBox heigth={1}/>
             <UserScrollList users={searchUsers} currentUsers={currentUsers} setCurrentUsers={(e)=>ChatHandlers.handleCurrentUser({currentUsers:currentUsers,setCurrentUsers:setCurrentUsers,user:e})}/>
-            <div className={css.btn}><GradientButtonOval callback={()=>{}} text={'Создать чат'}/></div>
+            <div className={css.btn}><GradientButtonOval callback={()=>ChatHandlers.create({currentUsers:currentUsers,messageOnlyI:messageOnlyI,name:name,close:()=>setModal(false)})} text={'Создать чат'}/></div>
         </div>
     </RigthModalWind>
   )
