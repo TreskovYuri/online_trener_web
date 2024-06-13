@@ -1,0 +1,19 @@
+.btn{
+    background-color: white;
+    padding: 0vw 1vw;
+    border-radius: 10vw;
+    font-size: 0.6vw;
+    cursor: pointer;
+    transition: all .3s;
+    display: flex;
+    align-items: center;
+    gap: .4vw;
+    font-weight: 500;
+}
+.btn:hover{
+    background-color: var(--white-btn-hover) ;
+}
+.btn span{
+    font-size: 1vw;
+    font-weight: 600;
+}

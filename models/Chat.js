@@ -6,8 +6,11 @@ import {DataTypes} from 'sequelize'
 
 const Chat = sequelize.define('chat', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
-    user1Id: {type: DataTypes.INTEGER, allowNull:false},
-    user2Id: {type: DataTypes.INTEGER, allowNull:false},
+    userId: {type: DataTypes.INTEGER, allowNull:false},
+    name: {type:DataTypes.STRING, allowNull:false},
+    messageOnlyI:{type:DataTypes.BOOLEAN,defaultValue:false},
+    isGroup:{type:DataTypes.BOOLEAN,defaultValue:false},
+
 })
 
 

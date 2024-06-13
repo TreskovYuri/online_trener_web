@@ -12,6 +12,14 @@ html, body{
   --modal-bacground:#00000027;
   --input-bacground: #858dad36;
   --input-bacground-hover: #C8CCD7;
+  --white-btn-hover: rgba(197, 207, 212, 0.301);
+  --input-border: rgba(146, 146, 146, 0.301);
+  --white-modal_item-hover: rgba(230, 230, 230, 0.301);
+  --gradient1:#4D8AEE;
+  --gradient2:#2962ffb2;
+  --gradient1-hover:#457fdd;
+  --gradient2-hover:#1f51d8b2;
+
 }
 *{
   box-sizing: border-box;

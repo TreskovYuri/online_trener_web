@@ -1,0 +1,16 @@
+.container{
+    display: flex;
+    padding: 2vw;
+}
+.sidebar{
+    width: 25%;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+.chatWind{
+    width: 75%;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}

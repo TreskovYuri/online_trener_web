@@ -1,0 +1,43 @@
+.container{
+    width: 100%;
+    height: 2vw;
+    border: 1px solid var(--input-border);
+    border-radius: .5vw;
+    display: flex;
+    align-items: center;
+    padding: 0 1vw;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+    user-select: none;
+}
+.arrow{
+    width: .6vw;
+    height: auto;
+    transform: rotate(-90deg);
+    transition: all .2s;
+}
+.active{
+    transform: none;
+}
+.modalWind{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-color: white;
+    gap: .3vw;
+    border:  1px solid var(--input-border);
+    border-radius: .5vw;
+}
+.modalWind span{
+    padding: .5vw;
+    transition: all .3s;
+}
+.modalWind span:hover{
+    background-color: var(--white-modal_item-hover);
+}

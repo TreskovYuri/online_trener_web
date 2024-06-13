@@ -1,0 +1,18 @@
+.itemCard{
+    margin-top: 0.5vw;
+    display: flex;
+    align-items: center;
+    gap: .3vw;
+}
+.icon{
+    width: 1.7vw;
+    height: 1.7vw;
+}
+.itemName{
+    font-size: 0.7vw;
+    font-weight: 400;
+}
+.checkBox{
+    width: 1vw;
+    height: 1vw;
+}
