@@ -7,9 +7,9 @@ import Image from 'next/image'
 const ExerciseCard = ({belong,exercises,callback}) => {
     const exercise = exercises.find(e => e.id == belong.exerciseId)
   return (
-    <div className={css.container}>
+    <div className={css.container} onClick={callback}>
         {
-            <div className={css.icon}>{exercise.img?<ImgIconCircle url={exercise.img} radius={0.5}/>:<DefaultIconCircleOnName text={exercise?.nameRU||''} radius={0.5}/>}</div>
+            <div className={css.icon}>{exercise.img?<ImgIconCircle url={exercise.img} radius={0.5}/>:<DefaultIconCircleOnName text={exercise?.nameRu||''} radius={0.5}/>}</div>
         }
         <div className={css.title}>{exercise.nameRu}</div>
         <Image unoptimized src={arrow} className={css.arrow}/>

@@ -26,6 +26,8 @@ const TrainingDetails = observer(({setModal}) => {
   const exersicesBelong = mobx.sportprogrammExersices.filter(el => el.date == mobx.currentDate)
   const exercises = mobx.exercises
 
+  
+
   return (
     <RigthModalWind setModal={setModal}>
       <div className={css.container}>
@@ -48,6 +50,8 @@ export default TrainingDetails
 const _ExerciseCard = observer(({exercise, belong}) => {
   const sets = JSON.parse(belong.sets)
   const comments = mobx.comments.filter(el => el.exerciseBelongId == belong.id)
+  const fix = mobx.trainingFix?.find(el => el.exerciseId == exercise.id  &&  el.date == mobx.currentDate  && el.programmId == mobx.currentTraining.id && el.userId == mobx.currentTraining.sportsmanId)
+  const fixSets = fix? JSON.parse(fix?.sets):null
   return <div className={css.exerciseCard}>
           <h3 className={css.exerciseTitle}>{exercise?.nameRu || 'Название тренировки'}</h3>
           {exercise?.video&& <NetworkVideoPlayer url={exercise.video} />}
@@ -60,16 +64,21 @@ const _ExerciseCard = observer(({exercise, belong}) => {
               {exercise?.pocazatel5Name && <span>{exercise.pocazatel5Name}</span>}
           </div>
           {
-            sets.map(set =><_SetRow key={set} set={set} exercise={exercise}/> )
+            sets.map(set =><_SetRow key={set} set={set} exercise={exercise} fix={fixSets?.find(el => el.set == set.set)}/> )
           }
           < _CommentBlock belongId={belong?.id||0} comments={comments}/>
         </div>
 })
 
-const _SetRow = ({set,exercise}) => {
+const _SetRow = ({set,exercise,fix}) => {
   return <div className={css.setRow}>
           <span >{set.set}</span>
-          <span className={css.between}><div>{set.diapazonOt}-{set.diapazonDo}</div><div className={css.setType}>{exercise?.pocazatel1Type}</div></span>
+          <span className={`${css.between} ${fix?.diapazon || fix?.diapazonOt?css.fix:''}`}>{fix?.diapazon?<div>{fix?.diapazon}</div>:<div>{fix?.diapazonOt || set.diapazonOt}-{fix?.diapazonDo || set.diapazonDo}</div>}<div className={css.setType}>{exercise?.pocazatel1Type}</div></span>
+          {exercise?.pocazatel2Name&&<span className={`${css.between} ${fix?.pokazatel2?css.fix:''}`}><div>{fix?.pokazatel2 || set.pokazatel2}</div><div className={css.setType}>{exercise?.pocazatel2Type}</div></span>}
+          {exercise?.pocazatel3Name&&<span className={`${css.between} ${fix?.pokazatel3?css.fix:''}`}><div>{fix?.pokazatel3 || set.pokazatel3}</div><div className={css.setType}>{exercise?.pocazatel3Type}</div></span>}
+          {exercise?.pocazatel4Name&&<span className={`${css.between} ${fix?.pokazatel4?css.fix:''}`}><div>{fix?.pokazatel4 || set.pokazatel4}</div><div className={css.setType}>{exercise?.pocazatel4Type}</div></span>}
+          {exercise?.pocazatel5Name&&<span className={`${css.between} ${fix?.pokazatel5?css.fix:''}`}><div>{fix?.pokazatel5 || set.pokazatel5}</div><div className={css.setType}>{exercise?.pocazatel5Type}</div></span>}
+
         </div>
 }
 

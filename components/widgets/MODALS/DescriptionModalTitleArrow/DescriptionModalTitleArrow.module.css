@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    margin-top: 1w;
+}
+.header{
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    font-size: 0.8vw;
+    user-select: none;
+}
+.arrow{
+    width: .6vw;
+    height: auto;
+    transform: rotate(-90deg);
+    transition: all .3s;
+}
+.activeArrow{
+    transform: none;
+}

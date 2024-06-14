@@ -36,6 +36,8 @@ const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModa
     (el) => el.id == programmId
   );
   const tests = sportsman.tests.filter((el) => el.date == date);
+  const isExerciseFix = mobx.trainingFix.find(el => el?.programmId == sportprogramm?.id && el?.userId == sportsman?.id && el?.date == date )?true:false
+  const isTestFix = mobx.testFix.find(el => el?.programmId == sportprogramm?.id && el?.date == date && el?.sportsmanId == sportsman?.id)?true:false
 
   useEffect(()=>{
     if(exercices.length>0){
@@ -62,23 +64,30 @@ const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModa
           <span className={css.amluaItem}>{sportsman.team}</span>
           <span className={css.amluaItem}>{sportsman.post}</span>
         </div>
-        {sportprogramm && <_CardRow callback={()=>{
-          mobx.setCurrentTraining(sportprogramm)
+        {exercices.length>0 && <_CardRow callback={()=>{
+          mobx.setCurrentTraining({
+            ...sportprogramm,
+            sportsmanId:sportsman.id
+          })
           mobx.setCurrentDate(date)
-          if( СompareWithCurrentDate(ParseDateOnString(date))){
+          mobx.setCurrentExercise()
+          if(!isExerciseFix &&  СompareWithCurrentDate(ParseDateOnString(date))){
             setFutureTrainingModal(true)
           }else{
             setTrainingModal(true);
           }
           
-          }} isFlag={true} flag={mobx.trainingFix.find(el => el?.programmId == sportprogramm?.id && el?.userId == sportprogramm?.id && el?.date == date )?true:false} text={sportprogramm?.name} />}
+          }} isFlag={isExerciseFix || !СompareWithCurrentDate(ParseDateOnString(date))} flag={isExerciseFix} text={sportprogramm?.name} />}
         {tests?.map((el) => (
           <_CardRow  callback={()=>{
-
-            mobx.setCurrentTest(mobx.tests.find(e => e.id == el.testId))
+            mobx.setCurrentDate(date)
+            mobx.setCurrentTest({
+              ...mobx.tests.find(e => e.id == el.testId),
+              programmId:programmId
+            })
             setTestModal(true);
           }}  text={mobx.tests.find(e => e.id == el.testId)?.name} 
-           isFlag={true} flag={mobx.testFix.find(el => el?.programmId == sportprogramm?.id && el?.date == date && el?.sportsmanId == sportsman?.id)?true:false}
+           isFlag={isTestFix || !СompareWithCurrentDate(ParseDateOnString(date))} flag={isTestFix}
           />
         ))
         }

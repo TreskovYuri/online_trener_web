@@ -12,8 +12,11 @@ import { observer } from "mobx-react-lite";
 import EquipmentsListScroll from "@/components/widgets/EquipmentsListScroll/EquipmentsListScroll";
 import ExerciseCard from "./ExerciseCard/ExerciseCard";
 import DescriptionModalTitleArrow from "@/components/widgets/MODALS/DescriptionModalTitleArrow/DescriptionModalTitleArrow";
+import SizedBox from "@/components/widgets/SizedBox/SizedBox";
+import OneExercise from "./OneExercise/OneExercise";
 
 const FutureTrainingDetails = observer(({ setModal }) => {
+  const [exerciseModal, setExerciseModal] = useState(false)
   useEffect(() => {
     SportProgrammUtills.getExersicesById(mobx.currentTraining?.id);
     
@@ -36,6 +39,7 @@ const FutureTrainingDetails = observer(({ setModal }) => {
 
   return (
     <RigthModalWind setModal={setModal}>
+      {exerciseModal&&<OneExercise setModal={setExerciseModal}/>}
       <div className={css.container}>
         <div className={css.header}>
           <h2 className={css.title}>{mobx.currentTraining?.name}</h2>
@@ -45,8 +49,13 @@ const FutureTrainingDetails = observer(({ setModal }) => {
           <EquipmentsListScroll list={equipment}/>
         </div>
         {
-          exersicesBelong.map(belong => <ExerciseCard belong={belong} exercises={exercises} callback={()=>{}}/>)
+          exersicesBelong.map(belong => <ExerciseCard belong={belong} exercises={exercises} callback={()=>{
+            mobx.setCurrentExercise(exercises.find(el => el.id == belong.exerciseId))
+            mobx.setCurrentBelongExercise(belong)
+            setExerciseModal(true);
+          }}/>)
         }
+        <SizedBox heigth={1}/>
         <DescriptionModalTitleArrow title={'Описание'} description={<div>{'adawdw'}</div>}/>
       </div>
     </RigthModalWind>

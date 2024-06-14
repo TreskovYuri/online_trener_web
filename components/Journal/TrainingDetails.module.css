@@ -91,3 +91,6 @@
 .message{
     font-size: 0.8vw;
 }
+.fix{
+    border: 1px solid rgb(0, 153, 255);
+}

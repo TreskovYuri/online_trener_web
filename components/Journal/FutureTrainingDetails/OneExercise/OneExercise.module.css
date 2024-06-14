@@ -1,0 +1,34 @@
+.container{
+    padding: 2vw 1vw;
+    display: flex;
+    flex-direction: column;
+}
+.exit{
+    display: flex;
+    gap: .2vw;
+    align-items: center;
+    color: var(--blue);
+    transition: all .3s;
+    cursor: pointer;
+}
+.exit:hover{
+    color: var(--blue-hover);
+}
+.arrow{
+    width: 1vw;
+    height: auto;
+}
+.header{
+    margin-top: 1vw;
+    font-size: 1vw;
+    font-weight: 500;
+    margin-bottom: 1vw;
+}
+.label{
+    font-size: 1vw;
+    margin-top: 1vw;
+    font-weight: 500;
+}
+.description{
+    font-size: 0.7vw;
+}

@@ -261,6 +261,12 @@ class Mobx {
     currentTraining = {}
     setCurrentTraining(newCurrentTraining) { this.currentTraining = newCurrentTraining }
 
+    currentExercise = {}
+    setCurrentExercise(newCurrentExercise) { this.currentExercise = newCurrentExercise }
+
+    currentBelongExercise = {}
+    setCurrentBelongExercise(newCurrentBelongExercise) { this.currentBelongExercise = newCurrentBelongExercise }
+
     currentTest = {}
     setCurrentTest(newCurrentTest) { this.currentTest = newCurrentTest }
 
