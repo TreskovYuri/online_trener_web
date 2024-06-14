@@ -1,0 +1,28 @@
+.container{
+    margin-top: .5vw;
+    background-color: var(--input-bacground);
+    padding: .5vw;
+    border-radius: .5vw;
+    display: flex;
+    gap: .5vw;
+    cursor: pointer;
+    transition: all .3s;
+    align-items: center;
+}
+.container:hover{
+    background-color: var(--input-bacground-hover);
+}
+.icon{
+    width: 2vw;
+    height: 2vw;
+}
+.title{
+    flex: 1;
+    display: flex;
+    font-size: 0.7vw;
+}
+.arrow{
+    width: .7vw;
+    height: auto;
+    transform: rotate(-90deg);
+}

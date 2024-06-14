@@ -1,9 +1,9 @@
 import css from './DefaultIconCircleOnName.module.css'
 
-const DefaultIconCircleOnName = ({text}) => {
+const DefaultIconCircleOnName = ({text,radius=10}) => {
     
   return (
-    <div className={css.container}>{text && text.length>0?text.split('')[0]:'?'}</div>
+    <div className={css.container} style={{borderRadius:`${radius}vw`}}>{text && text.length>0?text.split('')[0]:'?'}</div>
   )
 }
 

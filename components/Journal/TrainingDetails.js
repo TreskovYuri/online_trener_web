@@ -21,7 +21,6 @@ import NameSokrashatel from '@/utils/NameSokrashatel'
 const TrainingDetails = observer(({setModal}) => {
   useEffect(()=>{
     SportProgrammUtills.getExersicesById(mobx.currentTraining?.id)
-    TrainingUtills.getExercise()
     CommentUtills.getComments()
   },[])
   const exersicesBelong = mobx.sportprogrammExersices.filter(el => el.date == mobx.currentDate)

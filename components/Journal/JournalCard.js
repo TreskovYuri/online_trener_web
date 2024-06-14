@@ -5,8 +5,10 @@ import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import css from "./JournalCard.module.css";
 import NameSokrashatel from "@/utils/NameSokrashatel";
+import ParseDateOnString from "@/utils/ParseDateOnString";
+import СompareWithCurrentDate from "@/utils/СompareWithCurrentDate";
 
-const JournalCard = observer(({ dayItem, filterValue, setTrainingModal,setNutritionModal,setTestModal }) => {
+const JournalCard = observer(({ dayItem, filterValue, setTrainingModal,setNutritionModal,setTestModal,setFutureTrainingModal }) => {
   const [sportsmans, setSportsmans] = useState([]);
 
   useEffect(() => {
@@ -18,7 +20,7 @@ const JournalCard = observer(({ dayItem, filterValue, setTrainingModal,setNutrit
   return (
     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} style={{width:'100%'}}>
       {sportsmans.map((e) => (
-        <_UserCard sportsman={e} date={dayItem} setTrainingModal={setTrainingModal}  setTestModal={setTestModal} setNutritionModal={setNutritionModal}/>
+        <_UserCard sportsman={e} date={dayItem} setTrainingModal={setTrainingModal}  setTestModal={setTestModal} setNutritionModal={setNutritionModal} setFutureTrainingModal={setFutureTrainingModal}/>
       ))}
     </motion.div>
   );
@@ -26,7 +28,7 @@ const JournalCard = observer(({ dayItem, filterValue, setTrainingModal,setNutrit
 
 export default JournalCard;
 
-const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModal,setTestModal }) => {
+const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModal,setTestModal,setFutureTrainingModal }) => {
   const exercices = sportsman.exercises.filter((el) => el.date == date);
   const nutrition = sportsman.nutrition.find((el) => el.date == date);
   const [programmId, setProgrammId] = useState(0)
@@ -63,7 +65,12 @@ const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModa
         {sportprogramm && <_CardRow callback={()=>{
           mobx.setCurrentTraining(sportprogramm)
           mobx.setCurrentDate(date)
-          setTrainingModal(true);
+          if( СompareWithCurrentDate(ParseDateOnString(date))){
+            setFutureTrainingModal(true)
+          }else{
+            setTrainingModal(true);
+          }
+          
           }} isFlag={true} flag={mobx.trainingFix.find(el => el?.programmId == sportprogramm?.id && el?.userId == sportprogramm?.id && el?.date == date )?true:false} text={sportprogramm?.name} />}
         {tests?.map((el) => (
           <_CardRow  callback={()=>{
