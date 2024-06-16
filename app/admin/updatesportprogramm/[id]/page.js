@@ -41,6 +41,7 @@ const page = observer(({params}) => {
     TrainingUtills.getExercise()
     GroupUtills.getTests()
     UserUtills.getSportsmans()
+    TrainingUtills.getExerciseGroups()
     
     return ()=>{
       mobx.setSportprogrammUsers([])

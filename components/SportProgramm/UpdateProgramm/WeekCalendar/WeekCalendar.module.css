@@ -153,11 +153,26 @@
     align-items: center;
     justify-content: center;
 }
+.ImgInfoBox{
+    position: absolute;
+    height: 1vw;
+    width: 1vw;
+    top: .8vw;
+    right: -.2vw;
+    cursor: pointer;
+    opacity: .3;
+    transition: all .3s;
+    background-color: rgba(240, 240, 240, 0.623);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .ImgUpdateBox:hover{
     opacity: 1;
 }
 .updateImg{
-    height: 70%;
+    height: 50%;
 }
 .cardHeader{
     font-size: 0.5vw;

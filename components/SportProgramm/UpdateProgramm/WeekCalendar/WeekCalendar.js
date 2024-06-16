@@ -10,6 +10,7 @@ import leftArrow from "./img/leftArrow.svg";
 import rightArrow from "./img/rightArrow.svg";
 import deleteImg from "./img/delete.svg";
 import pencill from './img/pencil.svg'
+import { Pencil, Settings } from "lucide-react";
 
 
 
@@ -68,7 +69,10 @@ const WeekCalendar = observer(() => {
             date: el?.date,
             body: {
               "exerciseId": el?.exerciseId,
-              "sets": JSON.parse(el?.sets)
+              "sets": JSON.parse(el?.sets),
+              "time": el?.time,
+              "recomendation": el?.recomendation,
+
             }
           }))
         );
@@ -348,12 +352,8 @@ const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray })
                 mobx.setCardUpdateExercise(item),
                   mobx.setCardUpdateExerciseFlag(true)
               }}>
-                <Image
-                  src={pencill}
-                  className={css.updateImg}
+                <Settings className={css.updateImg}/>
 
-                  key={item?.id}
-                />
               </div>
               </span>
               <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body?.sets?.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>
@@ -405,13 +405,9 @@ const Card = observer(({ dayItem, exercicesArray, testsArray, nutritionsArray })
                               <div className={css.ImgUpdateBox} onClick={() => {
                 mobx.setCardUpdateExercise(item),
                   mobx.setCardUpdateExerciseFlag(true)
+                  console.log(item)
               }}>
-                <Image
-                  src={pencill}
-                  className={css.updateImg}
-
-                  key={item?.id}
-                />
+                <Settings className={css.updateImg}/>
               </div>
               </span>
               <span className={css.cardTypes}>{TextWrang2(`${TextWrang1(mobx.exercises?.find((el) => el?.id === item?.body?.exerciseId)?.pocazatel1Name)}: ${item.body?.sets?.map(e => `${e.diapazonOt}/${e.diapazonDo}`).join(' / ')}`)}:</span>

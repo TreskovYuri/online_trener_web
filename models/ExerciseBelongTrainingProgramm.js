@@ -11,6 +11,7 @@ const ExerciseBelongTrainingProgramm = sequelize.define('ExerciseBelongTrainingP
     sets:{type: DataTypes.TEXT, allowNull:true},
     time: {type: DataTypes.STRING, allowNull:true},
     date: {type: DataTypes.STRING, allowNull:true},
+    recomendation:{type:DataTypes.TEXT,allowNull:true}
 })
 
 

@@ -259,14 +259,6 @@ background-color: #ffffff;
     justify-content: center;
     z-index: 999;
 }
-.modalUpdateWind{
-    width: 100%;
-    height: auto;
-    background-color: white;
-    padding:2vw 1vw;
-    display: flex;
-    flex-direction: column;
-}
 .ipdateInput{
     width: 100%;
 }
@@ -436,29 +428,7 @@ background-color: #ffffff;
     margin: 0;
     display: none;
 }
-.AddSetsBtn{
-    display: flex;
-    background-color: white;
-    border:1px solid #4D8AEE;
-    border-radius: 1vw;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    gap: .3vw;
-    padding: .3vw 0;
-    cursor: pointer;
-    font-size: .7vw;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.804);
-    margin-top: 2vw;
-    transition: all .3s;
-}
-.AddSetsBtn1{
-    margin-top: .3vw    ;
-}
-.AddSetsBtn:hover{
-    background-color: rgb(246, 246, 246);
-}
+
 .label{
     font-size: 0.6vw;
     opacity: .6;
@@ -520,4 +490,53 @@ background-color: #ffffff;
 .textContainer{
     display: flex;
     flex-direction: column;
+}
+.modalUpdateWind{
+    width: 100%;
+    height: auto;
+    background-color: white;
+    padding:2vw 1vw;
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 20vw;
+    height: 100%;
+}
+.btnContainer{
+    display: flex;
+    gap: .3vw;
+    height: 2vw;
+    margin-top: 2vw;
+}
+.AddSetsBtn{
+    display: flex;
+    background-color: white;
+    border:1px solid #4D8AEE;
+    border-radius: 1vw;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: .3vw;
+    padding: .3vw 0;
+    cursor: pointer;
+    font-size: .7vw;
+    font-weight: 600;
+    color: rgba(0, 0, 0, 0.804);
+    transition: all .3s;
+}
+.AddSetsBtn:hover{
+    background-color: rgb(246, 246, 246);
+}
+.headerBtnContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .3vw;
+    width: 100%;
+}
+.btn{
+    width: 1.7vw;
+    height: 1.7vw;
 }

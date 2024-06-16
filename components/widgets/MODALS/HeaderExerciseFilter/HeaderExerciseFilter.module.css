@@ -1,0 +1,81 @@
+.btn{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all .3s;
+    background-color: rgb(240, 240, 240);
+    border-radius: 10vw;
+    position: relative;
+    opacity: 1;
+}
+.btn:hover{
+    background-color: rgb(209, 209, 209);
+}
+.search{
+    width:auto;
+    height:40%;
+}
+.filterModal{
+    position: absolute;
+    top: 110%;
+    right: 0;
+    width: 10vw;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.211);
+    border-radius: .5vw;
+    z-index: 999;
+    box-sizing: border-box;
+    padding: 0;
+    box-shadow:  0px 7px 31px 4px rgba(0, 0, 0, 0.42);
+    user-select: none;
+    max-height: 20vw;
+    overflow-y: auto;
+}
+.filterModal span{
+    padding: .5vw 1vw;
+    cursor: pointer;
+    width: 100%;
+    transition: all .3s;
+    margin: 0;
+    font-size: .7vw;
+    font-weight: 600;
+    opacity: 1;
+}
+.filterSpanActive{
+    color: #4D8AEE;
+}
+.filterModal span:hover{
+    background-color: rgb(229, 229, 229);
+}
+.filterSpan{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+}
+.filterSpanBetween{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.arrow{
+    width: 1vw;
+    height: auto;
+}
+.filterExit{
+    display: flex;
+    align-items: center;
+    gap: .3vw;
+}
+.filterSpanEnd{
+    border-top: 1px solid rgba(128, 128, 128, 0.24);
+    color: rgb(180, 180, 180);
+}
+.activeSpan{
+    color: var(--blue);
+}

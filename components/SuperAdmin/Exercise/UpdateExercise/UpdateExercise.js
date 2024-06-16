@@ -90,6 +90,33 @@ const UpdateExercise = () => {
     }
   }
 
+  const deletePokazatel = (num) => {
+    if(num == 2){
+      setPocazatel2Flag(false)
+      setPocazatel2Name('')
+      setPocazatel2Type('кг')
+      return
+    }
+    if(num == 3){
+      setPocazatel3Flag(false)
+      setPocazatel3Name('')
+      setPocazatel3Type('кг')
+      return
+    }
+    if(num == 4){
+      setPocazatel4Flag(false)
+      setPocazatel4Name('')
+      setPocazatel4Type('кг')
+      return
+    }
+    if(num == 5){
+      setPocazatel5Flag(false)
+      setPocazatel5Name('')
+      setPocazatel5Type('кг')
+      return
+    }
+  }
+
   useEffect(()=>{
     mobx.oneExercise.nameRu && setNameRu(mobx.oneExercise.nameRu)
     mobx.oneExercise.nameEng && setNameEng(mobx.oneExercise.nameEng)
@@ -143,6 +170,18 @@ const UpdateExercise = () => {
   };
 
   const next = () => {
+    if(!nameRu&& page==1){
+      ErrorHandler('Заполните название тренировки на русском')
+      return
+    }
+    if(!nameEng&& page==1){
+      ErrorHandler('Заполните название тренировки на Ангийском')
+      return
+    }
+    if(stage.length==0){
+      ErrorHandler('Выберите этап тренировки')
+      return
+    }
     setPage(page+1)
   }
 
@@ -243,7 +282,7 @@ const UpdateExercise = () => {
             pocazatel4Name={pocazatel4Name} setPocazatel4Name={setPocazatel4Name} pocazatel4Type={pocazatel4Type} setPocazatel4Type={setPocazatel4Type} pocazatel4SPFlag={pocazatel4SPFlag} setPocazatel4SPFlag={setPocazatel4SPFlag}
             pocazatel5Name={pocazatel5Name} setPocazatel5Name={setPocazatel5Name} pocazatel5Type={pocazatel5Type} setPocazatel5Type={setPocazatel5Type} pocazatel5SPFlag={pocazatel5SPFlag} setPocazatel5SPFlag={setPocazatel5SPFlag}
             pocazatel2Flag={pocazatel2Flag} setPocazatel2Flag={setPocazatel2Flag} pocazatel3Flag={pocazatel3Flag} setPocazatel3Flag={setPocazatel3Flag} pocazatel4Flag={pocazatel4Flag} setPocazatel4Flag={setPocazatel4Flag}
-            pocazatel5Flag={pocazatel5Flag} setPocazatel5Flag={setPocazatel5Flag} groupId={groupId} setGroupId={setGroupId} save={save}
+            pocazatel5Flag={pocazatel5Flag} setPocazatel5Flag={setPocazatel5Flag} groupId={groupId} setGroupId={setGroupId} save={save} deletePokazatel={deletePokazatel}
           />
         }
 
@@ -429,7 +468,7 @@ const Page4 = observer(({
   pocazatel4Name, setPocazatel4Name, pocazatel4Type, setPocazatel4Type, pocazatel4SPFlag, setPocazatel4SPFlag,
   pocazatel5Name, setPocazatel5Name, pocazatel5Type, setPocazatel5Type, pocazatel5SPFlag, setPocazatel5SPFlag,
   pocazatel2Flag, setPocazatel2Flag, pocazatel3Flag, setPocazatel3Flag, pocazatel4Flag, setPocazatel4Flag, pocazatel5Flag, setPocazatel5Flag,
-  groupId, setGroupId, save
+  groupId, setGroupId, save, deletePokazatel
 }) => {
   const [group, setGroup] = useState([])
   const [groupModal, setGroupModal] = useState(false)
@@ -452,22 +491,22 @@ const Page4 = observer(({
       {
         pocazatel2Flag && 
         <CardPokazatel name={pocazatel2Name} setName={setPocazatel2Name} pocazatelType={pocazatel2Type} setPocazatelType={setPocazatel2Type} pocazatelSPFlag={pocazatel2SPFlag} 
-        setPocazatelSPFlag={setPocazatel2SPFlag}/>
+        setPocazatelSPFlag={setPocazatel2SPFlag} deletePokazatel={()=>deletePokazatel(2)}/>
       }
       {
         pocazatel3Flag && 
         <CardPokazatel name={pocazatel3Name} setName={setPocazatel3Name} pocazatelType={pocazatel3Type} setPocazatelType={setPocazatel3Type} pocazatelSPFlag={pocazatel3SPFlag} 
-        setPocazatelSPFlag={setPocazatel3SPFlag}/>
+        setPocazatelSPFlag={setPocazatel3SPFlag} deletePokazatel={()=>deletePokazatel(3)}/>
       }
       {
         pocazatel4Flag && 
         <CardPokazatel name={pocazatel4Name} setName={setPocazatel4Name} pocazatelType={pocazatel4Type} setPocazatelType={setPocazatel4Type} pocazatelSPFlag={pocazatel4SPFlag} 
-        setPocazatelSPFlag={setPocazatel4SPFlag}/>
+        setPocazatelSPFlag={setPocazatel4SPFlag} deletePokazatel={()=>deletePokazatel(4)}/>
       }
       {
         pocazatel5Flag && 
         <CardPokazatel name={pocazatel5Name} setName={setPocazatel5Name} pocazatelType={pocazatel5Type} setPocazatelType={setPocazatel5Type} pocazatelSPFlag={pocazatel5SPFlag} 
-        setPocazatelSPFlag={setPocazatel5SPFlag}/>
+        setPocazatelSPFlag={setPocazatel5SPFlag} deletePokazatel={()=>deletePokazatel(5)}/>
       }
        <h2 className={css.header}>Выберите группу</h2>
               <div className={`${css.miniInput} ${css.miniInput2}`} onClick={()=>setGroupModal(!groupModal)}>
@@ -490,6 +529,7 @@ const Page4 = observer(({
                  <span className={css.addNewGroupButton} onClick={addGroup}>Создать</span>
               </div>
             }
+           
       <div className={css.btnSave} onClick={save}>Сохранить</div>
 
 
@@ -499,7 +539,7 @@ const Page4 = observer(({
 })
 
 
-function CardPokazatel ({name,setName,pocazatelType,setPocazatelType,pocazatelSPFlag,setPocazatelSPFlag}){
+function CardPokazatel ({name,setName,pocazatelType,setPocazatelType,pocazatelSPFlag,setPocazatelSPFlag,deletePokazatel}){
   const [typesLst, setTypesLst] = useState(['кг', 'сек', 'мин', 'раз',])
   const [type1Modal, setType1Modal] = useState(false)
 
@@ -525,6 +565,7 @@ function CardPokazatel ({name,setName,pocazatelType,setPocazatelType,pocazatelSP
         <Image src={spOff} className={css.spFlagImg} onClick={() => setPocazatelSPFlag(!pocazatelSPFlag)} />
       }
     </div>
+    {deletePokazatel&&<div className={css.deletePokazatel} onClick={()=>{deletePokazatel()}}>Удалить показатель</div>}
   </>
   )
 }

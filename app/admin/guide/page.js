@@ -21,6 +21,7 @@ import UpdateTests from "@/components/Tests/UpdateTests/UpdateTests";
 import TrainingUtills from "@/http/TrainingUtills";
 import x from './img/x.svg'
 
+
 const page = observer(() => {
   const [page, setPage] = useState("Упражнения");
   const [currentStage, setCurrentStage] = useState('Все')

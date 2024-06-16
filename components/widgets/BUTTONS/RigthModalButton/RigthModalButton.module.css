@@ -1,0 +1,22 @@
+.btnSave{
+    width: 16.7vw;
+    background-color: var(--blue);
+    color: white;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    bottom: 2vw;
+    right: 1.9vw;
+    font-size: .8vw ;
+    border-radius: 10vw;
+    padding: .5vw 0;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .3s;
+}
+.btnSave:hover{
+    transform: scale(101%);
+    background-color: var(--blue-hover);
+}

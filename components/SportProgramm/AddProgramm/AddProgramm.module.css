@@ -27,26 +27,14 @@
     overflow-y: auto;
 
 }
-.exit{
-    font-size: 0.7vw;
-    font-weight: 600;
-    color: #4D8AEE;
-    cursor: pointer;
-    transition: all .3s;
-}
-.exit:hover{
-    color: #4973b8;
-}
+
 .headerContainer{
     display: flex;
     justify-content: space-between;
     align-items: center;
 
 }
-.header{
-    font-size: 1vw;
-    font-weight: 500;
-}
+
 .btn{
     background-color: rgb(240, 240, 240);
     border-radius: 10vw;
@@ -64,7 +52,6 @@
 }
 .add:hover, .btn:hover{
     background-color: rgb(209, 209, 209);
-    opacity: .9;
 }
 .input{
     width: 90%;
@@ -123,28 +110,7 @@ background-color: #ffffff;
     font-weight: 100;
     font-weight: normal;
 }
-.btnSave{
-    width: 16.7vw;
-    background-color: var(--blue);
-    color: white;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: fixed;
-    bottom: 2vw;
-    right: 1.9vw;
-    font-size: .8vw ;
-    border-radius: 10vw;
-    padding: .5vw 0;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .3s;
-}
-.btnSave:hover{
-    transform: scale(101%);
-    background-color: var(--blue-hover);
-}
+
 .navBarContainer{
     display: flex;
     gap: .5vw;
@@ -259,14 +225,7 @@ background-color: #ffffff;
     justify-content: center;
     z-index: 999;
 }
-.modalUpdateWind{
-    width: 100%;
-    height: auto;
-    background-color: white;
-    padding:2vw 1vw;
-    display: flex;
-    flex-direction: column;
-}
+
 .ipdateInput{
     width: 100%;
 }
@@ -369,96 +328,10 @@ background-color: #ffffff;
     height: 100%;
     width: auto;
 }
-.modalHeaderNavCotainer{
-    display: flex;
-    gap: .3vw;
-    width: 100%;
-    margin-bottom: .1vw;
-}
-.modalHeaderNavCotainer span{
-    font-size: 0.6vw;
-    font-weight: 600;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 100%;
-}
-.flex1{
-    display: flex;
-    flex: 1;
-}
-.flex2{
-    display: flex;
-    flex: 2;
-}
-.rowContainer{
-    display: flex;
-    gap: .2vw;
-    width: 100%;
-    margin-top: .5vw;
-}
-.setNum{
-    border: none;
-    outline: none;
-    background-color: #F3F3F3;
-    border-radius: .5vw;
-    height: 2vw;
-    width: 2vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    flex: 1;
-    font-size: 0.7vw;
-    font-weight: 600;
-}
-.diapazonContainer{
-    display: flex;
-    flex: 2;
-    align-items: center;
-}
-.inputMiniInput{
-    border: none;
-    outline: none;
-    background-color: #F3F3F3;
-    border-radius: .5vw;
-    height: 2vw;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-.inputMiniInput::-webkit-inner-spin-button, 
-.inputMiniInput::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    display: none;
-}
-.AddSetsBtn{
-    display: flex;
-    background-color: white;
-    border:1px solid #4D8AEE;
-    border-radius: 1vw;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    gap: .3vw;
-    padding: .3vw 0;
-    cursor: pointer;
-    font-size: .7vw;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.804);
-    margin-top: 2vw;
-    transition: all .3s;
-}
-.AddSetsBtn1{
-    margin-top: .3vw    ;
-}
-.AddSetsBtn:hover{
-    background-color: rgb(246, 246, 246);
-}
+
+
+
+
 .label{
     font-size: 0.6vw;
     opacity: .6;
@@ -498,10 +371,7 @@ background-color: #ffffff;
     margin-top: 0.5vw;
     margin-bottom: 0.5vw;
 }
-.header{
-    font-size: 1vw;
-    font-weight: 500;
-}
+
 .header1{
     font-size: .8vw;
     font-weight: 500;
@@ -525,3 +395,16 @@ background-color: #ffffff;
     display: flex;
     justify-content: space-between;
 }
+.headerBtnContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: .3vw;
+    width: 100%;
+}
+.btn{
+    width: 1.7vw;
+    height: 1.7vw;
+}
+
+
