@@ -6,49 +6,65 @@ import RigthModalInput from '@/components/widgets/INPUTS/RigthModalInput/RigthMo
 import { Send } from 'lucide-react'
 import mobx from '@/mobx/mobx'
 import { observer } from 'mobx-react-lite'
+import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv'
+
 
 const OneChatWind = observer(() => {
+  const [chat, setChat] = useState(undefined)
+  
+  useEffect(()=>{
+    setChat(mobx.currentChat)
+  }, [mobx.currentChat])
+  
+  if(chat) return (<_Wind key={chat.chat} chat={chat}/>)
+})
+
+export default OneChatWind
+
+
+const _Wind = ({ chat }) => {
+  const roomID = chat.id
   const [socket, setSocket] = useState(undefined)
   const [inbox, setInbox] = useState([])
   const [message, setMessage] = useState('')
 
   const inboxRef = useRef(inbox)
-  
+
   useEffect(() => {
-    if(mobx.currentChatID){
-      const roomID = mobx.currentChatID
+    if(roomID) {
+      // Reset the inbox state when roomID changes
+      setInbox([])
+      inboxRef.current = []
+
       // Инициализация вебсокета
       const socket = io(`${process.env.NEXT_PUBLIC_STATIC_WEB_SOCKET}`)
-      // Подключение к комнате
-      socket.emit('JoinRoom',roomID)
-      // Отслеживание новых сообщений и пополнение массива
-      socket.on('message', (message) => {
-        // Update inboxRef.current before updating state
-        inboxRef.current = [...inboxRef.current, message]
-        setInbox(inboxRef.current)
-      })
-      
       setSocket(socket)
 
+      // Подключение к комнате
+      socket.emit('JoinRoom', roomID)
 
-      
+      // Отслеживание новых сообщений и пополнение массива
+      socket.on('message', (message) => {
+        inboxRef.current = [...inboxRef.current, message]
+        setInbox([...inboxRef.current])
+      })
+
       // Отключение при размонтировании компонента
       return () => {
         socket.disconnect()
       }
     }
-  }, [mobx.currentChatID])
+  }, [roomID])
 
   const handleSendMessage = () => {
-    const roomID = mobx.currentChatID
     if (message.trim() !== '') {
-      socket?.emit('message', message,roomID )
+      socket?.emit('message', message, roomID)
       setMessage('')
     }
   }
 
-  if(mobx.currentChatID) return (
-    <div className={css.container}>
+  if(roomID) return (
+    <OpacityDiv className={css.container}>
       {
         inbox.map((msg, index) => <_Message key={index} message={msg} />)
       }
@@ -56,11 +72,10 @@ const OneChatWind = observer(() => {
         <RigthModalInput input={message} setInput={setMessage} placeholder={'Сообщение'} className={css.input} isIcon={false} />
         <div className={css.sendBox} onClick={handleSendMessage}><Send className={css.send} /></div>
       </div>
-    </div>
+    </OpacityDiv>
   )
-})
+}
 
-export default OneChatWind
 
 const _Message = ({ message }) => {
   return (

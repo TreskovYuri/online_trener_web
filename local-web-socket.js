@@ -1,32 +1,14 @@
-require('dotenv').config()
-const express = require('express');
-const path = require('path');
-const https =  require('https')
-const fs =  require('fs')
+const PORT = 4000
+const CLIENT_URL = 'http://localhost:3000'
 
-
-const WEB_SOCKET_PORT = process.env.WEB_SOCKET_SERVER_PORT || 4000
-const CLIENT_URL = process.env.CLIENT_URL
-
-const app = express();
-
-
-var credentials = {
-	key: fs.readFileSync('/etc/letsencrypt/live/mobilecoach.ru/privkey.pem'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/mobilecoach.ru/fullchain.pem'),
-};
-
-
-var httpsServer = https.createServer(credentials, app);
-
-const io = require('socket.io')(httpsServer,{
-  cors:{
-    origin:CLIENT_URL,
-    methods:["GET",'POST']
+const io = require('socket.io')(PORT, {
+  cors: {
+    origin: CLIENT_URL,
+    methods: ["GET", "POST"],
   }
 })
 
-console.log(`Сервер запустился на ${WEB_SOCKET_PORT} порту...`)
+console.log(`Сервер запустился на ${PORT} порту...`)
 
 // Отслеживание нового подключения
 io.on('connection', (socket) => {
@@ -58,5 +40,3 @@ io.on('connection', (socket) => {
     socket.join(roomID)
   })
 })
-
-httpsServer.listen(WEB_SOCKET_PORT ,() => console.log('\x1b[32m%s\x1b[0m',`Сервер запустился на ${WEB_SOCKET_PORT } порту`))

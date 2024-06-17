@@ -1,10 +1,11 @@
 .container{
     width: 100%;
-    height: 40vw;
+    height:100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
+    overflow-y: auto;
 }
 .notFound{
     width: 90%;
@@ -18,4 +19,40 @@
     align-items: center;
     justify-content: center;
     color: rgba(0, 0, 0, 0.411);
+    opacity: .7;
+}
+.chatsList{
+    width: 100%;
+}
+.dialogCard{
+    width: 100%;
+    padding: 1vw .6vw;
+    box-sizing: border-box;
+    background-color: var(--input-bacground);
+    border-radius: .5vw;
+    cursor: pointer;
+    transition: all .3s;
+    margin-top: 0.5vw;
+    display: flex;
+    gap: .4vw;
+    align-items: flex-start;
+}
+.img{
+    height: 2vw;
+    width: 2vw;
+    box-sizing: border-box;
+}
+.textContainer{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.activeDialog{
+    background-color: var(--input-bacground-hover);
+}
+.dialogCard:hover{
+    background-color: var(--input-bacground-hover);
+}
+.activeDialog:hover{
+    background-color: var(--input-bacground-hover-hover);
 }

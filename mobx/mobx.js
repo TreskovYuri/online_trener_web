@@ -283,8 +283,8 @@ class Mobx {
     chats = []
     setChats(newChats){this.chats = newChats}
 
-    currentChatID = 0
-    setCurrentChatID(newId){this.currentChatID = newId}
+    currentChat = {}
+    setCurrentChat(newChat){this.currentChat = newChat}
     
 
 }

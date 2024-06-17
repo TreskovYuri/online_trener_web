@@ -1,4 +1,6 @@
 import Chat from "@/models/Chat";
+import User from "@/models/User";
+import UserMessageBelongChat from "@/models/UserMessageBelongChat";
 import UsersBelongChats from "@/models/UsersBelongChats";
 import { decrypt } from "@/service/UserService";
 import chalk from "chalk";
@@ -19,19 +21,38 @@ export async function GET(){
             user = await decrypt(session)
             if(! user){return Response.json({"message":'Не удалось расшифровать токен, доступ запрещен!'},{status:403})}
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время расшифровки токена'},{status:500})}
-        let myChats;
+        let allBelongUsers = [];
         try{
-            myChats = await UsersBelongChats.findAll({where:{userId:user.id}})
+            allBelongUsers = await UsersBelongChats.findAll()
+        }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех связей пользователей с чатами'},{status:500})}
+        
+        let myChats = [];
+        try{
+            myChats = allBelongUsers.filter(el => el.userId === user.id)
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка связей пользователя с чатами'},{status:500})}
-        let allChats;
+        let allChats = [];
         try{
             allChats = await Chat.findAll()
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех чатов'},{status:500})}
+        let allUsers = [];
+        try{
+            allUsers = await User.findAll()
+        }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех пользователей'},{status:500})}
+        
+        let allMessages = [];
+        try{
+            allMessages = await UserMessageBelongChat.findAll()
+        }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех пользователей'},{status:500})}
+        
         const finalChats= [];
         try{
             for (let i = 0; i < myChats.length; i++){
                 const mc = myChats[i]
-                finalChats.push(allChats.find(el => el.id == mc.chatId),
+                finalChats.push({
+                    chat:  allChats.find(el => el.id == mc.chatId),
+                    users:  allBelongUsers.filter((belong) => belong.chatId === mc.chatId).map(belong => allUsers.find(user => user.id === belong.userId)),
+                    lastMessage: allMessages.find((message) => message.chatId === mc.chatId)
+                },
                 )
             }
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время формирования финального списка чатов'},{status:500})}
@@ -60,7 +81,7 @@ export async function POST(request){
         try{
             await UsersBelongChats.create({chatId:chat.id,userId:user.id})
             for (let i = 0; i < users.length; i++){
-                await UsersBelongChats.create({chatId:chat.id,userId:users[i]?.id||0})
+                await UsersBelongChats.create({chatId:chat.id,userId:users[i].id})
             }
         }catch(err){console.log(chalk.red(err)); return Response.json({"message":'Возникла ошибка во время создания связей пользователей с чатом'},{status:500})}
 
