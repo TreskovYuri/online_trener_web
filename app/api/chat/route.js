@@ -19,18 +19,20 @@ export async function GET(){
             user = await decrypt(session)
             if(! user){return Response.json({"message":'Не удалось расшифровать токен, доступ запрещен!'},{status:403})}
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время расшифровки токена'},{status:500})}
-        let chats;
+        let myChats;
         try{
-            chats = await UsersBelongChats.findAll({where:{userId:user.id}})
-
+            myChats = await UsersBelongChats.findAll({where:{userId:user.id}})
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка связей пользователя с чатами'},{status:500})}
-        let finalChats;
+        let allChats;
         try{
-            for (let i = 0; i < finalChats.length; i++){
-                finalChats.add({
-                    'chat':await Chat.findOne({where:{id:finalChats[i].chatId}}),
-                    'users': await UsersBelongChats.findAll({where:{chatId:finalChats[i].chatId}})
-                })
+            allChats = await Chat.findAll()
+        }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех чатов'},{status:500})}
+        const finalChats= [];
+        try{
+            for (let i = 0; i < myChats.length; i++){
+                const mc = myChats[i]
+                finalChats.push(allChats.find(el => el.id == mc.chatId),
+                )
             }
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время формирования финального списка чатов'},{status:500})}
         return Response.json(finalChats)

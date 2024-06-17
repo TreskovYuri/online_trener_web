@@ -279,6 +279,12 @@ class Mobx {
 
     comments = []
     setComments(newComments){this.comments = newComments}
+
+    chats = []
+    setChats(newChats){this.chats = newChats}
+
+    currentChatID = 0
+    setCurrentChatID(newId){this.currentChatID = newId}
     
 
 }

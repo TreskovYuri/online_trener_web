@@ -1,0 +1,51 @@
+.container{
+    height: 40vw;
+    width: 100%;
+    background-color: white;
+    border-radius: 1vw;
+    box-sizing: border-box;
+    padding: 1vw;
+    display: flex;
+    flex-direction: column;
+}
+.messageCard{
+    margin-top: 1vw;
+    width: auto;
+    display: flex;
+}
+.message{
+    background-color: var(--input-bacground);
+    padding: .4vw 1vw;
+    border-radius: .5vw;
+}
+.inputBox{
+    display: flex;
+    gap: .2vw;
+    margin-top: auto;
+}
+.input{
+    margin-top: auto;
+}
+.sendBox{
+    height: 2vw;
+    width: 2vw;
+    background-color: var(--input-bacground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5vw;
+    transition: all .3s;
+    cursor: pointer;
+}
+.sendBox:hover{
+    background-color: var(--input-bacground-hover);
+}
+.send{
+    height: 50%;
+    width: auto;
+    color: white;
+    transition: all .3s;
+}
+.send:hover{
+    color: var(--gradient1);
+}
