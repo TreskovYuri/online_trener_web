@@ -45,7 +45,7 @@ class ChatHandlers {
             return
         }
         if(currentUsers.length==1){
-            const flag = mobx.chats.find(chat => chat.users,length==2 &&  chat.users?.find(user => user.id == currentUsers[0]?.id))
+            const flag = mobx.chats.find(chat => chat.users.length==2 &&  chat.users?.find(user => user.id == currentUsers[0]?.id))?.chat?true:false
             if(flag){
                 ErrorHandler('Такой чат уже существует...')
                 return

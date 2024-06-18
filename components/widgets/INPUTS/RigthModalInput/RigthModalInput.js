@@ -1,6 +1,6 @@
 import css from './RigthModalInput.module.css'
 
-const RigthModalInput = ({placwholder, input,setInput, min=0,type='text',className='',id=''}) => {
+const RigthModalInput = ({placwholder, input,setInput, min=0,type='text',className='',id='',onSubmit = ()=>{}}) => {
   return (
     <input  
     placeholder={placwholder} 
@@ -9,7 +9,10 @@ const RigthModalInput = ({placwholder, input,setInput, min=0,type='text',classNa
     className={`${css.input} ${className}`}
     id={id}
     min={min}
-    type={type}/>
+    type={type}
+    onKeyDown={e => {if (e.key ==='Enter')onSubmit()}} 
+    />
+    
   )
 }
 

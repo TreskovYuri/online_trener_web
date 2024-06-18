@@ -4,9 +4,9 @@ import { ErrorHandler } from "./ErrorHandler"
 
 
 
-const GETHandler = async ({url,set }) => {
+const GETHandler = async ({url,set,loader=true }) => {
     try {
-        mobx.setLoading(true)
+        loader&&mobx.setLoading(true)
         const response = await $api.get(url)
         if(response?.status === 200){
             mobx.setLoading(false)

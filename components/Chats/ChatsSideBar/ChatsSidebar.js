@@ -37,7 +37,7 @@ const _DialogCard = observer(({dialog}) => {
   const lastMessage = dialog.lastMessage
   console.log(users)
   return(
-    <OpacityDiv className={`${css.dialogCard} ${mobx.currentChat.chat?.id === chat.id ? css.activeDialog:''}`} onClick={()=>mobx.setCurrentChat(dialog)}>
+    <OpacityDiv duration={0.6} className={`${css.dialogCard} ${mobx.currentChat.chat?.id === chat.id ? css.activeDialog:''}`} onClick={()=>mobx.setCurrentChat(dialog)}>
         <div className={css.img}><ChatCardImage users={users}/> </div>
         <div className={css.textContainer}>
           <ChatCardName chat={chat} users={users}/>

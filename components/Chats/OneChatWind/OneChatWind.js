@@ -10,6 +10,8 @@ import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv'
 import ChatUtills from '@/http/ChatUtills'
 import ChatCardImage from '@/components/widgets/ChatCardImage/ChatCardImage'
 import ChatCardName from '@/components/widgets/ChatCardName/ChatCardName'
+import { ErrorHandler } from '@/utils/ErrorHandler'
+import  { format }from "date-fns";
 
 
 const OneChatWind = observer(() => {
@@ -52,9 +54,7 @@ const _Wind = observer(({ chat }) => {
 
       // Отслеживание новых сообщений и пополнение массива
       socket.on('message', (message,userId) => {
-        // inboxRef.current = [...inboxRef.current, {'userId':userId,'message':message}]
-        // setInbox([...inboxRef.current])
-        setInbox((prev) => [...prev, {'userId':userId,'message':message}])
+        setInbox((prev) => [...prev, {'userId': userId, 'message': message, 'createdAt': new Date()}])
         const ccc = mobx.chats.find(ct => ct.chat?.id == roomID)
         ccc.lastMessage = {userId:userId, message:message}
         mobx.setChats([...mobx.chats.filter(el => el.chat?.id != roomID), ccc])
@@ -86,16 +86,16 @@ const _Wind = observer(({ chat }) => {
     if (message.trim() !== '') {
       socket?.emit('message', message, roomID, mobx.user.id)
       setMessage('')
-    }
+    }else{ErrorHandler('Нельзя отправить пустое сообщение!')}
   }
   console.log(mobx.currentChat)
   if(roomID) return (
-    <div className={css.container}>
+    <OpacityDiv className={css.container}>
       <div className={css.windHeader}>
-        <div className={css.windImg}><ChatCardImage users={users}/> </div>
-        <div className={css.textContainer}>
+        <OpacityDiv className={css.windImg}><ChatCardImage users={users}/> </OpacityDiv>
+        <OpacityDiv className={css.textContainer}>
           <ChatCardName chat={chat} users={users}/>
-        </div>
+        </OpacityDiv>
         <div className={css.iconContainer}>
         <Phone  className={css.icon}/>
         <Video  className={css.icon}/>
@@ -108,11 +108,11 @@ const _Wind = observer(({ chat }) => {
       }
       <div ref={WindRef} className={css.endRef}></div>
       </div>
-      <div className={css.inputBox}>
-        <RigthModalInput input={message} setInput={setMessage} placeholder={'Сообщение'} className={css.input} isIcon={false} />
+      <OpacityDiv className={css.inputBox}>
+        <RigthModalInput input={message} setInput={setMessage} placeholder={'Сообщение'} className={css.input} isIcon={false} onSubmit={handleSendMessage}/>
         <div className={css.sendBox} onClick={handleSendMessage}><Send className={css.send} /></div>
-      </div>
-    </div>
+      </OpacityDiv>
+    </OpacityDiv>
   )
 })
 
@@ -120,7 +120,11 @@ const _Wind = observer(({ chat }) => {
 const _Message = ({ message}) => {
   return (
     <div  className={ `${css.messageCard} ${message.userId == mobx.user.id?css.myMessage:''}`} >
-      <span   className={css.message}>{message.message}</span>
+      <OpacityDiv   className={`${css.message}  ${message.userId == mobx.user.id?css.myM:''}`}>
+        {message.message}
+        <div className={css.timeAgo}>{format(message.createdAt,"HH:mm")}</div>
+        </OpacityDiv>
+      
     </div>
   )
 }
