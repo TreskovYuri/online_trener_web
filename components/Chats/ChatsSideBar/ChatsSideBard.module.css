@@ -56,3 +56,6 @@
 .activeDialog:hover{
     background-color: var(--input-bacground-hover-hover);
 }
+.lastMessage{
+    font-size: 0.6vw;
+}

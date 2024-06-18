@@ -44,6 +44,13 @@ class ChatHandlers {
             ErrorHandler('Выберите хотя бы одного пользователя')
             return
         }
+        if(currentUsers.length==1){
+            const flag = mobx.chats.find(chat => chat.users,length==2 &&  chat.users?.find(user => user.id == currentUsers[0]?.id))
+            if(flag){
+                ErrorHandler('Такой чат уже существует...')
+                return
+            }
+        }
         try{
             const formData = new FormData()
             formData.append('name',name)

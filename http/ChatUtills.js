@@ -10,5 +10,8 @@ class ChatUtills {
     getMyChats = async () => {
         await GETHandler({url:'chat', set:(e)=>mobx.setChats(e)})
     }
+    getMessageByChat = async (id) => {
+        await GETHandler({url:`chat/${id}`, set:(e)=>mobx.setMessages(e)})
+    }
 }
 export default new ChatUtills

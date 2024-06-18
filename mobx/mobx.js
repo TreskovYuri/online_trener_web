@@ -285,7 +285,9 @@ class Mobx {
 
     currentChat = {}
     setCurrentChat(newChat){this.currentChat = newChat}
-    
+
+    messages = []
+    setMessages(newMessages){this.messages = newMessages}
 
 }
 

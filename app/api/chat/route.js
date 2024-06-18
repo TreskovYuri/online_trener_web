@@ -23,7 +23,7 @@ export async function GET(){
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время расшифровки токена'},{status:500})}
         let allBelongUsers = [];
         try{
-            allBelongUsers = await UsersBelongChats.findAll()
+            allBelongUsers = await UsersBelongChats.findAll({order: [['updatedAt', 'DESC']] })
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех связей пользователей с чатами'},{status:500})}
         
         let myChats = [];
@@ -32,16 +32,16 @@ export async function GET(){
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка связей пользователя с чатами'},{status:500})}
         let allChats = [];
         try{
-            allChats = await Chat.findAll()
+            allChats = await Chat.findAll({order: [['updatedAt', 'DESC']] })
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех чатов'},{status:500})}
         let allUsers = [];
         try{
-            allUsers = await User.findAll()
+            allUsers = await User.findAll({order: [['updatedAt', 'DESC']] })
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех пользователей'},{status:500})}
         
         let allMessages = [];
         try{
-            allMessages = await UserMessageBelongChat.findAll()
+            allMessages = await UserMessageBelongChat.findAll({order: [['updatedAt', 'DESC']] })
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения списка всех пользователей'},{status:500})}
         
         const finalChats= [];
