@@ -8,6 +8,7 @@ import HeaderAddButton from '@/components/widgets/HeaderAddButton/HeaderAddButto
 import AddChat from '@/components/Chats/AddChat/AddChat'
 import UserUtills from '@/http/UserUtills'
 import ChatUtills from '@/http/ChatUtills'
+import { io } from "socket.io-client";
 
 const Chats = () => {
     const [modalAddChat, setModalAddChat] = useState(false)
@@ -15,6 +16,19 @@ const Chats = () => {
         UserUtills.getUsers()
         mobx.setPageName('Чаты')
         ChatUtills.getMyChats()
+        const socket = io(`${process.env.NEXT_PUBLIC_STATIC_WEB_SOCKET}`);
+
+socket.on('connect', () => {
+    const userId = mobx.user.id
+    socket.emit('registerUser', userId);
+});
+
+// Listen for new message notifications
+socket.on('newMessageNotification', (data) => {
+    console.log('New message notification:', data);
+    alert('У вас новое  сообщение!')
+    // Handle the notification (e.g., show a popup, update the UI)
+});
       },[])
   return (
     <div className={css.container}>

@@ -4,6 +4,7 @@ import mobx from '@/mobx/mobx'
 import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv'
 import ChatCardImage from '@/components/widgets/ChatCardImage/ChatCardImage'
 import ChatCardName from '@/components/widgets/ChatCardName/ChatCardName'
+import { MessageSquarePlus } from 'lucide-react'
 
 const ChatsSidebar = observer(() => {
   const chats = mobx.chats
@@ -52,5 +53,8 @@ const _DialogCard = observer(({dialog}) => {
 
 // Заглушка, если чатов нет
 const _NotFoundChats = () =>{
-  return <span className={css.notFound}>У вас пока нет чатов.</span>
+  return <span className={css.notFound}>
+    <MessageSquarePlus className={css.notFoundChatSvg}/>
+    Создайте новый чат.
+    </span>
 }

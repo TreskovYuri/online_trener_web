@@ -97,7 +97,6 @@
 .sendBox{
     height: 2vw;
     width: 2vw;
-    background-color: var(--input-bacground);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -105,19 +104,43 @@
     transition: all .3s;
     cursor: pointer;
 }
-.sendBox:hover{
-    background-color: var(--input-bacground-hover);
-}
 .send{
     height: 50%;
     width: auto;
-    color: white;
+    color: var(--blue);
     transition: all .3s;
+    opacity: .5;
 }
-.send:hover{
-    color: var(--gradient1);
+.mic{
+    height: 50%;
+    width: auto;
+    color: rgb(0, 0, 0);
+    transition: all .3s;
+    opacity: .5;
+}
+.send:hover, .mic:hover{
+    opacity: 1;
 }
 .windImg{
     height: 2vw;
     width: 2vw;
+}
+
+
+
+.notFoundContainer{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 0.8vw;
+    font-weight: 600;
+    color: rgb(0, 0, 0);
+    opacity: .2;
+}
+.chatSvg{
+    height: 7vw;
+    width: auto;
 }

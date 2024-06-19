@@ -3,7 +3,7 @@ import { useEffect, useState, useRef } from 'react'
 import css from './OneChatWind.module.css'
 import { io } from 'socket.io-client'
 import RigthModalInput from '@/components/widgets/INPUTS/RigthModalInput/RigthModalInput'
-import { Phone, Send, Settings, Video } from 'lucide-react'
+import { MessageCircleReply, Mic, Paperclip, Phone, Send, SendHorizontal, Settings, Video } from 'lucide-react'
 import mobx from '@/mobx/mobx'
 import { observer } from 'mobx-react-lite'
 import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv'
@@ -12,6 +12,7 @@ import ChatCardImage from '@/components/widgets/ChatCardImage/ChatCardImage'
 import ChatCardName from '@/components/widgets/ChatCardName/ChatCardName'
 import { ErrorHandler } from '@/utils/ErrorHandler'
 import  { format }from "date-fns";
+import { UploadField } from '@navjobs/upload'
 
 
 const OneChatWind = observer(() => {
@@ -21,7 +22,7 @@ const OneChatWind = observer(() => {
     setChat(mobx.currentChat)
   }, [mobx.currentChat])
   
-  if(chat) return (<_Wind key={chat.chat} chat={chat}/>)
+  if(chat?.chat){return (<_Wind key={chat.chat} chat={chat}/>)}else{if(mobx.chats.length)return <_NotFoundWind />}
 })
 
 export default OneChatWind
@@ -39,6 +40,7 @@ const _Wind = observer(({ chat }) => {
   const inboxRef = useRef(inbox)
 
   useEffect(() => {
+    
     if(roomID) {
       ChatUtills.getMessageByChat(roomID)
       // Reset the inbox state when roomID changes
@@ -109,8 +111,18 @@ const _Wind = observer(({ chat }) => {
       <div ref={WindRef} className={css.endRef}></div>
       </div>
       <OpacityDiv className={css.inputBox}>
+        <UploadField 
+        onFiles={file => console.log(file)}
+        uploadProps={{accept:'.jpg,.jpeg,.png,.gif'}}
+        >
+          <OpacityDiv duration={1} className={css.sendBox} onClick={()=>{}}><Paperclip className={css.mic} /></OpacityDiv>
+        </UploadField>
+      
         <RigthModalInput input={message} setInput={setMessage} placeholder={'Сообщение'} className={css.input} isIcon={false} onSubmit={handleSendMessage}/>
-        <div className={css.sendBox} onClick={handleSendMessage}><Send className={css.send} /></div>
+        {message.length ?
+        <OpacityDiv duration={1} className={css.sendBox} onClick={handleSendMessage}><SendHorizontal className={css.send} /></OpacityDiv>:
+        <OpacityDiv duration={1} className={css.sendBox} onClick={()=>{}}><Mic className={css.mic} /></OpacityDiv>
+        }
       </OpacityDiv>
     </OpacityDiv>
   )
@@ -127,4 +139,13 @@ const _Message = ({ message}) => {
       
     </div>
   )
+}
+
+
+
+const _NotFoundWind = () => {
+  return <did className={css.notFoundContainer}>
+    <MessageCircleReply className={css.chatSvg} />
+    Откройте диалог
+    </did>
 }
