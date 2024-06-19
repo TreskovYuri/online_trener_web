@@ -66,3 +66,8 @@
 .lastMessage{
     font-size: 0.6vw;
 }
+.notification{
+    margin-left: auto;
+   height: 1vw;
+    width: 1vw;
+}

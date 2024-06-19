@@ -43,6 +43,7 @@ const _Wind = observer(({ chat }) => {
     
     if(roomID) {
       ChatUtills.getMessageByChat(roomID)
+      ChatUtills.readMessageByChatId(roomID)
       // Reset the inbox state when roomID changes
       setInbox([])
       inboxRef.current = []

@@ -5,6 +5,7 @@ import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv'
 import ChatCardImage from '@/components/widgets/ChatCardImage/ChatCardImage'
 import ChatCardName from '@/components/widgets/ChatCardName/ChatCardName'
 import { MessageSquarePlus } from 'lucide-react'
+import GradientCircle from '@/components/widgets/GradientCircle/GradientCircle'
 
 const ChatsSidebar = observer(() => {
   const chats = mobx.chats
@@ -36,6 +37,7 @@ const _DialogCard = observer(({dialog}) => {
   const chat = dialog.chat
   const users = dialog.users
   const lastMessage = dialog.lastMessage
+  const unRead = dialog.unRead
   console.log(users)
   return(
     <OpacityDiv duration={0.6} className={`${css.dialogCard} ${mobx.currentChat.chat?.id === chat.id ? css.activeDialog:''}`} onClick={()=>mobx.setCurrentChat(dialog)}>
@@ -43,7 +45,8 @@ const _DialogCard = observer(({dialog}) => {
         <div className={css.textContainer}>
           <ChatCardName chat={chat} users={users}/>
           <span className={css.lastMessage}>{lastMessage?.message || ''}</span>
-          </div>
+        </div>
+        {unRead>0 && <div className={css.notification}><GradientCircle text={unRead} /></div>}
     </OpacityDiv>
   )
 })

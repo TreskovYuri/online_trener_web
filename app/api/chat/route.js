@@ -51,7 +51,8 @@ export async function GET(){
                 finalChats.push({
                     chat:  allChats.find(el => el.id == mc.chatId),
                     users:  allBelongUsers.filter((belong) => belong.chatId === mc.chatId).map(belong => allUsers.find(user => user.id === belong.userId)),
-                    lastMessage: allMessages.find((message) => message.chatId === mc.chatId)
+                    lastMessage: allMessages.find((message) => message.chatId === mc.chatId),
+                    unRead :allMessages.filter((message) => message.chatId === mc.chatId && message.isRead === false && message.userId != user.id).length
                 },
                 )
             }

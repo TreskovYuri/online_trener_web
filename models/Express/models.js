@@ -10,6 +10,7 @@ const UserMessageBelongChatExpress = sequelize.define('userMessageBelongChat', {
     message:{type:DataTypes.TEXT, allowNull:true},
     isRead:{type:DataTypes.BOOLEAN, allowNull:true, defaultValue:false},
 
+
 })
 
 // Экспорт таблиц

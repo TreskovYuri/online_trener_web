@@ -19,10 +19,16 @@ import { useRouter } from 'next/navigation'
 import UserUtills from '@/http/UserUtills'
 import { observer } from 'mobx-react-lite'
 import mobx from '@/mobx/mobx'
+import { useEffect } from 'react'
+import ChatUtills from '@/http/ChatUtills'
 
 export const dynamic = 'force-dynamic'
 
 const Sidebar = observer(() => {
+
+
+
+
   const router = useRouter()
   const  exit = async() => {
     
@@ -38,10 +44,10 @@ const Sidebar = observer(() => {
             <Image src={km} className={css.imgLogo} alt='Логотип Красная машина юниор' />
         </Link>
         <h1 className={css.header}>Онлайн тренер</h1>
-      <div className={css.linkContainer}>
+      <div className={css.linkContainer} >
       <Link href='/admin/journal' className={mobx.pageName==='Журнал'?`${css.link} ${css.active}`:`${css.link}`}><Image src={img1} className={css.img}/>Журнал</Link>
         <Link href='/admin/sportsmans' className={mobx.pageName==='Спортсмены'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img2} className={css.img}/>Спортсмены</Link>
-        <Link href='/admin/chats' className={mobx.pageName==='Чаты'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img3} className={css.img}/>Чаты</Link>
+        <Link href='/admin/chats' className={mobx.pageName==='Чаты'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img3} className={css.img}/>Чаты </Link>
         <Link href='/admin/guide' className={mobx.pageName==='Справочники'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img4} className={css.img}/>Справочники</Link>
         <Link href='/admin/training' className={mobx.pageName==='Тренировки'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img5} className={css.img}/>Тренировки</Link>
         <Link href='/admin/nutrition' className={mobx.pageName==='Шаблоны питания'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img6} className={css.img}/>Питание</Link>

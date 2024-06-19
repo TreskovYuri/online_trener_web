@@ -289,6 +289,9 @@ class Mobx {
     messages = []
     setMessages(newMessages){this.messages = newMessages}
 
+    globalMessages = {}
+    setGlobalMessages(obj){this.globalMessages = obj}
+
 }
 
 
