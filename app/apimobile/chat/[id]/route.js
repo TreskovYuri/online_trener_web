@@ -11,32 +11,19 @@ import { headers } from "next/headers";
 export const dynamic = 'force-dynamic'
 
 
+
+
+// Функция для удаления шаблона
 export async function GET(request,{params}){
     try{
-        let session;
-        try {
-          const headersList = headers();
-          session = headersList.get("session");
-        } catch (e) {
-          console.log(e);
-          return Response.json({ message: "Ошибка во время получения сессии" }, { status: 401 });
-        }
-        const id = params.id;
-        if (!id){return Response.json({"message":'Передайте id'},{status:400})}
-        if (!session){return Response.json({"message":'Токен не обнаружен'},{status:401})}
-        let userSession; // Достаем данные пользователя из токена
-        try{
-            userSession = await decrypt(session)
-            if(! userSession){return Response.json({"message":'Не удалось расшифровать токен, доступ запрещен!'},{status:403})}
-        }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время расшифровки токена'},{status:500})}
-        let messages;
-        try{
-          messages = await UserMessageBelongChat.findAll({where:{chatId:parseInt(id)}})
-        }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время получения или создания чата'},{status:500})}
+        const id = params.id
 
-        return Response.json(messages)
-    }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла непредвиденная ошибка при создании пользователя'},{status:418})}
+        return Response.json(await UserMessageBelongChat.findAll({where :{chatId:id}}))
+
+    }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла непредвиденная ошибка при удалении шаблона'},{status:418})}
+
 }
+
 
 
 export async function POST(request,{params}){
