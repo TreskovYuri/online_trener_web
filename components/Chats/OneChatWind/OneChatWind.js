@@ -29,7 +29,7 @@ export default OneChatWind
 
 
 const _Wind = observer(({ chat }) => {
-  const roomID = chat?.chat?.id
+  const roomID = parseInt(chat?.chat?.id)
   const users = chat?.users
   
   const [socket, setSocket] = useState(undefined)
@@ -53,13 +53,13 @@ const _Wind = observer(({ chat }) => {
       setSocket(socket)
 
       // Подключение к комнате
-      socket.emit('JoinRoom', roomID)
+      socket.emit('JoinRoom', parseInt(roomID))
 
       // Отслеживание новых сообщений и пополнение массива
-      socket.on('message', (message,userId) => {
-        setInbox((prev) => [...prev, {'userId': userId, 'message': message, 'createdAt': new Date()}])
+      socket.on('message', (data) => {
+        setInbox((prev) => [...prev, {'userId': data.userId, 'message': data.message, 'createdAt': new Date()}])
         const ccc = mobx.chats.find(ct => ct.chat?.id == roomID)
-        ccc.lastMessage = {userId:userId, message:message}
+        ccc.lastMessage = {userId:data.userId, message:data.message}
         mobx.setChats([...mobx.chats.filter(el => el.chat?.id != roomID), ccc])
         setTimeout(()=>{
           scrollToBottom()
@@ -87,7 +87,11 @@ const _Wind = observer(({ chat }) => {
 
   const handleSendMessage = () => {
     if (message.trim() !== '') {
-      socket?.emit('message', message, roomID, mobx.user.id)
+      socket?.emit('message', {
+        'message':message, 
+        'roomID':roomID, 
+        'userId':mobx.user.id
+      })
       setMessage('')
     }else{ErrorHandler('Нельзя отправить пустое сообщение!')}
   }

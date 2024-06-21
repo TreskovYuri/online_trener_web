@@ -44,12 +44,18 @@ io.on('connection', (socket) => {
   console.log('Пользователь подключен..')
 
   // Отслеживание входящего сообщения
-  socket.on('message', (message, roomID, userId) => {
-    console.log(`Сообщение: ${message}. Комната № ${roomID} Пользователь ID ${userId}`)
+  socket.on('message', (data) => {
+    const message = data.message
+    const roomID = data.roomID
+    const userId = data.userId
     // Если в комнате кто-то есть
     if (roomID > 0) {
+      console.log(`Сообщение: ${message}. Комната № ${roomID} Пользователь ID ${userId}`)
       // Отправить сообщение всем посетителям комнаты
-      io.to(roomID).emit('message', message, userId)
+      io.to(roomID).emit('message', {
+        'message':message,
+        'userId':userId
+      })
       try{
         UserMessageBelongChatExpress.create({chatId:roomID,userId:userId,message:message})
       }catch(e){ColorConsole.red(e)}
