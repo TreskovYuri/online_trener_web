@@ -1,8 +1,8 @@
 import css from './GradientButtonOval.module.css'
 
-const GradientButtonOval = ({text,callback}) => {
+const GradientButtonOval = ({text,callback,className=''}) => {
   return (
-    <div onClick={callback} className={css.btn}>{text}</div>
+    <div onClick={callback} className={`${css.btn} ${className}`}>{text}</div>
   )
 }
 

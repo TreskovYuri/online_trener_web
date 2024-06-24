@@ -49,7 +49,7 @@ const Sidebar = observer(() => {
         <Link href='/admin/sportsmans' className={mobx.pageName==='Спортсмены'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img2} className={css.img}/>Спортсмены</Link>
         <Link href='/admin/chats' className={mobx.pageName==='Чаты'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img3} className={css.img}/>Чаты </Link>
         <Link href='/admin/guide' className={mobx.pageName==='Справочники'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img4} className={css.img}/>Справочники</Link>
-        <Link href='/admin/training' className={mobx.pageName==='Тренировки'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img5} className={css.img}/>Тренировки</Link>
+        <Link href='/admin/training' className={mobx.pageName==='Тренировки'  || mobx.pageName == 'Шаблон тренировки'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img5} className={css.img}/>Тренировки</Link>
         <Link href='/admin/nutrition' className={mobx.pageName==='Шаблоны питания'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img6} className={css.img}/>Питание</Link>
         <Link href='' className={mobx.page==='Нутриенты'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img7} className={css.img}/>Нутриенты</Link>
         <Link href='/admin/sportprogramm' className={mobx.pageName==='Спортивная программа'?`${css.link} ${css.active}`:`${css.link}`}><Image alt='Онлайн-Тренер' src={img8} className={css.img}/>Спортивная программа</Link>

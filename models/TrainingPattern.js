@@ -8,7 +8,7 @@ const TrainingPattern = sequelize.define('trainingpattern', {
     id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
     userId: {type: DataTypes.INTEGER, allowNull:false},
     name: {type: DataTypes.STRING,allowNull:true},
-    stages: {type: DataTypes.ARRAY(DataTypes.JSONB),default:[]},
+    stages: {type: DataTypes.ARRAY(DataTypes.JSONB),default:[],allowNull:true},
 })
 
 
