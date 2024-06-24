@@ -50,6 +50,7 @@ class UserUtills{
     login = async (formData) => {
         try {
             const response = await $api.post("user/login", formData)
+
             if(response?.status === 200){
                 return response.data
             }
@@ -57,6 +58,7 @@ class UserUtills{
                 ErrorHandler('Сервер не отвечает..')
             }
         } catch (err) {
+            console.log(err)
             switch (err?.response?.status) {
                 case 400:
                     // Неверный запрос

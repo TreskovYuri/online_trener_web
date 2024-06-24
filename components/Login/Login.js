@@ -36,6 +36,7 @@ const Login = observer(() => {
             email ? formData.append('email', email) : formData.append('email', 111)
             password ? formData.append('password', password) : formData.append('password', 111)
             const data = await UserUtills.login(formData)
+
             if(data){
                 if(checkbox){
                     window.localStorage.setItem('email',email.trim())

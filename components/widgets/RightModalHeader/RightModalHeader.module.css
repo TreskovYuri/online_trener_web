@@ -1,0 +1,11 @@
+.headerContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5vw;
+    margin-bottom: 0.5vw;
+}
+.header{
+    font-size: 1.2vw;
+    font-weight: 500;
+}

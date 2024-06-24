@@ -12,7 +12,6 @@ import ChatCardImage from '@/components/widgets/ChatCardImage/ChatCardImage'
 import ChatCardName from '@/components/widgets/ChatCardName/ChatCardName'
 import { ErrorHandler } from '@/utils/ErrorHandler'
 import  { format }from "date-fns";
-import { UploadField } from '@navjobs/upload'
 
 
 const OneChatWind = observer(() => {
