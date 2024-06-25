@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import addPatternHandlers from '../../addPatternHandlers';
 
-const ExerciseCard = observer(({exercise}) => {
+const ExerciseCard = observer(({exercise,stages,setStages,stg}) => {
   const stage = JSON.parse(exercise.stage)
   const [shiftClicked, setShiftClicked] = useState(false);
   const [isDrag, setIsDrag] = useState(false)
@@ -27,7 +27,7 @@ const ExerciseCard = observer(({exercise}) => {
     <div className={`${css.container} ${shiftClicked?css.currentSery:''} ${isDrag?css.isDrag:''}`} 
     onMouseDown={handleMouseDown} 
     draggable
-    onDrag={()=>addPatternHandlers.handleDrag(setIsDrag,exercise)}
+    onDrag={()=>addPatternHandlers.handleDrag(setIsDrag,exercise,stages,setStages,stg)}
     onMouseOut={()=>setIsDrag(false)}
     > 
         <div className={css.header}>{exercise.nameRu}<span> / {exercise.nameEng}</span></div>

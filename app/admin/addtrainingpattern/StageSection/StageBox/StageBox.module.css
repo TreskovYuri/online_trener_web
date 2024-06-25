@@ -3,8 +3,10 @@
     flex-wrap: wrap;
     width: 61.5vw;
     height: auto;
+    transition: all .3s;
 }
 .dropZone{
     display: flex;
     width: auto;
+    transition: all .3s;
 }

@@ -20,7 +20,7 @@ const AddExercise = observer(({setModal,currentStage, stages, setStages}) => {
 
 
   return (
-    <RigthModalWind setModal={setModal} isModal={false}>
+    <RigthModalWind setModal={setModal} isModal={false} initialOpacity={1}>
       <div className={css.container}>
         <RightModalHeader title={"Добавьте упражнения"}  />
         <div className={css.header}>
