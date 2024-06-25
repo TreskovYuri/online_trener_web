@@ -8,6 +8,7 @@ import { Debounced } from '@/utils/Debounced'
 
 const StageCard = ({ title, index, stages, setStage }) => {
   const [input, setInput] = useState(title);
+  
 
   // Функция для задержки реагирования на ввод
   const debouncedUpdateStageName = Debounced((newInput) => {

@@ -4,6 +4,8 @@
     height: auto;
     min-height: 15vw;
     margin-top: 2vw;
+    flex-direction: column;
+    margin-bottom: 2vw;
 }
 .header{
     display: flex;
@@ -11,6 +13,7 @@
     height: 1.2vw;
     width: 100%;
     align-items: center;
+    margin-bottom: 1vw;
 }
 .title{
     font-size: 1.2vw;

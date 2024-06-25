@@ -1,0 +1,10 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 61.5vw;
+    height: auto;
+}
+.dropZone{
+    display: flex;
+    width: auto;
+}

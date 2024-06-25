@@ -154,7 +154,7 @@ class Mobx {
     setAddProgramm(bool) { this.addProgramm = bool }
 
     dragValue = {}
-    setDragValue(dragValue) { this.dragValue = dragValue }
+    setDragValue(value) { this.dragValue = value }
     setDragValueDropId(id) { this.dragValue.forEach(element => {element.id = id}); }
 
     dragOnWeekExerciseValue = {}

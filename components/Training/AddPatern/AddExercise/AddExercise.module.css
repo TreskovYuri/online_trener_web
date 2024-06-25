@@ -17,3 +17,15 @@
     padding-bottom: 2vw;
     scrollbar-width: none; /* Скрыть скроллбар */
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+}
+.filterContainer{
+    display: flex;
+    gap: .3vw;
+}
+.filterContainer span{
+    width: 1.5vw;
+    height: 1.5vw;
+}

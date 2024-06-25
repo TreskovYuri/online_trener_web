@@ -46,7 +46,8 @@
     font-size: .7vw;
     font-weight: 600;
     opacity: 1;
-}
+    
+} 
 .filterSpanActive{
     color: #4D8AEE;
 }
@@ -57,6 +58,7 @@
     display: flex;
     align-items: center;
     gap: 1vw;
+    width: 100%;
 }
 .filterSpanBetween{
     display: flex;

@@ -1,0 +1,38 @@
+.container{
+    display: flex;
+    padding: .5vw 1vw;
+    background-color: var(--input-bacground);
+    margin-top: 0.5vw;
+    border-radius: .5vw;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all .3s;
+}
+.container:hover{
+    background-color: var(--input-bacground-hover);
+}
+.textContainer{
+    display: flex;
+    flex-direction: column;
+}
+.header{
+    margin: 0;
+    font-size: 0.7vw;
+}
+.btn{
+    color: var(--blue);
+    margin-top: 0.5vw;
+    cursor: pointer;
+    font-size: 0.6vw;
+    font-weight: 600;
+    opacity: .7;
+    transition: all .3s;
+}
+.btn:hover{
+    opacity: 1;
+}
+.arrow{
+    width: 1vw;
+    opacity: .7;
+}

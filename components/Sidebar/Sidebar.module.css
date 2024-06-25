@@ -1,7 +1,9 @@
 .container{
     width: 15vw;
-
-    height: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
     min-height: 90vh;
     display: flex;
     flex-direction: column;

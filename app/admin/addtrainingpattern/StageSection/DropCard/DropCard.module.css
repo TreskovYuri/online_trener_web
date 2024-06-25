@@ -1,0 +1,16 @@
+.card{
+    background-color: transparent;
+    height: 100%;
+    width: .5vw;
+    transition: all .3s;
+    max-height: 8vw;
+    
+}
+.drop{
+    width: 20vw;
+    margin: .5vw;
+    height: 90%;
+    background-color: var(--input-bacground);
+    border-radius: .5vw;
+
+}

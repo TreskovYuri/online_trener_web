@@ -1,0 +1,36 @@
+.container{
+    padding: 1vw;
+    background-color: var(--input-bacground);
+    border-radius: .5vw;
+    cursor: pointer;
+    transition: all .3s;
+    margin-top: 1vw;
+    width: 19.5vw;
+    max-height: 7VW;
+}
+.currentSery{
+    border: 1px solid var(--gradient1);
+}
+.isDrag{
+    border: 1px solid gray;
+}
+.container:hover{
+    background-color: var(--input-bacground-hover);
+}
+.header{
+    font-size: .8vw;
+    font-weight: 600;
+}
+.header span{
+    opacity: .4;
+}
+.stages{
+    display: flex;
+    gap: .3vw;
+    flex-wrap: wrap;
+    margin-top: 1vw;
+}
+.stageItem{
+    height: 1.4vw;
+    width: 6vw;
+}

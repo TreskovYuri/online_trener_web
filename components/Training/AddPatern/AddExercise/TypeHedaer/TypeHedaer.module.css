@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    width: 100%;
+    gap: .3vw;
+}
+.typeContainer{
+    display: flex;
+    gap: .3vw;
+}
+.item{
+    font-size: 0.7vw;
+    font-weight: 500;
+    opacity: .6;
+    cursor: pointer;
+    transition: all .3s;
+}
+.item:hover{
+    transform: scale(101%);
+}
+.active{
+    font-weight: 600;
+    opacity: 1;
+}
