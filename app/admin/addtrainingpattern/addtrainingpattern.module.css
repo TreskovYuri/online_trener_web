@@ -5,7 +5,10 @@
     height: 100%;
     padding: 2vw;
 }
-.navBar{
+.navBar, .navBarSeria{
     display: flex;
     justify-content: flex-end;
+}
+.navBarSeria{
+    height: 1.2vw;
 }

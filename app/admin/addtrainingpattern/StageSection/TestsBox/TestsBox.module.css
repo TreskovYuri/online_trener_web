@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin-top: 1vw;
+}
+.wrapBox{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5vw;
+    width: 62vw;
+}
+.header{
+    font-size: 1vw;
+}

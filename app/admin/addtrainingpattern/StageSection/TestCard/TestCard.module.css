@@ -1,0 +1,24 @@
+.container{
+    padding: 1vw;
+    background-color: var(--input-bacground);
+    border-radius: .5vw;
+    cursor: pointer;
+    transition: all .3s;
+    margin-top: .1vw;
+    width: 19.5vw;
+    max-height: 7VW;
+    min-height: 4.5vw;
+}
+.currentSery{
+    border: 1px solid var(--gradient1);
+}
+.isDrag{
+    border: 1px solid gray;
+}
+.container:hover{
+    background-color: var(--input-bacground-hover);
+}
+.header{
+    font-size: .8vw;
+    font-weight: 600;
+}

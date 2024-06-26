@@ -1,0 +1,44 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+.card{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2vw;
+}
+.CardHeader{
+    display: flex;
+    gap: .5vw;
+    align-items: center;
+}
+.CardTitle{
+    font-size: .7vw;
+    margin: 0;
+    font-weight: 600;
+}
+.CardHeader span{
+    display: flex;
+    gap: .3vw;
+    align-items: center;
+    font-size: 0.7vw;
+    font-weight: 600;
+}
+.input{
+    width: auto;
+    width: 2.7vw;
+    height: 1.2vw;
+}
+.dropZone{
+    display: flex;
+    flex-wrap: wrap;
+}
+.wrapBox{
+    display: flex;
+    flex-wrap: wrap;
+    width: 61.5vw;
+}
+.addExerciseBtn{
+    height: 1.5vw;
+    margin-left: auto;
+}

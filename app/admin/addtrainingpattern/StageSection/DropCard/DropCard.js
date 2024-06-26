@@ -32,7 +32,6 @@ const DropCard = ({ dropCallback}) => {
       onDragOver={handleDragOver}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
-      draggable
     ></div>
   )
 }

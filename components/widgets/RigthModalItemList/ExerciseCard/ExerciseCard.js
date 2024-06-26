@@ -3,16 +3,24 @@ import css from './ExerciseCard.module.css'
 import { useState } from 'react'
 import addPatternHandlers from '@/app/admin/addtrainingpattern/addPatternHandlers'
 
-const ExerciseCard = ({exercise, callback}) => {
+const ExerciseCard = ({exercise, callback, type='', seria={}}) => {
   const [isDrag, setIsDrag] = useState(false)
   
+
+  const handleDrag = () => {
+    if(type == 'Этапы'){
+      addPatternHandlers.handleDragStage(setIsDrag,exercise)
+    }else{
+      addPatternHandlers.handleDragSeries(setIsDrag,exercise,seria)
+    }
+  }
 
 
 
 
 
   return (
-    <div className={`${css.container} ${isDrag?css.isDrag:''}`} draggable onDrag={()=>addPatternHandlers.handleDrag(setIsDrag,exercise)} onMouseOut={()=>setIsDrag(false)} >
+    <div className={`${css.container} ${isDrag?css.isDrag:''}`} draggable onDrag={handleDrag} onMouseOut={()=>setIsDrag(false)} >
       <div className={css.textContainer}>
         <h2 className={css.header}>{exercise.nameRu}</h2>
         <div className={css.btn} onClick={()=>callback(exercise)}>Добавить</div>

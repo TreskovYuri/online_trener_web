@@ -2,7 +2,7 @@
     display: flex;
     width: 100%;
     height: auto;
-    min-height: 15vw;
+    /* min-height: 15vw; */
     margin-top: 2vw;
     flex-direction: column;
     margin-bottom: 2vw;

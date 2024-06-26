@@ -13,7 +13,7 @@ import RigthModalHandleSearch from '@/utils/RigthModalHandleSearch'
 
 
 
-const AddExercise = observer(({setModal,currentStage, stages, setStages}) => {
+const AddExercise = observer(({setModal,currentStage, stages, setStages,series, setSeries}) => {
   const [currentType,setCurrentType] = useState('Упражнения')
   const [search, setSearch] = useState('')
   const itemList = RigthModalHandleSearch({search:search, setSearch:setSearch, type:currentType})
@@ -30,7 +30,7 @@ const AddExercise = observer(({setModal,currentStage, stages, setStages}) => {
               <span><HeaderSearchFilter value={search} setValue={setSearch}/></span>
           </div>
         </div>
-        <RigthModalItemList type={currentType} list={itemList} setStages={setStages} stages={stages} currentStage={currentStage}/>
+        <RigthModalItemList type={currentType} list={itemList} setStages={setStages} stages={stages} currentStage={currentStage} series={series} setSeries={setSeries}/>
         <div className={css.saveBtn}><GradientButtonOval callback={()=>setModal(false)} text={"Сохранить"} /></div>
       </div>
     </RigthModalWind>
