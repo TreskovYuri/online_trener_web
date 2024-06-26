@@ -4,10 +4,13 @@ import css from "./StageBox.module.css";
 import { observer } from "mobx-react-lite";
 import addPatternHandlers from "../../addPatternHandlers";
 import { AnimatePresence,motion } from "framer-motion";
+import TrainingMobx from "@/mobx/TrainingMobx";
 
-const StageBox = observer(({ stage, stages, setStages }) => {
+const StageBox = observer(({ stage }) => {
   const exercises = stage.exercises;
   const handleDrop = addPatternHandlers.handleDropStage;
+  const stages = TrainingMobx.stages
+  const setStages = TrainingMobx.setStages
 
   return (
     <AnimatePresence mode={"sync"}>

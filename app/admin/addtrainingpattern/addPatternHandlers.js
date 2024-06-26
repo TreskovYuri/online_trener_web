@@ -138,29 +138,32 @@ class AddPatternHandlers {
   };
 
   // Обработка события Drop в режиме серий
-  handleDropSeries = (dropIndex,series,seria,setSeries,stageIndex) => {
+  handleDropSeries = async(dropIndex,series,seria,setSeries,stageIndex) => {
     const dragValue = mobx.dragValue;
     if(!dragValue) return
+
     // Удаление карточки
     const updatedItems = series.map(sra => {
-      if(sra.title == dragValue.seria.title){
+      if (sra.title === dragValue.seria.title) {
         return {
           ...sra,
-          'stages': sra.stages.filter((stage,index) => {
-            const exercices = stage.exercises.filter(e => e.id != dragValue.exercise.id)
-            if( exercices.length>0){
+          stages: sra.stages.map(stage => {
+            const exercises = stage.exercises.filter(e => e.id !== dragValue.exercise.id);
+            if (exercises.length > 0) {
               return {
                 ...stage,
-                'exercises':exercices
-              }
+                exercises: exercises
+              };
+            } else {
+              return stage; // Return the stage as is if there are no changes
             }
           })
-        }
+        };
       }
-      return sra
-    })
-    // Добавление карточки у новое место
-    const finalItems = updatedItems.map((stg) => {
+      return sra;
+    });
+    // // Добавление карточки в новое место
+    const finalItems = await updatedItems.map((stg) => {
       if (stg.title === seria.title) {
 
           return {

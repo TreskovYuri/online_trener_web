@@ -6,9 +6,13 @@ import BLueBorderNoBacgroundButton from "@/components/widgets/BUTTONS/BLueBorder
 import GradientButtonOval from "@/components/widgets/BUTTONS/GradientButtonOval/GradientButtonOval";
 import ListView from "@/components/widgets/DEFAULT/ListView/ListView";
 import addPatternHandlers from "@/app/admin/addtrainingpattern/addPatternHandlers";
+import TrainingMobx from "@/mobx/TrainingMobx";
+import { observer } from "mobx-react-lite";
 
 
-const AddStage = ({ setModal, stages, setStages }) => {
+const AddStage = observer(({ setModal }) => {
+  const stages = TrainingMobx.stages
+  const setStages = TrainingMobx.setStages
 
     const save = () => {
         if(stages.length>1){
@@ -23,10 +27,10 @@ const AddStage = ({ setModal, stages, setStages }) => {
         <ListView/>
         <div className={css.scrollWind}>
             {stages.map((stage,index) => (
-            <StageCard key={index} title={stage.title} index={index} stages={stages} setStage={setStages}/>
+            <StageCard key={index} title={stage.title} index={index}/>
             ))}
         <div className={css.AddStage}><BLueBorderNoBacgroundButton 
-        callback={()=>addPatternHandlers.addStage({setStages:setStages,stages:stages})} 
+        callback={()=>addPatternHandlers.addStage({stages,setStages})} 
         title={'Добавить этап'} 
         isPlus={true}
         /></div>
@@ -35,6 +39,6 @@ const AddStage = ({ setModal, stages, setStages }) => {
       </div>
     </RigthModalWind>
   );
-};
+});
 
 export default AddStage;

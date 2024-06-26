@@ -2,8 +2,15 @@ import addPatternHandlers from '@/app/admin/addtrainingpattern/addPatternHandler
 import ExerciseCard from './ExerciseCard/ExerciseCard';
 import css from './RigthModalItemList.module.css'
 import TestCard from './TestCard/TestCard';
+import TrainingMobx from '@/mobx/TrainingMobx';
+import { observer } from 'mobx-react-lite';
 
-const RigthModalItemList = ({type, list=[],stages, setStages, currentStage,series, setSeries}) => {
+const RigthModalItemList = observer(({type, list=[]}) => {
+    const currentStage = TrainingMobx.currentStage
+    const stages = TrainingMobx.stages
+    const setStages = TrainingMobx.setStages
+    const series = TrainingMobx.series
+    const setSeries = TrainingMobx.setSeries
 
     const addHandler = (item) => {
         if(!currentStage.seria){
@@ -34,6 +41,6 @@ const RigthModalItemList = ({type, list=[],stages, setStages, currentStage,serie
         default:
             return;
     }
-}
+})
 
 export default RigthModalItemList

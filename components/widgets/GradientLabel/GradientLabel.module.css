@@ -4,7 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: radial-gradient(circle, var(--gradient1) 0%, var(--gradient2) 100%);
+    background: linear-gradient(90deg, var(--gradient1) 0%, var(--gradient2) 100%);
     color: white;
     border-radius: 10vw;
     font-size: 0.7vw;

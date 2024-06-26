@@ -4,24 +4,24 @@ import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import addPatternHandlers from '../../addPatternHandlers';
 import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv';
+import TrainingMobx from '@/mobx/TrainingMobx';
 
 
 const ExerciseCard = observer(({
   exercise,
-  stages={},
-  setStages=()=>{},
   stg={},
-  series=[],
-  setSeries=()=>{},
   seria={},
   type='',
   isMany=false,
   blockIndex=0,
-  exerciseIndex=0
+  exerciseIndex=0,
+  index
 }) => {
   const stage = JSON.parse(exercise.stage)
   const [shiftClicked, setShiftClicked] = useState(false);
   const [isDrag, setIsDrag] = useState(false)
+  const stages = TrainingMobx.stages
+  const setStages = TrainingMobx.setStages
 
 
 
@@ -39,7 +39,7 @@ const ExerciseCard = observer(({
     if (type=='Этапы') {
       addPatternHandlers.handleDragStage(setIsDrag, exercise, stages, setStages, stg);
     } else {
-      addPatternHandlers.handleDragSeries(setIsDrag, exercise, seria);
+      addPatternHandlers.handleDragSeries(setIsDrag, exercise, seria,index);
     }
   };
 

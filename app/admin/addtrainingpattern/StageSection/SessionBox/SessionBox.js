@@ -6,14 +6,18 @@ import addPatternHandlers from '../../addPatternHandlers'
 import { Debounced } from '@/utils/Debounced'
 import DropCard from '../DropCard/DropCard'
 import HeaderAddButton from '@/components/widgets/HeaderAddButton/HeaderAddButton'
+import { observer } from 'mobx-react-lite'
+import TrainingMobx from '@/mobx/TrainingMobx'
 
 
-const SessionBox = ({series, setSeries,seria,setAddExercise,setCurrentStage}) => {
+const SessionBox = observer(({seria}) => {
+  const setCurrentStage = TrainingMobx.setCurrentStage
+  const setAddExercise = TrainingMobx.setAaddExercise
   return (
     <div className={css.container}>
 
       {
-        seria.stages.map((sra,index) => <_OneSeria key={index} stage={seria} seria={sra} index={index} title={seria.title} series={series} setSeries={setSeries} addExercise={()=>{
+        seria.stages.map((sra,index) => <_OneSeria key={index} stage={seria} seria={sra} index={index} title={seria.title}  addExercise={()=>{
           setAddExercise(true)
           setCurrentStage({
             'seria':seria,
@@ -23,13 +27,15 @@ const SessionBox = ({series, setSeries,seria,setAddExercise,setCurrentStage}) =>
       }
     </div>
   )
-}
+})
 
 export default SessionBox
 
 
 
-const _OneSeria = ({seria,index, title,series, setSeries ,stage,addExercise}) => {
+const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
+  const series = TrainingMobx.series
+  const setSeries = TrainingMobx.setSeries
   const exercises = seria?.exercises || []
   const [setCount, setSetCount] = useState(0)
   const [timeout, setTimeout] = useState(0)
@@ -59,8 +65,8 @@ const _OneSeria = ({seria,index, title,series, setSeries ,stage,addExercise}) =>
       {
         exercises.map((exercise,indx) => (
           <div className={css.dropZone} key={indx}>
-             <DropCard dropCallback={() => handleDrop(indx,series,stage,setSeries,index)} />
-            <ExerciseCard exercise={exercise} series={series} setSeries={setSeries} seria={stage} isMany={exercises.length>1} blockIndex={index+1} exerciseIndex={indx+1}/>
+            <DropCard dropCallback={() => handleDrop(indx,series,stage,setSeries,index)} />
+            <ExerciseCard exercise={exercise} series={series} setSeries={setSeries} seria={stage} isMany={exercises.length>1} blockIndex={index+1} exerciseIndex={indx+1} index={index}/>
             <DropCard dropCallback={() => handleDrop(indx+1,series,stage,setSeries,index)} />
           </div>
         ))
@@ -69,6 +75,6 @@ const _OneSeria = ({seria,index, title,series, setSeries ,stage,addExercise}) =>
       </div>
     </div>
   )
-}
+})
 
                                                                            

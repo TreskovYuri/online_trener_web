@@ -9,18 +9,20 @@ import HeaderSearchFilter from '@/components/widgets/MODALS/HeaderSearchFilter/H
 import { observer } from 'mobx-react-lite'
 import RigthModalItemList from '@/components/widgets/RigthModalItemList/RigthModalItemList'
 import RigthModalHandleSearch from '@/utils/RigthModalHandleSearch'
+import TrainingMobx from '@/mobx/TrainingMobx'
 
 
 
 
-const AddExercise = observer(({setModal,currentStage, stages, setStages,series, setSeries}) => {
+const AddExercise = observer(() => {
   const [currentType,setCurrentType] = useState('Упражнения')
   const [search, setSearch] = useState('')
   const itemList = RigthModalHandleSearch({search:search, setSearch:setSearch, type:currentType})
+  const setAddExercise = TrainingMobx.setAaddExercise
 
 
   return (
-    <RigthModalWind setModal={setModal} isModal={false} initialOpacity={1}>
+    <RigthModalWind setModal={setAddExercise} isModal={false} initialOpacity={1}>
       <div className={css.container}>
         <RightModalHeader title={"Добавьте упражнения"}  />
         <div className={css.header}>
@@ -30,8 +32,8 @@ const AddExercise = observer(({setModal,currentStage, stages, setStages,series, 
               <span><HeaderSearchFilter value={search} setValue={setSearch}/></span>
           </div>
         </div>
-        <RigthModalItemList type={currentType} list={itemList} setStages={setStages} stages={stages} currentStage={currentStage} series={series} setSeries={setSeries}/>
-        <div className={css.saveBtn}><GradientButtonOval callback={()=>setModal(false)} text={"Сохранить"} /></div>
+        <RigthModalItemList type={currentType} list={itemList} />
+        <div className={css.saveBtn}><GradientButtonOval callback={()=>setAddExercise(false)} text={"Сохранить"} /></div>
       </div>
     </RigthModalWind>
   )

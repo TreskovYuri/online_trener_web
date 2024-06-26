@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import css from './DropCard.module.css'
+import { observer } from 'mobx-react-lite';
 
-const DropCard = ({ dropCallback}) => {
+const DropCard = observer(({ dropCallback}) => {
     const [isDrop, setIsDrop] = useState(false)
 
     // Объект сброшен в элемент
@@ -34,6 +35,6 @@ const DropCard = ({ dropCallback}) => {
       onDragLeave={handleDragLeave}
     ></div>
   )
-}
+})
 
 export default DropCard

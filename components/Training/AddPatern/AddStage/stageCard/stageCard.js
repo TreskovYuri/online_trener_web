@@ -3,16 +3,19 @@ import css from './stageCard.module.css'
 import { useEffect, useState } from 'react'
 import addPatternHandlers from '@/app/admin/addtrainingpattern/addPatternHandlers'
 import { Debounced } from '@/utils/Debounced'
+import TrainingMobx from '@/mobx/TrainingMobx'
+import { observer } from 'mobx-react-lite'
 
 
 
-const StageCard = ({ title, index, stages, setStage }) => {
+const StageCard = observer(({ title, index }) => {
   const [input, setInput] = useState(title);
-  
+  const stages = TrainingMobx.stages
+  const setStages = TrainingMobx.setStages
 
   // Функция для задержки реагирования на ввод
   const debouncedUpdateStageName = Debounced((newInput) => {
-      addPatternHandlers.updateStageName({ index, title: newInput, setStages: setStage, stages });
+      addPatternHandlers.updateStageName({ index, title: newInput,stages:stages, setStages:setStages});
   });
 
   // Обработка изменения ввода текста
@@ -26,7 +29,7 @@ const StageCard = ({ title, index, stages, setStage }) => {
           <RigthModalInput input={input} setInput={setInput} placeholder={'Название'} className={css.input} />
       </div>
   );
-};
+});
 
 
 export default StageCard
