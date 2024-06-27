@@ -14,3 +14,8 @@
 .header{
     font-size: 0.9vw;
 }
+.scrollBox{
+    height: 100%;
+    overflow-y: auto;
+    scrollbar-width: none; /* Скрыть скроллбар */
+}

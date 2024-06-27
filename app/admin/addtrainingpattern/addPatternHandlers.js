@@ -265,5 +265,44 @@ class AddPatternHandlers {
     setSeries(updatedItems)
   }
 
+  createSetsArray({set,exercise}){
+      const result = {
+          "set":set,
+      }
+      if(exercise.pocazatel1Name){
+          if(exercise.pocazatel1SPFlag != null && exercise.pocazatel1SPFlag !=false){
+              result.diapazonOt1 = 0
+              result.diapazonDo1 = 0
+          }else{
+              result.pokazatel1 = 0
+          }
+          if(exercise.pocazatel2SPFlag != null && exercise.pocazatel2SPFlag !=false){
+              result.diapazonOt2 = 0
+              result.diapazonDo2 = 0
+          }else{
+              result.pokazatel2 = 0
+          }
+          if(exercise.pocazatel3SPFlag != null && exercise.pocazatel3SPFlag !=false){
+              result.diapazonOt3 = 0
+              result.diapazonDo3 = 0
+          }else{
+              result.pokazatel3 = 0
+          }
+          if(exercise.pocazatel4SPFlag != null && exercise.pocazatel4SPFlag !=false){
+              result.diapazonOt4 = 0
+              result.diapazonDo4 = 0
+          }else{
+              result.pokazatel4 = 0
+          }
+          if(exercise.pocazatel5SPFlag != null && exercise.pocazatel5SPFlag !=false){
+              result.diapazonOt5 = 0
+              result.diapazonDo5 = 0
+          }else{
+              result.pokazatel5 = 0
+          }
+      }
+      return result
+  }
+
 }
 export default new AddPatternHandlers();

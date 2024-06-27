@@ -1,4 +1,6 @@
+import RigthModalInput from '@/components/widgets/INPUTS/RigthModalInput/RigthModalInput'
 import css from './SetRow.module.css'
+import NumberInputGradientBorder from '@/components/widgets/INPUTS/NumberInputGradientBorder/NumberInputGradientBorder'
 
 const SetRow = ({set,exercise}) => {
 
@@ -12,7 +14,7 @@ const SetRow = ({set,exercise}) => {
 
   return (
     <div className={css.container}>
-        <span className={css.flex1}>{set}</span>
+        <span className={css.flex1}>{set.set}</span>
         {exercise.pocazatel1Name && typeHandler({sp:exercise.pocazatel1SPFlag})}
         {exercise.pocazatel2Name && typeHandler({sp:exercise.pocazatel2SPFlag})}
         {exercise.pocazatel3Name && typeHandler({sp:exercise.pocazatel3SPFlag})}
@@ -25,10 +27,12 @@ const SetRow = ({set,exercise}) => {
 export default SetRow
 
 const _Diapazon = () =>{
-    return <span className={css.diapazonBox}><span className={css.flex1}></span>-<span className={css.flex1}></span></span>
+    return <span className={css.diapazonBox}><span className={css.flex1}><NumberInputGradientBorder radius={0.5}/></span>-<span className={css.flex1}><NumberInputGradientBorder radius={0.5}/></span></span>
 }
 
 
 const _StateValue = () => {
-    return <span className={css.flex1}></span>
+    return <span className={css.flex1}>
+        <RigthModalInput bacgroundFill={true} type='number'/>
+        </span>
 }

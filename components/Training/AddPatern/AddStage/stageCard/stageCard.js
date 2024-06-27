@@ -26,7 +26,7 @@ const StageCard = observer(({ title, index }) => {
   return (
       <div className={css.container}>
           <span className={css.label}>Этап {index + 1}</span>
-          <RigthModalInput input={input} setInput={setInput} placeholder={'Название'} className={css.input} />
+          <div className={css.input}><RigthModalInput input={input} setInput={setInput} placeholder={'Название'} className={css.input} /></div>
       </div>
   );
 });

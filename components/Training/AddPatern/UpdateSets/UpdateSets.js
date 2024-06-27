@@ -13,15 +13,17 @@ const UpdateSets = observer(() => {
     const blockIndex = currentStage.stageIndex
     const stage = currentStage.stages[blockIndex]
     const exercises = stage.exercises
-    console.log(currentStage)
+    
 
   return (
     <RigthModalWind setModal={setUpdateExerciseSets} initialOpacity={1} isModal={false}>
         <div className={css.container}>
-          <h2 className={css.header}>{blockIndex+1} блок. {Sklonatel({count:stage.setCount,one:'сет',many:'сетов',rodit:'сета'})}</h2>
-          {
-            exercises.map((exercise,index) => <ExerciseCard exercise={exercise} blockIndex={blockIndex+1} exerciseIndex={index+1} isMany={exercises.length>1} setCount={stage.setCount}/>)
-          }
+          <div className={css.scrollBox}>
+            <h2 className={css.header}>{blockIndex+1} блок. {Sklonatel({count:stage.setCount,one:'сет',many:'сетов',rodit:'сета'})}</h2>
+            {
+              exercises.map((exercise,index) => <ExerciseCard exercise={exercise} blockIndex={blockIndex+1} exerciseIndex={index+1} isMany={exercises.length>1} setCount={stage.setCount}/>)
+            }
+          </div>
              <div className={css.btn}><GradientButtonOval text='Сохранить' callback={()=>setUpdateExerciseSets(false)}/></div>
         </div>
     </RigthModalWind>

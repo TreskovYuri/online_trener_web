@@ -8,9 +8,11 @@
     display: flex;
     flex: 1;
     font-size: 0.6vw;
+    max-width: 2.5vw;
 }
 .flex2{
     display: flex;
     flex: 2;
     font-size: 0.6vw;
+    max-width: 5vw;
 }

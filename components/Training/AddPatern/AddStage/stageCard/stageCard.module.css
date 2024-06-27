@@ -11,3 +11,7 @@
 .input{
     margin-top: .5vw;
 }
+.input{
+    width: 100%;
+    height: 2vw;
+}
