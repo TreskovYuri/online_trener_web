@@ -5,6 +5,7 @@ import { observer } from 'mobx-react-lite';
 import addPatternHandlers from '../../addPatternHandlers';
 import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv';
 import TrainingMobx from '@/mobx/TrainingMobx';
+import { BookmarkX, Trash2 } from 'lucide-react';
 
 
 const ExerciseCard = observer(({
@@ -18,21 +19,14 @@ const ExerciseCard = observer(({
   index
 }) => {
   const stage = JSON.parse(exercise.stage)
-  const [shiftClicked, setShiftClicked] = useState(false);
   const [isDrag, setIsDrag] = useState(false)
   const stages = TrainingMobx.stages
   const setStages = TrainingMobx.setStages
+  const isShifted = TrainingMobx.isShifted
 
 
 
-  const handleMouseDown = (event) => {
-    if (event.shiftKey) {
-      setShiftClicked(true);
 
-    } else {
-      setShiftClicked(false);
-    }
-  };
 
 
   const handleDrag = () => {
@@ -47,8 +41,7 @@ const ExerciseCard = observer(({
 
 
   return (
-    <OpacityDiv className={`${css.container} ${shiftClicked?css.currentSery:''} ${isDrag?css.isDrag:''}`} 
-    onMouseDown={handleMouseDown} 
+    <OpacityDiv className={`${css.container} ${isDrag?css.isDrag:''}`} 
     draggable
     onDrag={handleDrag}
     onMouseOut={()=>setIsDrag(false)}
@@ -60,6 +53,10 @@ const ExerciseCard = observer(({
            stage.map(st => <div className={css.stageItem}><GradientLabel text={st}/></div>)
           }
         </div>
+        {isShifted&&<div className={css.delBtn} onClick={()=>{
+          addPatternHandlers.handleDragSeries(()=>{}, exercise, seria,index)
+          addPatternHandlers.deleteExerciseOnSeries()
+        }}><Trash2 className={css.delete}/></div>}
     </OpacityDiv>
   )
 })

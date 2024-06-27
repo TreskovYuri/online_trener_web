@@ -7,6 +7,7 @@
     margin-top: 1vw;
     width: 19.5vw;
     max-height: 7VW;
+    position: relative;
 }
 .currentSery{
     border: 1px solid var(--gradient1);
@@ -33,4 +34,29 @@
 .stageItem{
     height: 1.4vw;
     width: 6vw;
+}
+.delBtn{
+    position: absolute;
+    top: .5vw;
+    right: .5vw;
+    height: 1.5vw;
+    width: 1.5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 10vw;
+    transition: all .3s;
+}
+.delBtn:hover{
+    background-color: var(--grey-hover);
+}
+.delete{
+    height: 40%;
+    width: auto;
+    opacity: .8;
+    transition: all .3s;
+}
+.delete:hover{
+    opacity: 1;
 }

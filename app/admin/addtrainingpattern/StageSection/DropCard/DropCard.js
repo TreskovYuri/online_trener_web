@@ -33,7 +33,7 @@ const DropCard = observer(({ dropCallback}) => {
       onDragOver={handleDragOver}
       onDragEnter={handleDragEnter}
       onDragLeave={handleDragLeave}
-    ></div>
+    ><span className={`${isDrop?css.drop:''}`}></span></div>
   )
 })
 

@@ -13,6 +13,10 @@ import TrainingMobx from '@/mobx/TrainingMobx'
 const SessionBox = observer(({seria}) => {
   const setCurrentStage = TrainingMobx.setCurrentStage
   const setAddExercise = TrainingMobx.setAaddExercise
+
+
+
+
   return (
     <div className={css.container}>
 
@@ -41,6 +45,9 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
   const [timeout, setTimeout] = useState(0)
   const [firstFlag, setFirstFlag] = useState(true)
   const handleDrop = addPatternHandlers.handleDropSeries;
+  const isShifted = TrainingMobx.isShifted
+  const setUpdateExerciseSets = TrainingMobx.setUpdateExerciseSets
+  const setCurrentStage = TrainingMobx.setCurrentStage
 
   useEffect(()=>{
     setSetCount(seria.setCount)
@@ -59,7 +66,21 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
         <h3 className={css.CardTitle}>{index+1} блок.{seria.setCount} сетов</h3>
         <span>Кол-во сетов<div className={css.input}><NumberInputGradientBorder input={setCount} setInput={setSetCount}/></div></span>
         <span>Отдых между  сетами<div className={css.input}><NumberInputGradientBorder input={timeout} setInput={setTimeout} label={"сек"}/></div></span>
-        <div className={css.addExerciseBtn}><HeaderAddButton callback={addExercise} text={'Добавить упражнение'}/></div>
+        <div className={css.addExerciseBtn}><HeaderAddButton 
+        isSettings={isShifted}
+        isPlus={!isShifted}
+        callback={()=>{
+          if(isShifted){
+            setCurrentStage({
+              ...stage,
+              stageIndex:index,
+
+            })
+            setUpdateExerciseSets(true)
+          }else{
+            addExercise()
+          }
+        }} text={isShifted?'Настроить сеты':'Добавить упражнение'}/></div>
       </div>
       <div className={css.wrapBox}>
       {

@@ -5,11 +5,15 @@
     transition: all .3s;
     max-height: 8vw;
     min-height: 5vw;
-    
+    box-sizing: border-box;
+}
+.card span{
+    height: 100%;
+    width: 100%;
 }
 .drop{
-    width: 20vw;
-    margin: .5vw;
+    width: 18vw;
+    margin: 1vw;
     height: 90%;
     background-color: var(--input-bacground);
     border-radius: .5vw;

@@ -4,6 +4,7 @@ import css from './RigthModalItemList.module.css'
 import TestCard from './TestCard/TestCard';
 import TrainingMobx from '@/mobx/TrainingMobx';
 import { observer } from 'mobx-react-lite';
+import RigthModalPush from '../MODALS/RigthModalPush/RigthModalPush';
 
 const RigthModalItemList = observer(({type, list=[]}) => {
     const currentStage = TrainingMobx.currentStage
@@ -25,6 +26,7 @@ const RigthModalItemList = observer(({type, list=[]}) => {
         case 'Упражнения':
             return (
                 <div className={css.container}>
+                    <div className={css.modalPush}><RigthModalPush /></div>
                     {
                         list.map((item,index) => <ExerciseCard key={index} exercise={item} callback={addHandler}  />)
                     }

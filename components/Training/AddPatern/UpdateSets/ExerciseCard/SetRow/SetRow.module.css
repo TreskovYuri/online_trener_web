@@ -1,0 +1,31 @@
+.container{
+    display: flex;
+    height: 1.5vw;
+    margin-top: 0.2vw;
+    gap: .2vw;
+}
+.diapazonBox{
+    display: flex;
+    align-items: center;
+    flex: 2;
+}
+.flex1{
+    height: 100%;
+    display: flex;
+    flex: 1;
+    background-color: var(--input-bacground);
+    align-items: center;
+    justify-content: center;
+    border-radius: .5vw;
+    font-size: 0.7vw;
+}
+.flex2{
+    height: 100%;
+    display: flex;
+    flex: 2;
+    background-color: var(--input-bacground);
+    align-items: center;
+    justify-content: center;
+    border-radius: .5vw;
+    font-size: 0.7vw;
+}

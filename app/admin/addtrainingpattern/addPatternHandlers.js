@@ -1,3 +1,4 @@
+import TrainingMobx from "@/mobx/TrainingMobx";
 import mobx from "@/mobx/mobx";
 
 class AddPatternHandlers {
@@ -68,13 +69,14 @@ class AddPatternHandlers {
   };
 
   // Обработка захвата карточки в режиме серий
-  handleDragSeries = (setIsDrag, exercise, seria) => {
+  handleDragSeries = (setIsDrag, exercise, seria,stageIndex) => {
     if (seria) {
       setIsDrag(true);
       mobx.setDragValue({
         type: "Упражнение",
         seria: seria,
         exercise: exercise,
+        stageIndex:stageIndex
       });
     } else {
       setIsDrag(true);
@@ -141,23 +143,21 @@ class AddPatternHandlers {
   handleDropSeries = async(dropIndex,series,seria,setSeries,stageIndex) => {
     const dragValue = mobx.dragValue;
     if(!dragValue) return
-
     // Удаление карточки
     const updatedItems = series.map(sra => {
       if (sra.title === dragValue.seria.title) {
         return {
           ...sra,
-          stages: sra.stages.map(stage => {
-            const exercises = stage.exercises.filter(e => e.id !== dragValue.exercise.id);
-            if (exercises.length > 0) {
+          stages: sra.stages.map((stage,index) => {
+            if(dragValue.stageIndex === index){
+              const exercises = stage.exercises.filter(e => e.id !== dragValue.exercise.id);
               return {
                 ...stage,
                 exercises: exercises
               };
-            } else {
-              return stage; // Return the stage as is if there are no changes
             }
-          })
+            return stage
+          }).filter(el => el.exercises.length>0)
         };
       }
       return sra;
@@ -238,7 +238,32 @@ class AddPatternHandlers {
     })
     setSeries(result)
   }
-
+  deleteExerciseOnSeries(){
+    const dragValue = mobx.dragValue;
+    const series = TrainingMobx.series
+    const setSeries = TrainingMobx.setSeries
+    if(!dragValue) return
+    // Удаление карточки
+    const updatedItems = series.map(sra => {
+      if (sra.title === dragValue.seria.title) {
+        return {
+          ...sra,
+          stages: sra.stages.map((stage,index) => {
+            if(dragValue.stageIndex === index){
+              const exercises = stage.exercises.filter(e => e.id !== dragValue.exercise.id);
+              return {
+                ...stage,
+                exercises: exercises
+              };
+            }
+            return stage
+          }).filter(el => el.exercises.length>0)
+        };
+      }
+      return sra;
+    });
+    setSeries(updatedItems)
+  }
 
 }
 export default new AddPatternHandlers();

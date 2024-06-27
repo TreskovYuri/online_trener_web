@@ -7,3 +7,11 @@
     scrollbar-width: none; /* Скрыть скроллбар */
     padding-bottom: 2vw;
 }
+.modalPush{
+    position: fixed;
+    width: 20vw;
+    height: 10vw;
+    right: 0;
+    top: 10vw;
+    pointer-events: none;
+}
