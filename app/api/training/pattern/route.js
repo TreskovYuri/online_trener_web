@@ -46,9 +46,6 @@ export async function POST(req) {
     const formData = await req.formData();
     const name = formData.get("name");
     const stages = JSON.parse(formData.get("stages"));
-    // const exersices = JSON.parse(formData.get("exersices"));
-    // const tests = JSON.parse(formData.get("tests"));
-    Response.json({ message: "ok" });
     if (!name) {
       return Response.json({ message: "Передайте название" }, { status: 400 });
     }
@@ -91,39 +88,6 @@ export async function POST(req) {
       );
     }
 
-    // try {
-    //   for (const obj of exersices) {
-    //     await ExerciseBelongTrainingProgramm.create({
-    //       programmId: pattern.id,
-    //       exerciseId: obj.exersiceId,
-    //       userId: userSession.id,
-    //       sets: JSON.stringify(obj.sets),
-    //       time: obj.time ? obj.time : null,
-    //     });
-    //   }
-    // } catch (err) {
-    //   console.log(chalk.red(err));
-    //   return Response.json(
-    //     { message: "Возникла ошибка во время создания связей" },
-    //     { status: 500 }
-    //   );
-    // }
-    // try {
-    //   for (const obj of tests) {
-    //     await TestBelongTrainingPattern.create({
-    //       programmId: pattern.id,
-    //       testId: obj,
-    //       userId: userSession.id,
-    //     });
-    //   }
-    // } catch (err) {
-    //   console.log(chalk.red(err));
-    //   return Response.json(
-    //     { message: "Возникла ошибка во время создания связей" },
-    //     { status: 500 }
-    //   );
-    // }
-
     return Response.json({ messsage: "ok" });
   } catch (err) {
     console.log(chalk.red(err));
@@ -133,8 +97,7 @@ export async function POST(req) {
     );
   }
 }
-// Функция для создания нового шаблона
-// Функция для создания нового шаблона тренировокы
+// Функция для обновления нового шаблона тренировокы
 // export async function PUT(req) {
 //   try {
 //     const session = cookies().get("session").value;

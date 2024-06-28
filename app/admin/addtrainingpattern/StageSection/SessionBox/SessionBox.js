@@ -87,7 +87,18 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
         exercises.map((exercise,indx) => (
           <div className={css.dropZone} key={indx}>
             <DropCard dropCallback={() => handleDrop(indx,series,stage,setSeries,index)} />
-            <ExerciseCard exercise={exercise} series={series} setSeries={setSeries} seria={stage} isMany={exercises.length>1} blockIndex={index+1} exerciseIndex={indx+1} index={index}/>
+            <ExerciseCard 
+            exercise={exercise} 
+            series={series} 
+            setSeries={setSeries} 
+            seria={stage} 
+            isMany={exercises.length>1} 
+            blockIndex={index+1} 
+            exerciseIndex={indx+1} 
+            index={index} 
+            setCount={setCount}
+            timeout={timeout}
+            />
             <DropCard dropCallback={() => handleDrop(indx+1,series,stage,setSeries,index)} />
           </div>
         ))

@@ -15,9 +15,14 @@ import TrainingMobx from '@/mobx/TrainingMobx'
 import TestsBox from './StageSection/TestsBox/TestsBox'
 import UpdateSets from '@/components/Training/AddPatern/UpdateSets/UpdateSets'
 import ShiftHandler from '@/utils/ShiftHandler'
+import GradientButtonOval from '@/components/widgets/BUTTONS/GradientButtonOval/GradientButtonOval'
+import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv'
+import { ErrorHandler } from '@/utils/ErrorHandler'
+import { useRouter } from 'next/navigation'
 
 
 const page = observer(() => {
+  const router = useRouter()
   const [addStage, setAddStage] = useState(false)
   const addExercise = TrainingMobx.addExercise
   const stages = TrainingMobx.stages
@@ -31,7 +36,7 @@ const page = observer(() => {
     mobx.setPageName('Шаблон тренировки')
     TrainingUtills.getExercise()
     GroupUtills.getTests()
-
+    TrainingUtills.getExerciseGroups()
     // Создание обработчика для отслеживания нажатия Shift
     ShiftHandler.init(setIsShiftPressed);
 
@@ -42,6 +47,18 @@ const page = observer(() => {
   };
   },[])
 
+
+    const save = async ()=>{
+      if(addPatternHandlers.isAllSetsReady(series)){
+        const formData = new FormData()
+        formData.append('name',TrainingMobx.trainingName)
+        formData.append('stages',JSON.stringify(series))
+        await TrainingUtills.createPattern(formData)
+        // router.push('/admin/training')
+      }else{
+        ErrorHandler('Заполните все сеты во всех упражнениях!')
+      }
+    }
 
 
 
@@ -55,7 +72,10 @@ const page = observer(() => {
       {!stages[0].title&&<div className={css.navBar}><HeaderAddButton callback={()=>setAddStage(!addStage)}  text={'Добавить этапы'}/></div>}
       {stages[0].title&& series.length === 0 &&<div className={css.navBarSeria}><HeaderAddButton  callback={()=>addPatternHandlers.stageToSeries(stages,setSeries)}  text={'Объеденить в серию'} isPlus={false} isicon={true} icon={seria}/></div>}
       {series.length > 0 && 
-      <span className={css.chiftPlaceholder}>Для редактирования этапов и упражнений зажмите клавишу Shift</span>
+      <div className={css.seriesHeader}>
+        <span className={css.chiftPlaceholder}>Для редактирования этапов и упражнений зажмите клавишу Shift</span>
+        {series.length>0&&<OpacityDiv duration={1} className={css.saveBtn}><GradientButtonOval text='Сохранить шаблон' callback={save}/></OpacityDiv>}
+      </div>
       }
       {series.length === 0?
       stages.map(stage => <StageSection stage={stage} type={'Этапы'} />):

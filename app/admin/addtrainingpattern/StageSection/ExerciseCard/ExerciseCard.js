@@ -6,6 +6,7 @@ import addPatternHandlers from '../../addPatternHandlers';
 import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv';
 import TrainingMobx from '@/mobx/TrainingMobx';
 import {  Trash2 } from 'lucide-react';
+import Sklonatel from '@/utils/Sklonatel';
 
 
 const ExerciseCard = observer(({
@@ -16,14 +17,16 @@ const ExerciseCard = observer(({
   isMany=false,
   blockIndex=0,
   exerciseIndex=0,
-  index
+  index,
+  setCount,
+  timeout
 }) => {
   const stage = JSON.parse(exercise.stage)
   const [isDrag, setIsDrag] = useState(false)
   const stages = TrainingMobx.stages
   const setStages = TrainingMobx.setStages
   const isShifted = TrainingMobx.isShifted
-
+  const formulaFlag = exercise.sets?.length>0? addPatternHandlers.isSetsReady({set:exercise.sets[0]}):false
 
 
 
@@ -36,7 +39,6 @@ const ExerciseCard = observer(({
       addPatternHandlers.handleDragSeries(setIsDrag, exercise, seria,index);
     }
   };
-
 
 
 
@@ -53,8 +55,12 @@ const ExerciseCard = observer(({
            stage.map(st => <div className={css.stageItem}><GradientLabel text={st}/></div>)
           }
         </div>
-        {exercise.sets.length>0&&
-          <div>{exercise.sets.length}</div>
+        {exercise.sets?.length>0 && formulaFlag &&
+          <div className={css.formula}>
+            <span>{exercise.sets.length}x{exercise.sets[0].pokazatel2?exercise.sets[0].pokazatel2:exercise.sets[0].pokazatelOt2}</span> • 
+            <span>{exercise.sets[0].pokazatel1?exercise.sets[0].pokazatel1:exercise.sets[0].pokazatelOt1} {exercise.pocazatel1Type}</span> • 
+            <span>{Sklonatel({count:timeout,many:'секунд',one:'секунда',rodit:'секунды'})} отдыха</span>
+            </div>
         }
         {isShifted&&<div className={css.delBtn} onClick={()=>{
           addPatternHandlers.handleDragSeries(()=>{}, exercise, seria,index)

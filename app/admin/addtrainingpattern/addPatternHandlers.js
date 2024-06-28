@@ -1,5 +1,6 @@
 import TrainingMobx from "@/mobx/TrainingMobx";
 import mobx from "@/mobx/mobx";
+import _ from 'lodash'
 
 class AddPatternHandlers {
   // Обработчик изменения названий этапов
@@ -264,7 +265,7 @@ class AddPatternHandlers {
     });
     setSeries(updatedItems)
   }
-
+  // Создание массива с сетами для заданного упражнения
   createSetsArray({ set, exercise }) {
     const result = {
       set: set,
@@ -282,7 +283,7 @@ class AddPatternHandlers {
       });
       return result
   }
-
+  // Изменение сета при вводе показателей
   updateSetsArray({sp,set,sets,setSets,pokazatelNum,diapazonOt,diapazonDo,pokazatel}){
     const result = sets.map((iterableSet,index) => {
       if (index === set.set-1){
@@ -297,7 +298,7 @@ class AddPatternHandlers {
     })
     setSets(result)
   }
-
+  // Сохранение сетов упражнения в глобальный массив серий
   saveSets({series,setSeries,currentStage}){
     const result = series.map(seria => {
       if(seria.title === currentStage.title){
@@ -309,6 +310,33 @@ class AddPatternHandlers {
       return seria
     })
     setSeries(result)
+  }
+
+  // Проверка все ли поля сета заполнены
+  isSetsReady({set}){
+    return _.every(set,(item)=>{
+      return item
+    })
+  }
+
+  // Проверка все ли поля сетов из всего глобального списка заполнены
+  isAllSetsReady(series){
+    let flag = true
+    _.each(series, (seria)=>{
+      if(seria.stages.length ==0){flag=false}
+      _.each(seria.stages,(stage)=>{
+        if(stage.exercises.length ==0){flag=false}
+        _.each(stage.exercises,(exercise)=>{
+          if(exercise.sets.length ==0){flag=false}
+          _.each(exercise.sets,(set)=>{
+            console.log(set)
+            if(!this.isSetsReady({set})) flag = false 
+          })
+        })
+      })
+
+    })
+    return flag
   }
 
 }

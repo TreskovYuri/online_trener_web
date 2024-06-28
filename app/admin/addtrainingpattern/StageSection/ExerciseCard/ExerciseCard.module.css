@@ -6,8 +6,11 @@
     transition: all .3s;
     margin-top: 1vw;
     width: 19.5vw;
-    max-height: 7VW;
+    min-height: 8vw;
+    max-height: 9VW;
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 .currentSery{
     border: 1px solid var(--gradient1);
@@ -29,7 +32,7 @@
     display: flex;
     gap: .3vw;
     flex-wrap: wrap;
-    margin-top: 1vw;
+    margin-top: auto;
 }
 .stageItem{
     height: 1.4vw;
@@ -59,4 +62,12 @@
 }
 .delete:hover{
     opacity: 1;
+}
+.formula{
+    font-size: 0.7vw;
+    font-weight: 600;
+    opacity: .3;
+    margin-top: auto;
+    display: flex;
+    gap: .4vw;
 }

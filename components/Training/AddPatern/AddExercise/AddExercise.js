@@ -10,6 +10,8 @@ import { observer } from 'mobx-react-lite'
 import RigthModalItemList from '@/components/widgets/RigthModalItemList/RigthModalItemList'
 import RigthModalHandleSearch from '@/utils/RigthModalHandleSearch'
 import TrainingMobx from '@/mobx/TrainingMobx'
+import GetMuscleGroupOnExercisesList from '@/utils/GetMuscleGroupOnExercisesList'
+import GetEquipmentsOnExercisesList from '@/utils/GetEquipmentsOnExercisesList'
 
 
 
@@ -28,7 +30,17 @@ const AddExercise = observer(() => {
         <div className={css.header}>
           <TypeHedaer setType={setCurrentType} type={currentType} typeList={['Упражнения','Тесты']}/>
           <div className={css.filterContainer}>
-              {currentType == 'Упражнения'&&<span><HeaderExerciseFilter /></span>}
+              {currentType == 'Упражнения'&&<span><HeaderExerciseFilter 
+                  muscleGoups={GetMuscleGroupOnExercisesList()} 
+                  equipments={GetEquipmentsOnExercisesList()} 
+                  currentEquipment={TrainingMobx.currentEquipment}
+                  setCurrentEquipment={TrainingMobx.setСurrentEquipment}
+                  currentGroup={TrainingMobx.currentGroup}
+                  setCurrentGroup={TrainingMobx.setСurrentGroup}
+                  setCirrentMuscleGroup={TrainingMobx.setСurrentMuscleGroup}
+                  currentMuscleGroup={TrainingMobx.currentMuscleGroup}
+
+              /></span>}
               <span><HeaderSearchFilter value={search} setValue={setSearch}/></span>
           </div>
         </div>

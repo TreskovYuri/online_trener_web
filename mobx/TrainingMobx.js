@@ -11,7 +11,29 @@ class TrainingMobx {
         this.setIsShifted = this.setIsShifted.bind(this);
         this.setUpdateExerciseSets = this.setUpdateExerciseSets.bind(this);
         this.setSeries = this.setSeries.bind(this);
+        this.setTrainingName = this.setTrainingName.bind(this);
+        this.setСurrentMuscleGroup = this.setСurrentMuscleGroup.bind(this);
+        this.setСurrentGroup = this.setСurrentGroup.bind(this);
+        this.setСurrentEquipment = this.setСurrentEquipment.bind(this);
     }
+
+
+    // <============ Строки ============>
+    // Название тренировки при ее создании
+    trainingName = ''
+    setTrainingName(value) {this.trainingName = value;}
+
+    // Выбрання группа мышц для фильтрации упражнений
+    currentMuscleGroup = ''
+    setСurrentMuscleGroup(value) {this.currentMuscleGroup = value;}
+
+    // Выбрання группа упражнений для фильтрации упражнений
+    currentGroup = 0
+    setСurrentGroup(value) {this.currentGroup = value;}
+
+    // Выбранное оборудование для фильтрации упражнений
+    currentEquipment = ''
+    setСurrentEquipment(value) {this.currentEquipment = value;}
 
     // <============ Списки ============>
 

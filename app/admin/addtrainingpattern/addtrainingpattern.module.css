@@ -15,4 +15,14 @@
 .chiftPlaceholder{
     font-size: 0.6vw;
     opacity: .6;
+    font-weight: 600;
+}
+.seriesHeader{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.saveBtn{
+    height: 1.4vw;
+    width: 9vw;
 }

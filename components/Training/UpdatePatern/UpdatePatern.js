@@ -16,6 +16,7 @@ import HeaderSearchFilter from "@/components/widgets/MODALS/HeaderSearchFilter/H
 import GetMuscleGroupOnExercisesList from "@/utils/GetMuscleGroupOnExercisesList";
 import GetEquipmentsOnExercisesList from "@/utils/GetEquipmentsOnExercisesList";
 import ExerciseImg from "@/components/widgets/ExerciseImg/ExerciseImg";
+import { ExerciseFilterFlagHandler } from "@/utils/ExerciseFilterFlagHandler";
 
 const AddPatern = observer(() => {
   const [name, setName] = useState("");
@@ -190,9 +191,7 @@ const AddPatern = observer(() => {
         {typePage == "Упражнения" ? (
           <div className={css.cardContainer}>
             {localExercises.map((exercise) => {
-              const equipments = JSON.parse(exercise.equipment);
-              const musclegroups = JSON.parse(exercise.musclegroups);
-              const flag = (currentEquipment == "" || equipments.includes(currentEquipment)) && (currentMuscleGroup == "" || musclegroups.includes(currentMuscleGroup)) && (exercise.groupId == currentGroup || currentGroup==0);
+              const flag = ExerciseFilterFlagHandler({exercise,currentEquipment, currentGroup,currentMuscleGroup})
               if (flag) return (
                 <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} key={exercise.id} className={exesiceId.includes(exercise.id) ? `${css.exerciseCard} ${css.exerciseCardAdded}` : `${css.exerciseCard}`}>
                   <div className={css.row}>

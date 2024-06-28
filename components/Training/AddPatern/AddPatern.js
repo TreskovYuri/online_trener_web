@@ -8,6 +8,7 @@ import GradientButtonOval from "@/components/widgets/BUTTONS/GradientButtonOval/
 import RightModalHeader from "@/components/widgets/RightModalHeader/RightModalHeader";
 import RigthModalInput from "@/components/widgets/INPUTS/RigthModalInput/RigthModalInput";
 import { useRouter } from 'next/navigation';
+import TrainingMobx from "@/mobx/TrainingMobx";
 
 const AddPatern = () => {
   const router = useRouter()
@@ -18,6 +19,8 @@ const AddPatern = () => {
       ErrorHandler("Заполните обязательные поля!");
       return;
     }
+    TrainingMobx.setTrainingName(name)
+    mobx.setAddPattern(false)
     router.push('/admin/addtrainingpattern')
   };
 

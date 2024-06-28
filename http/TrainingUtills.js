@@ -1,54 +1,15 @@
 import mobx from "@/mobx/mobx"
 import $api from "./index"
 import { ErrorHandler } from "@/utils/ErrorHandler";
+import POSTHandler from "@/utils/POSTHandler";
 
 export const dynamic = 'force-dynamic'
 
 class TrainingUtills{
     createPattern = async (formData) => {
-        try {
-            mobx.setLoading(true)
-            const response = await $api.post("training/pattern", formData)
-            if(response?.status === 200){
-                mobx.setLoading(false)
-                this.getTrainingBelongs()
-                this.getTrainingPattern()
-                return 'ok'
-            }
-            if(!response){
-                ErrorHandler('Сервер не отвечает..')
-            }
-            mobx.setLoading(false)
-        } catch (err) {
-            switch (err?.response?.status) {
-                case 400:
-                    // Неверный запрос
-                    mobx.setLoading(false)
-                    ErrorHandler('Не корректный запрос!')
-                    return 'fail';
-                case 403:
-                    // Ресурс не найден
-                    mobx.setLoading(false)
-                    ErrorHandler('Возникла проблема с токеном аутентификации!')
-                    return 'fail';
-                case 500:
-                    // Внутренняя ошибка сервера
-                    mobx.setLoading(false)
-                    ErrorHandler('Внутренняя ошибка сервера..')
-                    return 'fail';
-                case 418:
-                    // Внутренняя ошибка сервера
-                    mobx.setLoading(false)
-                    ErrorHandler('Произошла непредвиденная ошибка..')
-                    return 'fail';
-                default:
-                    // Другие статусы
-                    mobx.setLoading(false)
-                    return 'fail';
-            }
-        }
-
+        await POSTHandler({formData:formData,url:'training/pattern'})
 }
+
     updatePattern = async (formData) => {
         try {
             mobx.setLoading(true)

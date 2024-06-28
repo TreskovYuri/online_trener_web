@@ -28,6 +28,7 @@ import GetMuscleGroupOnExercisesList from "@/utils/GetMuscleGroupOnExercisesList
 import GetEquipmentsOnExercisesList from "@/utils/GetEquipmentsOnExercisesList";
 import HeaderExerciseFilter from "@/components/widgets/MODALS/HeaderExerciseFilter/HeaderExerciseFilter";
 import OpacityDiv from "@/components/widgets/MOTION/OpacityDiv/OpacityDiv";
+import { ExerciseFilterFlagHandler } from "@/utils/ExerciseFilterFlagHandler";
 
 export const dynamic = "force-dynamic";
 
@@ -338,9 +339,7 @@ const Page2 = observer(({ nextPage, prevPage }) => {
       {page === "Упражнения" && (
         <div className={css.cardContainer} onDragOver={(e) => e.preventDefault()}>
           {localExercises.map((exercise) => {
-            const equipments = JSON.parse(exercise.equipment);
-            const musclegroups = JSON.parse(exercise.musclegroups);
-            const flag = (currentEquipment == "" || equipments.includes(currentEquipment)) && (currentMuscleGroup == "" || musclegroups.includes(currentMuscleGroup)) && (exercise.groupId == currentGroup || currentGroup==0);
+            const flag = ExerciseFilterFlagHandler({exercise,currentEquipment, currentGroup,currentMuscleGroup})
             if (flag)
               return (
                 <div
