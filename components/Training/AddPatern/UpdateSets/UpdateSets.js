@@ -5,7 +5,9 @@ import TrainingMobx from '@/mobx/TrainingMobx'
 import GradientButtonOval from '@/components/widgets/BUTTONS/GradientButtonOval/GradientButtonOval'
 import Sklonatel from '@/utils/Sklonatel'
 import ExerciseCard from './ExerciseCard/ExerciseCard'
-import SizedBox from '@/components/widgets/SizedBox/SizedBox'
+import addPatternHandlers from '@/app/admin/addtrainingpattern/addPatternHandlers'
+
+
 
 const UpdateSets = observer(() => {
     const setUpdateExerciseSets = TrainingMobx.setUpdateExerciseSets
@@ -13,6 +15,14 @@ const UpdateSets = observer(() => {
     const blockIndex = currentStage.stageIndex
     const stage = currentStage.stages[blockIndex]
     const exercises = stage.exercises
+    const series = TrainingMobx.series
+    const setSeries = TrainingMobx.setSeries
+
+    const save =() => {
+
+        addPatternHandlers.saveSets({series,setSeries,currentStage})
+        setUpdateExerciseSets(false)
+    }
     
 
   return (
@@ -21,10 +31,10 @@ const UpdateSets = observer(() => {
           <div className={css.scrollBox}>
             <h2 className={css.header}>{blockIndex+1} блок. {Sklonatel({count:stage.setCount,one:'сет',many:'сетов',rodit:'сета'})}</h2>
             {
-              exercises.map((exercise,index) => <ExerciseCard exercise={exercise} blockIndex={blockIndex+1} exerciseIndex={index+1} isMany={exercises.length>1} setCount={stage.setCount}/>)
+              exercises.map((exercise,index) => <ExerciseCard key={exercise.id} exercise={exercise} blockIndex={blockIndex+1} exerciseIndex={index+1} isMany={exercises.length>1} setCount={stage.setCount}/>)
             }
           </div>
-             <div className={css.btn}><GradientButtonOval text='Сохранить' callback={()=>setUpdateExerciseSets(false)}/></div>
+             <div className={css.btn}><GradientButtonOval  text='Сохранить' callback={save} delay={1500}/></div>
         </div>
     </RigthModalWind>
   )

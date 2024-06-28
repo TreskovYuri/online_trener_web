@@ -12,7 +12,27 @@
     font-weight: 300;
     cursor: pointer;
     transition: all .3s;
+    position: relative;
 }
 .btn:hover{
     filter: brightness(0.9);
+}
+.loader {
+    position: absolute;
+    top: 10%;
+    left: 45%;
+    height: 80%;
+    width: auto;
+    z-index: 999;
+    color: white;
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -5,7 +5,7 @@ import { observer } from 'mobx-react-lite';
 import addPatternHandlers from '../../addPatternHandlers';
 import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv';
 import TrainingMobx from '@/mobx/TrainingMobx';
-import { BookmarkX, Trash2 } from 'lucide-react';
+import {  Trash2 } from 'lucide-react';
 
 
 const ExerciseCard = observer(({
@@ -53,6 +53,9 @@ const ExerciseCard = observer(({
            stage.map(st => <div className={css.stageItem}><GradientLabel text={st}/></div>)
           }
         </div>
+        {exercise.sets.length>0&&
+          <div>{exercise.sets.length}</div>
+        }
         {isShifted&&<div className={css.delBtn} onClick={()=>{
           addPatternHandlers.handleDragSeries(()=>{}, exercise, seria,index)
           addPatternHandlers.deleteExerciseOnSeries()

@@ -25,7 +25,7 @@ const AddPatern = () => {
     <RigthModalWind setModal={()=>mobx.setAddPattern(false)}>
       <div className={css.container}>
         <RightModalHeader title={'Новый шаблон'}/>
-        <RigthModalInput type={"text"}  placwholder={"Название"}  input={name} setInput={(e) => setName(e)}/>
+        <div className={css.input}><RigthModalInput type={"text"}  placwholder={"Название"}  input={name} setInput={(e) => setName(e)}/></div>
           <div className={css.btnSave}>
             <GradientButtonOval text='Сохранить' callback={save}/>
           </div>

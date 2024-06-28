@@ -27,6 +27,11 @@ class TrainingMobx {
     series = []
     setSeries(value) {this.series = value;}
 
+    clearLists(){
+        this.stages = [{'title': '', 'exercises': []}]
+        this.series = []
+    }
+
 
 
     // <=========== Current ===============>

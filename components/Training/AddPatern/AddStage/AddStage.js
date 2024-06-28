@@ -14,10 +14,12 @@ const AddStage = observer(({ setModal }) => {
   const stages = TrainingMobx.stages
   const setStages = TrainingMobx.setStages
 
+
     const save = () => {
         if(stages.length>1){
             setStages([...stages.filter(stg => stg.title !='')])
         }
+        
         setModal(false)
     }
   return (
@@ -33,9 +35,10 @@ const AddStage = observer(({ setModal }) => {
         callback={()=>addPatternHandlers.addStage({stages,setStages})} 
         title={'Добавить этап'} 
         isPlus={true}
+        delay={1000}
         /></div>
         </div>
-        <div className={css.saveBtn}><GradientButtonOval callback={save} text={"Сохранить"} /></div>
+        <div className={css.saveBtn}><GradientButtonOval callback={save} text={"Сохранить"} delay={1000}/></div>
       </div>
     </RigthModalWind>
   );

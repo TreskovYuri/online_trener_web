@@ -11,10 +11,30 @@
     transition: all .3s;
     user-select: none;
     gap: .3vw;
+    position: relative;
 }
 .container:hover{
     border: 1px solid var(--blue-hover);
 }
 .plus{
     font-size: 1.4vw;
+}
+.loader {
+    position: absolute;
+    top: 10%;
+    left: 45%;
+    height: 80%;
+    width: auto;
+    z-index: 999;
+    color: rgb(78, 78, 78);
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

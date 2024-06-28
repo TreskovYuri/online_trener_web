@@ -4,26 +4,51 @@ import SetRow from './SetRow/SetRow'
 import SetsHeader from './SetsHeader/SetsHeader'
 import { useEffect, useState } from 'react'
 import addPatternHandlers from '@/app/admin/addtrainingpattern/addPatternHandlers'
+import { observer } from 'mobx-react-lite'
+import TrainingMobx from '@/mobx/TrainingMobx'
 
-const ExerciseCard = ({exercise,blockIndex, exerciseIndex,isMany,setCount}) => {
+const ExerciseCard = observer(({exercise,blockIndex, exerciseIndex,isMany,setCount}) => {
     const [sets,setSets] = useState([])
-
-
-
+    const currentStage = TrainingMobx.currentStage
+    const setCurrentStage = TrainingMobx.setCurrentStage
     const stages = JSON.parse(exercise.stage)
-    const indexes = Array.from({ length: setCount }, (_, index) => index + 1)
+
+
+
+    useEffect(()=>{
+        const result = currentStage.stages.map((stage,iterator) => {
+            if(iterator == blockIndex-1){
+                return {
+                    ...stage,
+                    exercises:stage.exercises.map((ex,iterator1)=> {
+                        if(exerciseIndex-1 == iterator1){
+                            return {
+                                ...ex,  
+                                sets:sets
+                            }
+                        }
+                        return ex
+                    })
+                }
+            }
+            return stage
+        })
+        setCurrentStage({
+            ...currentStage,
+            stages:result
+        })
+    },[sets])
+
+
 
 
     useEffect(()=>{
         if(exercise.sets.length>0){
-            setSets(exercise.sets)
+            setSets(exercise.sets.slice(0,setCount))
         }else{
             setSets(Array.from({ length: setCount }, (_, index) => addPatternHandlers.createSetsArray({set:index + 1,exercise:exercise})))
         }
     },[])
-    useEffect(()=>{
-        if(sets) console.log(sets)
-    },[sets])
 
   return (
     <div className={css.container}>
@@ -35,10 +60,10 @@ const ExerciseCard = ({exercise,blockIndex, exerciseIndex,isMany,setCount}) => {
         </div>
         <SetsHeader exercise={exercise}/>
         {
-            sets.map(set => <SetRow set={set} exercise={exercise}/>)
+            sets.map(set => <SetRow set={set} exercise={exercise} sets={sets} setSets={setSets}/>)
         }
     </div>
   )
-}
+})
 
 export default ExerciseCard

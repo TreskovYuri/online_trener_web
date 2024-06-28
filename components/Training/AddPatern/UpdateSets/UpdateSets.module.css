@@ -10,7 +10,9 @@
     width: 100%;
     height: 1.7vw;
     min-height: 1.7vw;
+    position: relative;
 }
+
 .header{
     font-size: 0.9vw;
 }
