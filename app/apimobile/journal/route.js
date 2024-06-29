@@ -93,6 +93,8 @@ export async function GET() {
             { status: 500 }
           );
         }
+        // Получаем список обоектов по дням из спортивной программы
+        const days = programm?.days || []
         // Получаем список Питания из программы
         let nutritionBelongProgramm;
         try {
@@ -138,6 +140,7 @@ export async function GET() {
               existingUser.exercises = existingUser.exercises.concat(newExercises);
               existingUser.tests = existingUser.tests.concat(newTests);
               existingUser.nutrition = existingUser.nutrition.concat(newNutrition);
+              existingUser.days = existingUser.days.concat(days);
             } else {
               // Если такого обьекта нет, то добавляем новый обьект
               const usr = await users.find((el) => el.id == sportsman.userId);
@@ -152,6 +155,7 @@ export async function GET() {
                   exercises: exerciseBelongTrainingProgramm,
                   tests: testBelongProgramm,
                   nutrition: nutritionBelongProgramm,
+                  days:days
                 });
               }
             }
