@@ -10,6 +10,9 @@ import leftArrow from "./img/leftArrow.svg";
 import rightArrow from "./img/rightArrow.svg";
 import deleteImg from "./img/delete.svg";
 import pencill from './img/pencil.svg'
+import SportProgrammHandlers from "@/utils/handlers/SportProgrammHandlers";
+import SportProgrammMobx from "@/mobx/SportProgrammMobx";
+import _ from 'lodash'
 
 const monthArray = {
   January: "Январь",
@@ -83,7 +86,8 @@ const WeekCalendar = observer(() => {
         className={css.calendar}
       >
         {daysArray.map((dayItem) => (
-          <div className={css.card} key={dayItem.format("DDMMYYYY")}>
+          <>
+                    <div className={css.card} key={dayItem.format("DDMMYYYY")}>
             <div className={css.dateContainer}>
               <span
                 className={
@@ -97,10 +101,17 @@ const WeekCalendar = observer(() => {
               <span className={css.headerWeek}>{days[dayItem.day()]}</span>
             </div>
             <div className={css.cell} onDragOver={(e) => e.preventDefault()}>
-            <Card dayItem={dayItem.format("DD.MM.YYYY")} exercicesArray={mobx.finalExersiceArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))} testsArray={mobx.finalTestsArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))}
-              nutritionsArray={mobx.finalNutritionArrayOnDragAndDrop.find(el=> el.date == dayItem.format("DD.MM.YYYY"))}  />
+            <Card 
+            dayItem={dayItem.format("DD.MM.YYYY")} 
+            exercicesArray={mobx.finalExersiceArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))} 
+            testsArray={mobx.finalTestsArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))}
+            nutritionsArray={mobx.finalNutritionArrayOnDragAndDrop.find(el=> el.date == dayItem.format("DD.MM.YYYY"))} 
+            training={_.find(SportProgrammMobx.days,{date:dayItem.format("DD.MM.YYYY")})?.training}
+             />
             </div>
           </div>
+          </>
+
         ))}
         {daysArray2.map((dayItem) => (
           <div className={css.card} key={dayItem.format("DDMMYYYY")}>
@@ -117,8 +128,13 @@ const WeekCalendar = observer(() => {
               <span className={css.headerWeek}>{days[dayItem.day()]}</span>
             </div>
             <div className={css.cell} onDragOver={(e) => e.preventDefault()}>
-              <Card dayItem={dayItem.format("DD.MM.YYYY")} exercicesArray={mobx.finalExersiceArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))} testsArray={mobx.finalTestsArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))}
-              nutritionsArray={mobx.finalNutritionArrayOnDragAndDrop.find(el=> el.date == dayItem.format("DD.MM.YYYY"))}  />
+              <Card 
+              dayItem={dayItem.format("DD.MM.YYYY")} 
+              exercicesArray={mobx.finalExersiceArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))} 
+              testsArray={mobx.finalTestsArrayOnDragAndDrop.filter(el=> el.date == dayItem.format("DD.MM.YYYY"))}
+              nutritionsArray={mobx.finalNutritionArrayOnDragAndDrop.find(el=> el.date == dayItem.format("DD.MM.YYYY"))}  
+              training={_.find(SportProgrammMobx.days,{date:dayItem.format("DD.MM.YYYY")})?.training}
+              />
             </div>
           </div>
         ))}
@@ -129,7 +145,7 @@ const WeekCalendar = observer(() => {
 
 export default WeekCalendar;
 
-const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) => {
+const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray,training }) => {
   const [showDrop, setShowDrop] = useState(false);
   const [allExesice, setAllExersice] = useState(false);
   const [allTests, setAllTests] = useState(false);
@@ -164,25 +180,13 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
 
 
   const drop = () => {
-    if (mobx.dragFlag) {
-      let array = [];
-      mobx.dragValue?.training?.forEach((el) => {
-        const id = Math.floor(Math.random() * 100001);
-        array.push({ ...el, id: id });
-        mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop, { id: id, date: dayItem, body: {
-          "exerciseId":el.exerciseId,
-          "time":el.time,
-          "sets":JSON.parse(el.sets)
-        }, },]);
-      });
-      mobx.dragValue?.tests.forEach((el) => {
-        const id = Math.floor(Math.random() * 100001);
-        array.push({ ...el, id: id });
-        mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop,{id: id,date: dayItem,body: mobx.tests.find(obj => obj.id == el.testId)},]);
-      });
+    if (mobx.dragFlag && mobx.dragValue.type == 'Тренировка') {
+
+      let training = mobx.dragValue.training
+      console.log(training)
+      SportProgrammHandlers.trainingDropHandler({dayItem,training})
       mobx.setDragValue({});
       mobx.setDropValue({});
-      setShowDrop(false);
       mobx.setDragFlag(false);
     }
     if (mobx.dragExersicesFlag) {
@@ -192,21 +196,18 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       mobx.setDropValue({});
       mobx.setDragExersicesValue({});
       mobx.setDragExersicesFlag(false);
-      setShowDrop(false);
     }
     if (mobx.dragNutritionFlag) {
       const id = Math.floor(Math.random() * 100001);
       mobx.setFinalNutritionArrayOnDragAndDrop([...mobx.finalNutritionArrayOnDragAndDrop.filter( (el) => el.date != dayItem ),{id: id,date: dayItem,body: mobx.dropAndDropArrayNutrition},]);
       mobx.setDragNutritionFlag(false);
       mobx.setDropAndDropArrayNutrition({});
-      setShowDrop(false);
     }
     if (mobx.dragTestsFlag) {
       const id = Math.floor(Math.random() * 100001);
       mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop,{id: id,date: dayItem,body: mobx.dropAndDropArrayTests},]);
       mobx.setDragTestsFlag(false);
       mobx.setDropAndDropArrayTests({});
-      setShowDrop(false);
     }
     if (mobx.dragOnWeekExerciseFlag) {
       const training = { ...mobx.dragOnWeekExerciseValue }
@@ -215,7 +216,6 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       mobx.setFinalExersiceArrayOnDragAndDrop([...mobx.finalExersiceArrayOnDragAndDrop.filter(e => e.id != training.id), training])
       mobx.setDragOnWeekExerciseFlag(false);
       mobx.setDragOnWeekExerciseValue({})
-      setShowDrop(false);
     }
     if (mobx.dragOnWeekNutritionFlag) {
       const nutrition = { ...mobx.dragOnWeekNutritionValue }
@@ -223,7 +223,6 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       mobx.setFinalNutritionArrayOnDragAndDrop([...mobx.finalNutritionArrayOnDragAndDrop.filter(e => e.id != nutrition.id), nutrition])
       mobx.setDragOnWeekNutritionFlag(false);
       mobx.setDragOnWeekNutritionValue({})
-      setShowDrop(false);
     }
     if (mobx.dragOnWeekTextFlag) {
       const test = { ...mobx.dragOnWeekTextValue }
@@ -232,8 +231,8 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       mobx.setFinalTestsArrayOnDragAndDrop([...mobx.finalTestsArrayOnDragAndDrop.filter(e => e.id != test.id), test])
       mobx.setDragOnWeekTextFlag(false);
       mobx.setDragOnWeekTextValue({})
-      setShowDrop(false);
     }
+    setShowDrop(false);
   };
 
   const deleteExercises = (id) => {mobx.setFinalExersiceArrayOnDragAndDrop(mobx.finalExersiceArrayOnDragAndDrop.filter((el) => el.id != id));};
@@ -252,6 +251,24 @@ const Card = observer(({ dayItem,exercicesArray,testsArray,nutritionsArray }) =>
       onDragLeave={() => setShowDrop(false)}
       onDragOver={(e) => e.preventDefault()}
     >
+      {training&&
+                <>
+                <span className={css.type}>
+                  Тренировка <Image src={arrow} alt="" className={css.arrow} />
+                </span>
+                <div className={css.trainingCard} draggable onDrag={() => {  }} >
+                  <span className={css.cardHeader}>
+                    {TextWrang(training?.name)}
+                    <div className={css.ImgUpdateBox} onClick={() => {SportProgrammHandlers.deleteTrainingOnDay({dayItem})}}>
+                    <Image
+                      src={deleteImg}
+                      className={css.updateImg}
+                    />
+                  </div>
+                  </span>
+                </div>
+              </>
+      }
       {allExesice && exercicesArray?.length > 0 && (
         <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}>
           <span className={css.type}>

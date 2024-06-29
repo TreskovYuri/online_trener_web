@@ -31,6 +31,7 @@ const page = observer(() => {
   const tests = TrainingMobx.addPatternTests
   const updateExerciseSets = TrainingMobx.updateExerciseSets
   const setIsShiftPressed = TrainingMobx.setIsShifted
+  const [name,setName] = useState(TrainingMobx.trainingName)
   
   useEffect(()=>{
     mobx.setPageName('Шаблон тренировки')
@@ -39,7 +40,9 @@ const page = observer(() => {
     TrainingUtills.getExerciseGroups()
     // Создание обработчика для отслеживания нажатия Shift
     ShiftHandler.init(setIsShiftPressed);
-
+    if(!TrainingMobx.trainingName){
+      router.push('/admin/training')
+    }
 
     return () => {
       ShiftHandler.cleanup();
@@ -51,10 +54,12 @@ const page = observer(() => {
     const save = async ()=>{
       if(addPatternHandlers.isAllSetsReady(series)){
         const formData = new FormData()
-        formData.append('name',TrainingMobx.trainingName)
+        formData.append('name',name||TrainingMobx.trainingName)
         formData.append('stages',JSON.stringify(series))
-        await TrainingUtills.createPattern(formData)
-        // router.push('/admin/training')
+        const data = await TrainingUtills.createPattern(formData)
+        if(data == 'ok'){
+          router.push('/admin/training')
+        }
       }else{
         ErrorHandler('Заполните все сеты во всех упражнениях!')
       }

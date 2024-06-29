@@ -1,12 +1,12 @@
 'use client'
 import mobx from '@/mobx/mobx'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect} from 'react'
 import css from './AddProgramm.module.css'
 import { observer } from 'mobx-react-lite';
 import moment from 'moment'
 import ConsultationUtills from '@/http/ConsultationUtills';
 import AddProgramm from '@/components/SportProgramm/AddProgramm/AddProgramm';
-import { useRouter } from 'next/navigation';
+
 import TrainingUtills from '@/http/TrainingUtills';
 
 
@@ -14,8 +14,7 @@ export const dynamic = 'force-dynamic'
 
 
 const page = observer(() => {
-  const router = useRouter()
-  const [typeModal, setTypeModal] = useState(false)
+
   useEffect(() => {
     mobx.setPageName('Спортивная программа')
     ConsultationUtills.getConsultations()

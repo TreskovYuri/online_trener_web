@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic'
 
 class TrainingUtills{
     createPattern = async (formData) => {
-        await POSTHandler({formData:formData,url:'training/pattern'})
+        return await POSTHandler({formData:formData,url:'training/pattern'})
 }
 
     updatePattern = async (formData) => {

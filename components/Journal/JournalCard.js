@@ -38,6 +38,7 @@ const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModa
   const tests = sportsman.tests.filter((el) => el.date == date);
   const isExerciseFix = mobx.trainingFix.find(el => el?.programmId == sportprogramm?.id && el?.userId == sportsman?.id && el?.date == date )?true:false
   const isTestFix = mobx.testFix.find(el => el?.programmId == sportprogramm?.id && el?.date == date && el?.sportsmanId == sportsman?.id)?true:false
+  const training = sportsman.days?.find(day=>day.date==date)?.training
 
   useEffect(()=>{
     if(exercices.length>0){
@@ -54,7 +55,7 @@ const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModa
     }
   })
 
-  if (exercices.length || nutrition|| tests.length) {
+  if (exercices.length || nutrition|| tests.length || training) {
     return (
       <div className={css.container}>
         <span className={css.name}>
@@ -64,6 +65,10 @@ const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModa
           <span className={css.amluaItem}>{sportsman.team}</span>
           <span className={css.amluaItem}>{sportsman.post}</span>
         </div>
+        {
+        training&&<_CardRow callback={()=>{
+          console.log(training)
+        }} isFlag={false}  text={training.name} />}
         {exercices.length>0 && <_CardRow callback={()=>{
           mobx.setCurrentTraining({
             ...sportprogramm,
@@ -98,6 +103,7 @@ const _UserCard = observer(({ sportsman, date, setTrainingModal,setNutritionModa
           mobx.setOnePattern(mobx.nutritions.find(el => el.id == nutrition.nutritionId))
           setNutritionModal(true);
         }} isFlag={false}  text={"Еда на день"} />}
+
       </div>
     );
   }

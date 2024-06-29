@@ -24,3 +24,6 @@
     flex-direction: column;
     gap: 1vw;
 }
+.btn{
+    height: 1.4vw;
+}

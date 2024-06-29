@@ -25,7 +25,7 @@ const Chats = () => {
             <ChatsSidebar />
         </div>
         <div className={css.chatWind}>
-            <HeaderAddButton callback={()=>setModalAddChat(true)} text={'Создать чат'}/>
+            <div className={css.btn}><HeaderAddButton  callback={()=>setModalAddChat(true)} text={'Создать чат'}/></div>
             <OneChatWind />
         </div>
     </div>

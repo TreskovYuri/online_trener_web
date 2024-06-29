@@ -9,7 +9,7 @@ const SportProgramm = sequelize.define('sportprogramms', {
     userId: {type: DataTypes.INTEGER, allowNull:false},
     name: {type: DataTypes.STRING,allowNull:true},
     description: {type: DataTypes.TEXT, allowNull:true},
-
+    days:{type:DataTypes.ARRAY(DataTypes.JSONB),allowNull:true}
 })
 
 

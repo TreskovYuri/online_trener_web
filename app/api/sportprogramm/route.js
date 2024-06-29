@@ -29,6 +29,7 @@ export async function POST(req){
         const nutritions = JSON.parse(formData.get("nutritions"));
         const tests = JSON.parse(formData.get("tests"));
         const users = JSON.parse(formData.get("users"));
+        const days = JSON.parse(formData.get("days"));
 
         
         if (!name){return Response.json({"message":'Передайте название программы'},{status:400})}
@@ -40,7 +41,7 @@ export async function POST(req){
         if(userSession.post !== 'Супер тренер' && userSession.post !== 'Тренер'){return Response.json({"message":'Не валидная должность'},{status:400})}
         let programm;
         try{
-            programm = await SportProgramm.create({ name, description, userId: userSession.id });
+            programm = await SportProgramm.create({ name, description, userId: userSession.id,days });
             if (!programm){return Response.json({"message":'Ошибка при создании модели программы'},{status:500})}
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка при создании модели программы'},{status:500})}
         try{

@@ -114,7 +114,7 @@ const _Wind = observer(({ chat }) => {
       }
       <div ref={WindRef} className={css.endRef}></div>
       </div>
-      <OpacityDiv className={css.inputBox}>
+      {/* <OpacityDiv className={css.inputBox}>
         <UploadField 
         onFiles={file => console.log(file)}
         uploadProps={{accept:'.jpg,.jpeg,.png,.gif'}}
@@ -127,7 +127,7 @@ const _Wind = observer(({ chat }) => {
         <OpacityDiv duration={1} className={css.sendBox} onClick={handleSendMessage}><SendHorizontal className={css.send} /></OpacityDiv>:
         <OpacityDiv duration={1} className={css.sendBox} onClick={()=>{}}><Mic className={css.mic} /></OpacityDiv>
         }
-      </OpacityDiv>
+      </OpacityDiv> */}
     </OpacityDiv>
   )
 })

@@ -29,6 +29,8 @@ import GetEquipmentsOnExercisesList from "@/utils/GetEquipmentsOnExercisesList";
 import HeaderExerciseFilter from "@/components/widgets/MODALS/HeaderExerciseFilter/HeaderExerciseFilter";
 import OpacityDiv from "@/components/widgets/MOTION/OpacityDiv/OpacityDiv";
 import { ExerciseFilterFlagHandler } from "@/utils/ExerciseFilterFlagHandler";
+import { TrainingExerciseCount } from "@/utils/TrainingExerciseCount";
+import SportProgrammMobx from "@/mobx/SportProgrammMobx";
 
 export const dynamic = "force-dynamic";
 
@@ -54,15 +56,6 @@ const countHandler = (one, two, three, four, five, six, seven) => {
   return `${count} ${pluralize(count, "прием", "приема", "приемов")} пищи`;
 };
 
-const countHandler1 = (id) => {
-  let count = 0;
-  mobx.trainingBelongs.forEach((belong) => {
-    if (belong.programmId == id) {
-      count++;
-    }
-  });
-  return `${count} ${pluralize(count, "упражнение", "упражнения", "упражнений")}`;
-};
 
 const AddProgramm = observer(() => {
   const router = useRouter();
@@ -84,6 +77,9 @@ const AddProgramm = observer(() => {
     mobx.setFinalNutritionArrayOnDragAndDrop([]);
     mobx.setFinalTestsArrayOnDragAndDrop([]);
     mobx.setFinalUsersArrayOnDragAndDrop([]);
+    return ()=>{
+      SportProgrammMobx.clear()
+    }
   }, []);
 
   const nextPage = () => {
@@ -111,6 +107,7 @@ const AddProgramm = observer(() => {
     mobx.finalNutritionArrayOnDragAndDrop && formData.append("nutritions", JSON.stringify(mobx.finalNutritionArrayOnDragAndDrop));
     mobx.finalTestsArrayOnDragAndDrop && formData.append("tests", JSON.stringify(mobx.finalTestsArrayOnDragAndDrop));
     mobx.finalUsersArrayOnDragAndDrop && formData.append("users", JSON.stringify(mobx.finalUsersArrayOnDragAndDrop));
+    formData.append("days", JSON.stringify(SportProgrammMobx.days || []));
 
     const data = await SportProgrammUtills.create(formData);
     if (data === "ok") {
@@ -168,15 +165,10 @@ const Page2 = observer(({ nextPage, prevPage }) => {
   const [sets, setSets] = useState("");
   const [updateCard, setUpdateCard] = useState({});
   const [modalUpdateExercise, setModalUpdateExercise] = useState(false);
-  const [search, setSearch] = useState("");
 
   const [setsObject, setSetsObject] = useState([]);
   const [exesiceId, setExesiceId] = useState([]);
   const [globalExersicesArray, setGlobalExersicesArray] = useState([]);
-  const [nutritions, setNutritions] = useState([]);
-  const [trainingPatterns, setTrainingPatterns] = useState([]);
-  const [exercises, setExercises] = useState([]);
-  const [tests, setTests] = useState([]);
   const [localExercises, setLocalExercises] = useState([]);
   const [localNutritions, setLocalNutritions] = useState([]);
   const [localTrainings, setLocalTrainings] = useState([]);
@@ -315,8 +307,8 @@ const Page2 = observer(({ nextPage, prevPage }) => {
                 draggable={true}
                 onDrag={(e) => {
                   mobx.setDragValue({
-                    training: mobx.trainingBelongs.filter((el) => el.programmId == card.id),
-                    tests: mobx.testBelongs.filter((el) => el.programmId == card.id),
+                    'type':"Тренировка",
+                    training:card,
                   });
                   mobx.setDragFlag(true);
                 }}
@@ -330,7 +322,7 @@ const Page2 = observer(({ nextPage, prevPage }) => {
                 }}
               >
                 <h3 className={css.cardHeader}>{card.name}</h3>
-                <span className={css.count}>{countHandler1(card.id)}</span>
+                <span className={css.count}>{TrainingExerciseCount(card)}</span>
               </motion.div>
             ))}
         </div>
