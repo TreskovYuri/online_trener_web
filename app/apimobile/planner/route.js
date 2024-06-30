@@ -44,6 +44,14 @@ export async function GET() {
       console.log(chalk.red(err));
       return Response.json({ message: "Возникла ошибка во время расшифровки токена" }, { status: 500 });
     }
+    // Получаем спортпрограммы спортсмена
+    let sportProgramms;
+    try {
+      sportProgramms = await SportProgramm.findAll();
+    } catch (err) {
+      console.log(chalk.red(err));
+      return Response.json({ message: "Возникла ошибка во получения спортивных программ" }, { status: 500 });
+    }
 
 
     // Получаем спортпрограммы спортсмена
@@ -63,9 +71,13 @@ export async function GET() {
       let finalExercisesArray =[];
       let finalNotritionsArray =[];
       let finalTestsArray =[];
+      let finalDays = []
       // Перебираем список программ
       for (const programm of programms) {
-        
+        const prgm = sportProgramms.find(el => el.id == programm.programmId)
+        if(prgm && prgm.days?.length>0){
+          finalDays.push(...prgm.days)
+        }
         // Получаем список упражнений из программы
         try {
           exerciseBelongTrainingProgramm =  await ExerciseBelongTrainingProgramm.findAll({
@@ -124,6 +136,7 @@ export async function GET() {
         'exercises': finalExercisesArray,
         'tests': finalTestsArray,
         'nutrition': finalNotritionsArray,
+        'days':finalDays
       });
     } catch (err) {
       console.log(chalk.red(err));
