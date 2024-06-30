@@ -34,7 +34,7 @@ const UpdateSets = observer(() => {
               exercises.map((exercise,index) => <ExerciseCard key={exercise.id} exercise={exercise} blockIndex={blockIndex+1} exerciseIndex={index+1} isMany={exercises.length>1} setCount={stage.setCount}/>)
             }
           </div>
-             <div className={css.btn}><GradientButtonOval  text='Сохранить' callback={save} delay={1500}/></div>
+             <div className={css.btn}><GradientButtonOval  text='Сохранить' callback={save} delay={500}/></div>
         </div>
     </RigthModalWind>
   )

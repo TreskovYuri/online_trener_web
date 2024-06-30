@@ -28,10 +28,10 @@ export default SetsHeader
 
 
 const _Diapazon = ({name,type}) => {
-    return <span className={css.flex2}>{Sokrashattel({length:15,text:`${Sokrashattel({length:4,text:name})},${Sokrashattel({length:3,text:type})}/диапазон`})}</span>
+    return <span className={css.flex2}>{name},{type}/диапазон`</span>
 }
 
 
 const _StateValue = ({name}) => {
-    return <span className={css.flex1}>{Sokrashattel({length:4,text:name})}</span>
+    return <span className={css.flex1}>{name}</span>
 }

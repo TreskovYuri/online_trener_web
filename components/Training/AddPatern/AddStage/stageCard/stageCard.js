@@ -16,7 +16,7 @@ const StageCard = observer(({ title, index }) => {
   // Функция для задержки реагирования на ввод
   const debouncedUpdateStageName = Debounced((newInput) => {
       addPatternHandlers.updateStageName({ index, title: newInput,stages:stages, setStages:setStages});
-  });
+  },200);
 
   // Обработка изменения ввода текста
   useEffect(() => {

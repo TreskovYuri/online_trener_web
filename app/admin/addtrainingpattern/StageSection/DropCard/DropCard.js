@@ -29,11 +29,13 @@ const DropCard = observer(({ dropCallback}) => {
 
   return (
     <div className={`${css.card} ${isDrop?css.drop:''}`}
-      onDrop={handleDrop}
-      onDragOver={handleDragOver}
-      onDragEnter={handleDragEnter}
-      onDragLeave={handleDragLeave}
-    ><span className={`${isDrop?css.drop:''}`}></span></div>
+
+    ><span className={``}
+    onDrop={handleDrop}
+    onDragOver={handleDragOver}
+    onDragEnter={handleDragEnter}
+    onDragLeave={handleDragLeave}
+    ></span></div>
   )
 })
 

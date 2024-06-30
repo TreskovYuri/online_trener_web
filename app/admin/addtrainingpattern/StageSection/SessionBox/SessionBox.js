@@ -25,7 +25,8 @@ const SessionBox = observer(({seria}) => {
           setAddExercise(true)
           setCurrentStage({
             'seria':seria,
-            'stageIndex':index
+            'stageIndex':index,
+            'title':seria.title
           })
         }} />)
       }
@@ -56,7 +57,7 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
 
 
 
-  const debouncedSetCountAndTimout = Debounced(() => {addPatternHandlers.setCountAndTimout(setCount,timeout,index, title ,series, setSeries, )});
+  const debouncedSetCountAndTimout = Debounced(() => {addPatternHandlers.setCountAndTimout(setCount,timeout,index, title ,series, setSeries, )},200);
  useEffect(()=>{ if(!firstFlag){debouncedSetCountAndTimout()}setFirstFlag(false)},[setCount,timeout])
 
 
@@ -66,21 +67,24 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
         <h3 className={css.CardTitle}>{index+1} блок.{seria.setCount} сетов</h3>
         <span>Кол-во сетов<div className={css.input}><NumberInputGradientBorder input={setCount} setInput={setSetCount}/></div></span>
         <span>Отдых между  сетами<div className={css.input}><NumberInputGradientBorder input={timeout} setInput={setTimeout} label={"сек"}/></div></span>
-        <div className={css.addExerciseBtn}><HeaderAddButton 
-        isSettings={isShifted}
-        isPlus={!isShifted}
-        callback={()=>{
-          if(isShifted){
-            setCurrentStage({
-              ...stage,
-              stageIndex:index,
+        <div className={css.addExerciseBtn}>
 
-            })
+         <div className={css.addBtn}>
+         <HeaderAddButton 
+        className={css.addBtn}
+        callback={()=>{addExercise()}} text={'Добавить упражнение'}/>
+          </div>
+
+          <div className={css.addBtn}><HeaderAddButton 
+        
+        isSettings={true}
+        isPlus={false}
+        callback={()=>{
+            setCurrentStage({...stage,stageIndex:index,})
             setUpdateExerciseSets(true)
-          }else{
-            addExercise()
-          }
-        }} text={isShifted?'Настроить сеты':'Добавить упражнение'}/></div>
+        }} text={'Настроить сеты'}/></div>
+
+        </div>
       </div>
       <div className={css.wrapBox}>
       {

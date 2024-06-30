@@ -1,7 +1,7 @@
 .container{
     width: 100%;
     display: flex;
-    gap: .2vw;
+    gap: .4vw;
     margin-top: 1vw;
 }
 .flex1{
@@ -9,6 +9,9 @@
     flex: 1;
     font-size: 0.6vw;
     max-width: 2.5vw;
+    width: 2.5vw;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 .flex2{
     display: flex;

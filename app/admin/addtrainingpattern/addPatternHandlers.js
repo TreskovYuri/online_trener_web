@@ -31,6 +31,7 @@ class AddPatternHandlers {
   }
   // Функция добавлет упражнения в этап в серии
   addExerciseOnSeriesStages({ exercise, currentStage,series, setSeries }) {
+
     const updatedStages = series.map((seria) => {
       if (seria.title == currentStage.seria.title) {
         return {
@@ -39,7 +40,7 @@ class AddPatternHandlers {
             if(index === currentStage.stageIndex){
               return {
                 ...stage,
-                'exercises': [...stage.exercises, {...exercise,'sets':[]}]
+                'exercises': [...stage.exercises, {...exercise,'sets':[],stage:currentStage.title}]
               }
             }
             return stage
@@ -172,7 +173,16 @@ class AddPatternHandlers {
             'stages': stg.stages.map((s,index) => {
               if(index == stageIndex){
                 const updatedExercises = [...s.exercises];
-                updatedExercises.splice(dropIndex, 0, dragValue.exercise);
+                if(dragValue.exercise.sets){
+                  updatedExercises.splice(dropIndex, 0, dragValue.exercise);
+                }else{
+                  updatedExercises.splice(dropIndex, 0, {
+                    ...dragValue.exercise,
+                    stage:seria.title,
+                    sets:[]
+                  });
+                }
+                
                 return {
                   ...s,
                   'exercises':updatedExercises
@@ -187,6 +197,7 @@ class AddPatternHandlers {
 
 
     setSeries(finalItems)
+    console.log(series)
   };
 
   // Преобразование массива этапов в массиы серий
@@ -337,6 +348,29 @@ class AddPatternHandlers {
 
     })
     return flag
+  }
+
+  addBlockToSeries(title){
+    const series = TrainingMobx.series
+    const setSeries = TrainingMobx.setSeries
+    const result = series.map((seria) => {
+      if(seria.title == title){
+        return {
+          ...seria,
+          stages: [
+            ...seria.stages,
+            {
+              'setCount':0,
+              'timeout':0,
+              'exercises':[]
+            }
+          ]
+        }
+      }
+      return seria
+    })
+    setSeries(result)
+    console.log(result)
   }
 
 }

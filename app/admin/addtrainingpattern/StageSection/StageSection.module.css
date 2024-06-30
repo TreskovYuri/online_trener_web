@@ -3,9 +3,9 @@
     width: 100%;
     height: auto;
     /* min-height: 15vw; */
-    margin-top: 2vw;
+    margin-top: 1vw;
     flex-direction: column;
-    margin-bottom: 2vw;
+    margin-bottom: 1vw;
 }
 .header{
     display: flex;
@@ -18,4 +18,9 @@
 .title{
     font-size: 1.2vw;
     font-weight: 600;
+}
+.addBtn{
+    width: 8vw;
+    height: 1.2vw;
+    margin-top: 2vw;
 }

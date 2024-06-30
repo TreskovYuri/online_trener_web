@@ -11,7 +11,7 @@ const ExerciseCard = observer(({exercise,blockIndex, exerciseIndex,isMany,setCou
     const [sets,setSets] = useState([])
     const currentStage = TrainingMobx.currentStage
     const setCurrentStage = TrainingMobx.setCurrentStage
-    const stages = JSON.parse(exercise.stage)
+    const stage = exercise.stage
 
 
 
@@ -55,7 +55,7 @@ const ExerciseCard = observer(({exercise,blockIndex, exerciseIndex,isMany,setCou
         <h3 className={css.header}>{isMany&&<span>{blockIndex}.{exerciseIndex}</span>} {exercise.nameRu}<span className={css.eng}> / {exercise.nameEng}</span></h3>
         <div className={css.labelBox}>
             {
-                stages.map(stage => <div key={stage} className={css.label}><GradientLabel text={stage}/></div>)
+                <div  className={css.label}><GradientLabel text={stage}/></div>
             }
         </div>
         <SetsHeader exercise={exercise}/>

@@ -17,7 +17,7 @@ export const dynamic = "force-dynamic";
 // Функция возвращает все шаблоны
 export async function GET() {
   try {
-    let finalArray = [];
+    let finalArray = {};
 
     let session;
     try {
@@ -132,12 +132,12 @@ export async function GET() {
           nutritionBelongProgramm = [];
         } catch (e) {console.log(e);return Response.json({message: "Возникла ошибка во время ",},{ status: 500 });}
       }
-      finalArray.push({
+      finalArray = {
         'exercises': finalExercisesArray,
         'tests': finalTestsArray,
         'nutrition': finalNotritionsArray,
         'days':finalDays
-      });
+      };
     } catch (err) {
       console.log(chalk.red(err));
       return Response.json({ message: "Возникла ошибка во время получения данных" }, { status: 500 });

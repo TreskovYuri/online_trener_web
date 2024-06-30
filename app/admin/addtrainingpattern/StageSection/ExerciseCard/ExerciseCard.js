@@ -4,41 +4,29 @@ import { useState } from 'react';
 import { observer } from 'mobx-react-lite';
 import addPatternHandlers from '../../addPatternHandlers';
 import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv';
-import TrainingMobx from '@/mobx/TrainingMobx';
-import {  Trash2 } from 'lucide-react';
+import {  Pencil, Trash2 } from 'lucide-react';
 import Sklonatel from '@/utils/Sklonatel';
 
 
 const ExerciseCard = observer(({
   exercise,
-  stg={},
   seria={},
-  type='',
   isMany=false,
   blockIndex=0,
   exerciseIndex=0,
   index,
-  setCount,
   timeout
 }) => {
-  const stage = JSON.parse(exercise.stage)
+  const stage = exercise.stage
   const [isDrag, setIsDrag] = useState(false)
-  const stages = TrainingMobx.stages
-  const setStages = TrainingMobx.setStages
-  const isShifted = TrainingMobx.isShifted
   const formulaFlag = exercise.sets?.length>0? addPatternHandlers.isSetsReady({set:exercise.sets[0]}):false
 
 
-
-
-
   const handleDrag = () => {
-    if (type=='Этапы') {
-      addPatternHandlers.handleDragStage(setIsDrag, exercise, stages, setStages, stg);
-    } else {
       addPatternHandlers.handleDragSeries(setIsDrag, exercise, seria,index);
-    }
+  
   };
+
 
 
 
@@ -52,7 +40,7 @@ const ExerciseCard = observer(({
         <div className={css.header}>{isMany&&`${blockIndex}.${exerciseIndex} `}{exercise.nameRu}<span> / {exercise.nameEng}</span></div>
         <div className={css.stages}>
           {
-           stage.map(st => <div className={css.stageItem}><GradientLabel text={st}/></div>)
+           <div className={css.stageItem}><GradientLabel text={stage}/></div>
           }
         </div>
         {exercise.sets?.length>0 && formulaFlag &&
@@ -62,10 +50,15 @@ const ExerciseCard = observer(({
             <span>{Sklonatel({count:timeout,many:'секунд',one:'секунда',rodit:'секунды'})} отдыха</span>
             </div>
         }
-        {isShifted&&<div className={css.delBtn} onClick={()=>{
-          addPatternHandlers.handleDragSeries(()=>{}, exercise, seria,index)
-          addPatternHandlers.deleteExerciseOnSeries()
-        }}><Trash2 className={css.delete}/></div>}
+        <div className={css.btnBox}>
+          <div className={css.delBtn} onClick={()=>{
+            addPatternHandlers.handleDragSeries(()=>{}, exercise, seria,index)
+            addPatternHandlers.deleteExerciseOnSeries()
+          }}><Trash2 className={css.delete}/></div>
+          <div className={css.delBtn} onClick={()=>{
+          }}><Pencil className={css.delete}/></div>
+        </div>
+        
     </OpacityDiv>
   )
 })

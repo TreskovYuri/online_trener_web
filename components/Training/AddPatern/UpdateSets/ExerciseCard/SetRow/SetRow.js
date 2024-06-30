@@ -11,11 +11,11 @@ const SetRow = ({set,exercise,sets,setSets}) => {
         if(sp!=null && sp!=false){
             return <_Diapazon callback={Debounced(({diapazonOt,diapazonDo})=>{
                 addPatternHandlers.updateSetsArray({sp:true,set:set,sets,setSets,pokazatelNum,diapazonOt,diapazonDo})
-            },1500)} valueDo={set[`diapazonDo${pokazatelNum}`]} valueOt={set[`diapazonOt${pokazatelNum}`]}/>
+            },200)} valueDo={set[`diapazonDo${pokazatelNum}`]} valueOt={set[`diapazonOt${pokazatelNum}`]}/>
         }else{
             return <_StateValue callback={Debounced(({pokazatel})=>{
                 addPatternHandlers.updateSetsArray({sp:false,set:set,sets,setSets,pokazatelNum,pokazatel})
-            },1500)} value={set[`pokazatel${pokazatelNum}`]}/>
+            },200)} value={set[`pokazatel${pokazatelNum}`]}/>
         }
     }
 
