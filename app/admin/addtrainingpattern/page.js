@@ -75,7 +75,7 @@ const page = observer(() => {
       {addExercise&&<AddExercise />}
       {updateExerciseSets&&<UpdateSets/>}
       {!stages[0].title&&<div className={css.navBar}><HeaderAddButton callback={()=>setAddStage(!addStage)}  text={'Добавить этапы'}/></div>}
-      {stages[0].title&& series.length === 0 &&<div className={css.navBarSeria}><HeaderAddButton  callback={()=>addPatternHandlers.stageToSeries(stages,setSeries)}  text={'Объеденить в серию'} isPlus={false} isicon={true} icon={seria}/></div>}
+      {stages[0].title&& series.length === 0 &&<div className={css.navBarSeria}><HeaderAddButton  callback={()=>addPatternHandlers.stageToSeries(stages,setSeries)}  text={'Объединить в серию'} isPlus={false} isicon={true} icon={seria}/></div>}
       {series.length > 0 && 
       <div className={css.seriesHeader}>
         <span className={css.chiftPlaceholder}>Для редактирования этапов и упражнений зажмите клавишу Shift</span>
