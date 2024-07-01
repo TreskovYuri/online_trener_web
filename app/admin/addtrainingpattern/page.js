@@ -101,11 +101,12 @@ const page = observer(() => {
       {stages[0].title&& series.length === 0 &&<div className={css.navBarSeria}><HeaderAddButton  callback={()=>addPatternHandlers.stageToSeries(stages,setSeries)}  text={'Объединить в серию'} isPlus={false} isicon={true} icon={seria}/></div>}
       {series.length > 0 && 
       <div className={css.seriesHeader}>
+        <span>Добавьте блоки в этапы, нажимая "+" и наполните их, перетаскивая их в нужный блок</span>
         {series.length>0&&<OpacityDiv duration={1} className={css.saveBtn}><GradientButtonOval text='Сохранить шаблон' callback={save}/></OpacityDiv>}
       </div>
       }
       {series.map(seria => <StageSection seria={seria} type={'Серии'}/>)}
-    {tests.length>0 &&<TestsBox/>}
+    <TestsBox/>
     </div>
   )
 })

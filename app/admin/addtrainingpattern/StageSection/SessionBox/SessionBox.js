@@ -63,11 +63,12 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
 
 
   return (
+    <>
     <OpacityDiv className={css.card}>
       <div className={css.CardHeader}>
-        <h3 className={css.CardTitle}>{index+1} блок.{seria.setCount} сетов</h3>
+        <h3 className={css.CardTitle}>{addPatternHandlers.getBlockIndex({title,blockIndex:index+1})} блок.{seria.setCount} сетов</h3>
         <span>Кол-во сетов<div className={css.input}><NumberInputGradientBorder input={setCount} setInput={setSetCount}/></div></span>
-        <span>Отдых между  сетами<div className={css.input}><NumberInputGradientBorder input={timeout} setInput={setTimeout} label={"сек"}/></div></span>
+        <span>Отдых между  сетами<div className={css.input}><NumberInputGradientBorder input={timeout} setInput={setTimeout} label={"сек"} className={css.setInput}/></div></span>
         <div className={css.addExerciseBtn}>
 
          <div className={css.addBtn}>
@@ -81,7 +82,7 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
         isSettings={true}
         isPlus={false}
         callback={()=>{
-            setCurrentStage({...stage,stageIndex:index,})
+            setCurrentStage({...stage,stageIndex:index,tite:seria.title})
             setUpdateExerciseSets(true)
         }} text={'Настроить сеты'}/></div>
 
@@ -111,6 +112,9 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
       <DropCard dropCallback={() => handleDrop(exercises.length,series,stage,setSeries,index)} />
       </div>
     </OpacityDiv>
+    {/* <DropCard type={'2'}/> */}
+    </>
+    
   )
 })
 

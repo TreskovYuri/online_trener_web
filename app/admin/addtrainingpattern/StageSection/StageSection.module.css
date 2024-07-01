@@ -26,6 +26,17 @@
     cursor: pointer;
     transition: all .3s;
     opacity: .7;
+    position: relative;
+}
+.dropZone{
+    position: absolute;
+    width: 5vw;
+    height: 5vw;
+    user-select: none;
+}
+.drop{
+    height: 2.5vw;
+    width: 2.5vw;
 }
 .addBtn:hover{
     background-color: var(--input-bacground-hover);
@@ -35,6 +46,7 @@
     height:60%;
     width: auto;
 }
+
 .title{
     font-size: 1.2vw;
     font-weight: 600;

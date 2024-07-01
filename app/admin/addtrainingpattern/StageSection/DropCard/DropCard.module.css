@@ -8,6 +8,25 @@
     box-sizing: border-box;
     position: relative;
 }
+.card1{
+    background-color:  var(--input-bacground);
+    height: 7vw;
+    width: 20vw;
+    transition: all .3s;
+    max-height: 8vw;
+    min-height: 5vw;
+    box-sizing: border-box;
+    position: relative;
+    border-radius: .5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.plus{
+    height: 3vw;
+    opacity: .3;
+    width: auto;
+}
 .card span{
     height: 120%;
     width:30vw;

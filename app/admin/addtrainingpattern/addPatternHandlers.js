@@ -89,6 +89,14 @@ class AddPatternHandlers {
       });
     }
   };
+  // Обработка захвата карточки в режиме серий
+  handleDragTests = ({setIsDrag, test}) => {
+    setIsDrag(true);
+      mobx.setDragValue({
+        type: "Тест",
+        test: test
+      });
+  };
 
   // Обработка события Drop в режиме этапов 
   handleDropStage = (dropIndex, stages, stage, setStages) => {
@@ -382,6 +390,35 @@ class AddPatternHandlers {
     localStorage.setItem('seria', JSON.stringify(result))
   }
 
+  addBlockToSeriesAndPushExercise(title,exercise){
+    const series = TrainingMobx.series
+    const setSeries = TrainingMobx.setSeries
+    const result = series.map((seria) => {
+      if(seria.title == title){
+        return {
+          ...seria,
+          stages: [
+            ...seria.stages,
+            {
+              'setCount':0,
+              'timeout':0,
+              'exercises':[
+                {
+                  ...exercise,
+                  stage:title,
+                  sets:[]
+                }
+              ]
+            }
+          ]
+        }
+      }
+      return seria
+    })
+    setSeries(result)
+    localStorage.setItem('seria', JSON.stringify(result))
+  }
+
   saveSetsByOneExercise({currentExercise, sets}){
     const series = TrainingMobx.series
     const setSeries = TrainingMobx.setSeries
@@ -412,6 +449,23 @@ class AddPatternHandlers {
     })
     setSeries(result)
 
+  }
+
+  // Возаращает индекс блока, для отображения подряд
+  getBlockIndex({ title, blockIndex }) {
+    const series = TrainingMobx.series; // массив объектов
+    let count = 0;
+  
+    for (let sra of series) {
+      if (sra.title === title) {
+        count += blockIndex;
+        break; // выйдем из цикла, так как нужный объект найден
+      } else {
+        count += sra.stages.length; // прибавляем длину массива stages
+      }
+    }
+  
+    return count;
   }
 
 }

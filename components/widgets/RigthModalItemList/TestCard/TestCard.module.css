@@ -36,3 +36,6 @@
     width: 1vw;
     opacity: .7;
 }
+.drag{
+    border: 1px solid gray;
+}

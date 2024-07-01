@@ -29,7 +29,7 @@ const UpdateSets = observer(() => {
     <RigthModalWind setModal={setUpdateExerciseSets} initialOpacity={1} isModal={false}>
         <div className={css.container}>
           <div className={css.scrollBox}>
-            <h2 className={css.header}>{blockIndex+1} блок. {Sklonatel({count:stage.setCount,one:'сет',many:'сетов',rodit:'сета'})}</h2>
+            <h2 className={css.header}>{addPatternHandlers.getBlockIndex({title:currentStage.title,blockIndex:blockIndex+1})} блок. {Sklonatel({count:stage.setCount,one:'сет',many:'сетов',rodit:'сета'})}</h2>
             {
               exercises.map((exercise,index) => <ExerciseCard key={exercise.id} exercise={exercise} blockIndex={blockIndex+1} exerciseIndex={index+1} isMany={exercises.length>1} setCount={stage.setCount}/>)
             }

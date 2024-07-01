@@ -41,6 +41,16 @@ const ExerciseCard = observer(({
     TrainingMobx.setUpdateOneExerciseSets(true)
   }
 
+  const formula = () => {
+    const set = exercise.sets[0]
+    const pokazatel = set.pokazatel1
+    const diapazonOt = set.diapazonOt1
+    if(pokazatel){
+      return pokazatel
+    }else{
+      return diapazonOt
+    }
+  }
 
 
 
@@ -51,7 +61,7 @@ const ExerciseCard = observer(({
     onMouseOut={()=>setIsDrag(false)}
     duration={.7}
     > 
-        <div className={css.header}>{isMany&&`${blockIndex}.${exerciseIndex} `}{exercise.nameRu}<span> / {exercise.nameEng}</span></div>
+        <div className={css.header}>{isMany&&`${addPatternHandlers.getBlockIndex({blockIndex,title:seria.title})}.${exerciseIndex} `}{exercise.nameRu}<span> / {exercise.nameEng}</span></div>
         <div className={css.stages}>
           {
            <div className={css.stageItem}><GradientLabel text={stage}/></div>
@@ -59,7 +69,7 @@ const ExerciseCard = observer(({
         </div>
         {formulaFlag &&
           <div className={css.formula}>
-            <span>{exercise.sets.length}x{exercise.sets[0].pokazatel2?exercise.sets[0].pokazatel2:exercise.sets[0].pokazatelOt2}</span> • 
+            <span>{exercise.sets.length}x{formula}</span> • 
             <span>{exercise.sets[0].pokazatel1?exercise.sets[0].pokazatel1:exercise.sets[0].pokazatelOt1} {exercise.pocazatel1Type}</span> • 
             <span>{Sklonatel({count:timeout,many:'секунд',one:'секунда',rodit:'секунды'})} отдыха</span>
             </div>
