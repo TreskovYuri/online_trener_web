@@ -8,7 +8,7 @@ export const dynamic = "force-dynamic";
 // Функция возвращает список всех комментариев к спортивным программам
 export async function GET(){
     try{
-        return Response.json(await ExerciseComment.findAll());
+        return Response.json(await ExerciseComment.findAll({order: [['updatedAt', 'DESC']] }));
     }catch(err){console.log(chalk.red(err)); return Response.json({"message":'Возникла непредвиденная ошибка...'},{status:418})}
 
 }

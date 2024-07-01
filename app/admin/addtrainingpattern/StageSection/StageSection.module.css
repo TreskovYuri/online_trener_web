@@ -15,12 +15,31 @@
     align-items: center;
     margin-bottom: 1vw;
 }
+.addBtn{
+    height: 1.5vw;
+    width: 1.5vw;
+    background-color: var(--input-bacground);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10vw;
+    cursor: pointer;
+    transition: all .3s;
+    opacity: .7;
+}
+.addBtn:hover{
+    background-color: var(--input-bacground-hover);
+    opacity: 1;
+}
+.plus{
+    height:60%;
+    width: auto;
+}
 .title{
     font-size: 1.2vw;
     font-weight: 600;
-}
-.addBtn{
-    width: 8vw;
-    height: 1.2vw;
-    margin-top: 2vw;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    gap: 1vw;
 }

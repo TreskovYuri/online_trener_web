@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+    padding: 0 0 1vw 0;
+}
+.container h2{
+    font-size: 0.8vw;
+    font-weight: 500;
+}
+.container span{
+    font-size: 0.7vw;
+}
+.btnBlock{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    height: 1.5vw;
+    padding: 0 1vw;
+} 
+.btnBlock span{
+    width: 45%;
+    height: 100%;
+    border-radius: .2vw;
+    transition: all .3s;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1vw;
+    font-size: 0.7vw;
+
+}
+.add{
+    background: linear-gradient(90deg, var(--gradient1) 0%, var(--gradient2) 100%);
+    color: white;
+}
+.add:hover{
+    background: linear-gradient(90deg, var(--gradient1-hover) 0%, var(--gradient2-hover) 100%);
+}
+.close{
+    border: 1px solid var(--gradient1);
+}
+.close:hover{
+    background-color: var(--gradient1);
+    color: white;
+}

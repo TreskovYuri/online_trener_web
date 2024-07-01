@@ -9,13 +9,16 @@
     flex: 1;
     font-size: 0.6vw;
     max-width: 2.5vw;
-    width: 2.5vw;
+    /* width: 2.5vw; */
     align-items: flex-start;
     justify-content: flex-start;
+    box-sizing: border-box;
+    overflow: hidden;
 }
 .flex2{
     display: flex;
     flex: 2;
     font-size: 0.6vw;
     max-width: 5vw;
+    overflow: hidden;
 }

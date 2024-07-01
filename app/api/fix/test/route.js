@@ -19,5 +19,5 @@ export async function GET(){
             if(! user){return Response.json({"message":'Не удалось расшифровать токен, доступ запрещен!'},{status:403})}
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время расшифровки токена'},{status:500})}
 
-        return Response.json(await FixTests.findAll());
+        return Response.json(await FixTests.findAll({order: [['updatedAt', 'DESC']] }));
     }catch(err){console.log(chalk.red(err)); return Response.json({"message":'Возникла непредвиденная ошибка ошибка...'},{status:418})}}

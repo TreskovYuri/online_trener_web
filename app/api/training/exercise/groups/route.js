@@ -21,7 +21,7 @@ export async function GET(){
             if(! userSession){return Response.json({"message":'Не удалось расшифровать токен, доступ запрещен!'},{status:403})}
         }catch(err){console.log(chalk.red(err));return Response.json({"message":'Возникла ошибка во время расшифровки токена'},{status:500})}
         if(userSession.post !== 'Супер тренер' && userSession.post !== 'Тренер'){return Response.json({"message":'Не валидная должность'},{status:400})}
-        return Response.json(await ExerciseGroups.findAll({where:{trenerId:userSession.id}}));
+        return Response.json(await ExerciseGroups.findAll({where:{trenerId:userSession.id},order: [['updatedAt', 'DESC']] }));
     }catch(err){console.log(chalk.red(err)); return Response.json({"message":'Возникла ошибка во время поиска пользователя в базе даных...'},{status:500})}
 
 }

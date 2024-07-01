@@ -6,6 +6,8 @@ import addPatternHandlers from '../../addPatternHandlers';
 import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv';
 import {  Pencil, Trash2 } from 'lucide-react';
 import Sklonatel from '@/utils/Sklonatel';
+import TrainingMobx from '@/mobx/TrainingMobx';
+import _ from 'lodash'
 
 
 const ExerciseCard = observer(({
@@ -15,17 +17,29 @@ const ExerciseCard = observer(({
   blockIndex=0,
   exerciseIndex=0,
   index,
-  timeout
+  timeout,
+  setCount
 }) => {
   const stage = exercise.stage
   const [isDrag, setIsDrag] = useState(false)
-  const formulaFlag = exercise.sets?.length>0? addPatternHandlers.isSetsReady({set:exercise.sets[0]}):false
+  const formulaFlag = exercise.sets.length>0 &&  _.some(exercise.sets, set => addPatternHandlers.isSetsReady(set));
 
 
   const handleDrag = () => {
       addPatternHandlers.handleDragSeries(setIsDrag, exercise, seria,index);
   
   };
+
+  const handleUpdate = () => {
+    TrainingMobx.setCurrentExercise({
+      seria,
+      exercise,
+      setCount,
+      blockIndex,
+      exerciseIndex
+    })
+    TrainingMobx.setUpdateOneExerciseSets(true)
+  }
 
 
 
@@ -43,7 +57,7 @@ const ExerciseCard = observer(({
            <div className={css.stageItem}><GradientLabel text={stage}/></div>
           }
         </div>
-        {exercise.sets?.length>0 && formulaFlag &&
+        {formulaFlag &&
           <div className={css.formula}>
             <span>{exercise.sets.length}x{exercise.sets[0].pokazatel2?exercise.sets[0].pokazatel2:exercise.sets[0].pokazatelOt2}</span> • 
             <span>{exercise.sets[0].pokazatel1?exercise.sets[0].pokazatel1:exercise.sets[0].pokazatelOt1} {exercise.pocazatel1Type}</span> • 
@@ -55,8 +69,7 @@ const ExerciseCard = observer(({
             addPatternHandlers.handleDragSeries(()=>{}, exercise, seria,index)
             addPatternHandlers.deleteExerciseOnSeries()
           }}><Trash2 className={css.delete}/></div>
-          <div className={css.delBtn} onClick={()=>{
-          }}><Pencil className={css.delete}/></div>
+          <div className={css.delBtn} onClick={handleUpdate}><Pencil className={css.delete}/></div>
         </div>
         
     </OpacityDiv>

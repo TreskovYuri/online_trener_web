@@ -39,14 +39,14 @@ export async function GET() {
     // Получвем принадлежащие ему спортивные программы
     let sportpogramms;
     try {
-      sportpogramms = await SportProgramm.findAll({ where: { userId: user.id } });
+      sportpogramms = await SportProgramm.findAll({ where: { userId: user.id },order: [['updatedAt', 'DESC']]  });
     } catch (err) {
       console.log(chalk.red(err));
       return Response.json({ message: "Возникла ошибка во получения спортивных программ" }, { status: 500 });
     }
     let users;
     try {
-      users = await User.findAll({ where: { post: "Спортсмен" } });
+      users = await User.findAll({ where: { post: "Спортсмен" },order: [['updatedAt', 'DESC']]  });
     } catch (err) {
       console.log(chalk.red(err));
       return Response.json({ message: "Возникла ошибка во получения спортивных программ" }, { status: 500 });
@@ -60,6 +60,7 @@ export async function GET() {
         try {
           sportsmans = await UsersBelongProgramm.findAll({
             where: { programmId: programm.id },
+            order: [['updatedAt', 'DESC']] 
           });
         } catch (err) {
           console.log(chalk.red(err));

@@ -8,6 +8,7 @@ import DropCard from '../DropCard/DropCard'
 import HeaderAddButton from '@/components/widgets/HeaderAddButton/HeaderAddButton'
 import { observer } from 'mobx-react-lite'
 import TrainingMobx from '@/mobx/TrainingMobx'
+import OpacityDiv from '@/components/widgets/MOTION/OpacityDiv/OpacityDiv'
 
 
 const SessionBox = observer(({seria}) => {
@@ -62,7 +63,7 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
 
 
   return (
-    <div className={css.card}>
+    <OpacityDiv className={css.card}>
       <div className={css.CardHeader}>
         <h3 className={css.CardTitle}>{index+1} блок.{seria.setCount} сетов</h3>
         <span>Кол-во сетов<div className={css.input}><NumberInputGradientBorder input={setCount} setInput={setSetCount}/></div></span>
@@ -109,7 +110,7 @@ const _OneSeria = observer(({seria,index, title ,stage,addExercise}) => {
       }
       <DropCard dropCallback={() => handleDrop(exercises.length,series,stage,setSeries,index)} />
       </div>
-    </div>
+    </OpacityDiv>
   )
 })
 

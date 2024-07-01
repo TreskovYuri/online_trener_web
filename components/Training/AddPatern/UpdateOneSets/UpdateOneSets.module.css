@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    padding: 1vw;
+    height: 100%;
+    box-sizing: border-box;
+}
+.btn{
+    margin-top: auto;
+    width: 100%;
+    height: 1.7vw;
+    min-height: 1.7vw;
+    position: relative;
+}
+
+.header{
+    font-size: 0.9vw;
+}
+.header span{
+    opacity: .4;
+}
+.scrollBox{
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: none; /* Скрыть скроллбар */
+}
+.label{
+    height: 1.2vw;
+    width: 8vw;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+}

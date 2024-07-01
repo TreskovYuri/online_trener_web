@@ -27,7 +27,7 @@ export async function GET() {
       );
     }
 
-    return Response.json(await TrainingPattern.findAll());
+    return Response.json(await TrainingPattern.findAll({order: [['updatedAt', 'DESC']] }));
   } catch (err) {
     console.log(chalk.red(err));
     return Response.json(

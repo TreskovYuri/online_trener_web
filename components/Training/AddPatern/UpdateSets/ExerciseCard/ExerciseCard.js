@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react'
 import addPatternHandlers from '@/app/admin/addtrainingpattern/addPatternHandlers'
 import { observer } from 'mobx-react-lite'
 import TrainingMobx from '@/mobx/TrainingMobx'
+import { ArrayIndexOnCountInt } from '@/utils/ArrayIndexOnCountInt'
 
 const ExerciseCard = observer(({exercise,blockIndex, exerciseIndex,isMany,setCount}) => {
     const [sets,setSets] = useState([])
@@ -43,8 +44,15 @@ const ExerciseCard = observer(({exercise,blockIndex, exerciseIndex,isMany,setCou
 
 
     useEffect(()=>{
-        if(exercise.sets.length>0){
+        if(exercise.sets.length>0 && exercise.sets.length == setCount){
             setSets(exercise.sets.slice(0,setCount))
+        }else if(exercise.sets.length<setCount){
+            setSets([
+                ...exercise.sets,
+                ...ArrayIndexOnCountInt(setCount).slice(exercise.sets.length,setCount).map(
+                    set => addPatternHandlers.createSetsArray({set:set,exercise})
+                )
+            ])
         }else{
             setSets(Array.from({ length: setCount }, (_, index) => addPatternHandlers.createSetsArray({set:index + 1,exercise:exercise})))
         }

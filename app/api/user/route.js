@@ -18,7 +18,7 @@ export const dynamic = 'force-dynamic'
 // Функция возвращает одного пользователя
 export async function GET(){
     try {
-        const users = await User.findAll();
+        const users = await User.findAll({order: [['updatedAt', 'DESC']] });
         const usersDto = users.map(user => new UserDto(user));
         return Response.json(usersDto)
     } catch (err) {

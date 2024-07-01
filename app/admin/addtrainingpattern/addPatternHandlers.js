@@ -49,6 +49,7 @@ class AddPatternHandlers {
       }
       return seria;
     });
+    localStorage.setItem('seria', JSON.stringify(updatedStages))
     setSeries(updatedStages);
   }
 
@@ -192,10 +193,11 @@ class AddPatternHandlers {
             }),
           };
       }
+
       return stg;
     });
 
-
+    localStorage.setItem('seria', JSON.stringify(finalItems))
     setSeries(finalItems)
     console.log(series)
   };
@@ -248,6 +250,7 @@ class AddPatternHandlers {
       }
       return seria
     })
+    localStorage.setItem('seria', JSON.stringify(result))
     setSeries(result)
   }
   deleteExerciseOnSeries(){
@@ -274,6 +277,7 @@ class AddPatternHandlers {
       }
       return sra;
     });
+    localStorage.setItem('seria', JSON.stringify(updatedItems))
     setSeries(updatedItems)
   }
   // Создание массива с сетами для заданного упражнения
@@ -320,15 +324,20 @@ class AddPatternHandlers {
       }
       return seria
     })
+    localStorage.setItem('seria', JSON.stringify(result))
     setSeries(result)
   }
 
   // Проверка все ли поля сета заполнены
-  isSetsReady({set}){
-    return _.every(set,(item)=>{
-      return item
-    })
+  isSetsReady(set) {
+    return _.every(set, (item, key) => {
+      if (key.startsWith('diapazonDo') && item == 0) {
+        return true;
+      }
+      return Boolean(item);
+    });
   }
+  
 
   // Проверка все ли поля сетов из всего глобального списка заполнены
   isAllSetsReady(series){
@@ -370,7 +379,39 @@ class AddPatternHandlers {
       return seria
     })
     setSeries(result)
-    console.log(result)
+    localStorage.setItem('seria', JSON.stringify(result))
+  }
+
+  saveSetsByOneExercise({currentExercise, sets}){
+    const series = TrainingMobx.series
+    const setSeries = TrainingMobx.setSeries
+    const result = _.map(series,(seria)=>{
+      if(currentExercise.seria.title == seria.title){
+        return {
+          ...seria,
+          stages:seria.stages.map((stage,index) => {
+            if(index == currentExercise.blockIndex){
+              return {
+                ...stage,
+                exercises: stage.exercises.map((ex,iterator)=>{
+                  if(iterator == currentExercise.exerciseIndex){
+                    return {
+                      ...ex,
+                      sets
+                    }
+                  }
+                  return ex
+                })
+              }
+            }
+            return stage
+          })
+        }
+      }
+      return seria
+    })
+    setSeries(result)
+
   }
 
 }

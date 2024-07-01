@@ -15,6 +15,7 @@ class TrainingMobx {
         this.setСurrentMuscleGroup = this.setСurrentMuscleGroup.bind(this);
         this.setСurrentGroup = this.setСurrentGroup.bind(this);
         this.setСurrentEquipment = this.setСurrentEquipment.bind(this);
+        this.setUpdateOneExerciseSets = this.setUpdateOneExerciseSets.bind(this);
     }
 
 
@@ -34,6 +35,8 @@ class TrainingMobx {
     // Выбранное оборудование для фильтрации упражнений
     currentEquipment = ''
     setСurrentEquipment(value) {this.currentEquipment = value;}
+
+
 
     // <============ Списки ============>
 
@@ -61,10 +64,10 @@ class TrainingMobx {
     // Выбранный этап для добавления упражнения
     currentStage = ''
     setCurrentStage(value) {this.currentStage = value;}
-    
-    // // Выбранное упражнения для редактирования сетов
-    // currentExercise = {}
-    // setCurrentExercise(value) {this.currentExercise = value;}
+    // Выбранный упражнение для редактирования его сетов
+    currentExercise = ''
+    setCurrentExercise(value) {this.currentExercise = value;}
+
 
 
     // <=========== Флаги ===================>
@@ -76,6 +79,9 @@ class TrainingMobx {
     // Флаг для открывания окна редактирования сетов
     updateExerciseSets = false
     setUpdateExerciseSets(value) {this.updateExerciseSets = value;}
+    // Флаг для открывания окна редактирования сетов отдельного упражнения
+    updateOneExerciseSets = false
+    setUpdateOneExerciseSets(value) {this.updateOneExerciseSets = value;}
 
     // Флаг для отслеживания нажатойкнопки Shift
     isShifted = false

@@ -29,17 +29,17 @@ const ExerciseDetails = observer(() => {
             <span className={css.description}>{mobx.oneExercise.descriptionRu}</span>
 
             {
-              mobx.oneExercise.video && !mobx.oneExercise.link &&
+              mobx.oneExercise.video  &&
               <video controls className={css.youTubeVideo}>
                 <source type="video/mp4" src={`${process.env.NEXT_PUBLIC_STATIC_URL}/assets/${mobx.oneExercise.video}`}/>
               </video>
             }
-            {
+            {/* {
               mobx.oneExercise.link &&
                 <iframe width="100%" height="auto" className={css.youTubeVideo}
                     src={`https://www.youtube.com/embed/${mobx.oneExercise.link.split('/').pop()}`}>
                 </iframe>
-            }
+            } */}
             <span className={css.label1}>Этап:</span>
             <div className={css.stageContaienr}>
                 {JSON.parse(mobx.oneExercise.stage)?.map(el => (
