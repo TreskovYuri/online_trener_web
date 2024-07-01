@@ -12,6 +12,7 @@ class TrainingMobx {
         this.setUpdateExerciseSets = this.setUpdateExerciseSets.bind(this);
         this.setSeries = this.setSeries.bind(this);
         this.setTrainingName = this.setTrainingName.bind(this);
+        this.setTrainingDescription = this.setTrainingDescription.bind(this);
         this.setСurrentMuscleGroup = this.setСurrentMuscleGroup.bind(this);
         this.setСurrentGroup = this.setСurrentGroup.bind(this);
         this.setСurrentEquipment = this.setСurrentEquipment.bind(this);
@@ -23,6 +24,10 @@ class TrainingMobx {
     // Название тренировки при ее создании
     trainingName = ''
     setTrainingName(value) {this.trainingName = value;}
+
+    // Описание тренировки при ее создании
+    trainingDescription = ''
+    setTrainingDescription(value) {this.trainingDescription = value;}
 
     // Выбрання группа мышц для фильтрации упражнений
     currentMuscleGroup = ''

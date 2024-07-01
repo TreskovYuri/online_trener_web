@@ -31,11 +31,13 @@ const page = observer(() => {
   const tests = TrainingMobx.addPatternTests
   const updateExerciseSets = TrainingMobx.updateExerciseSets
   const [name,setName] = useState(TrainingMobx.trainingName)
+  const [description,setDescription] = useState(TrainingMobx.trainingDescription)
   const updateOneExerciseSets = TrainingMobx.updateOneExerciseSets
   
   useEffect(()=>{
     const seria =  localStorage.getItem('seria')
     const trainingName =  localStorage.getItem('trainingName')
+    const trainingDescription =  localStorage.getItem('trainingDescription')
     mobx.setPageName('Шаблон тренировки')
     TrainingUtills.getExercise()
     GroupUtills.getTests()
@@ -48,6 +50,13 @@ const page = observer(() => {
       localStorage.setItem('trainingName', TrainingMobx.trainingName)
     }else if (trainingName){
       TrainingMobx.setTrainingName(trainingName)
+    }
+    if(TrainingMobx.description){
+      localStorage.setItem('trainingDescription', TrainingMobx.trainingDescription)
+      setDescription(TrainingMobx.trainingDescription)
+    }
+    if(trainingDescription){
+      setDescription(trainingDescription)
     }
     if(seria){
       setSeries(JSON.parse(seria))
@@ -65,6 +74,7 @@ const page = observer(() => {
       if(addPatternHandlers.isAllSetsReady(series)){
         const formData = new FormData()
         formData.append('name',name||TrainingMobx.trainingName)
+        formData.append('description',description||TrainingMobx.trainingDescription)
         formData.append('stages',JSON.stringify(series))
         const data = await TrainingUtills.createPattern(formData)
         if(data == 'ok'){

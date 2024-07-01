@@ -13,6 +13,7 @@
     top: 2vw;
     right: 3vw;
     gap: .3vw;
+    align-items: center;
 }
 .add{
     background-color: white;
@@ -25,15 +26,16 @@
     gap: .3vw;
     cursor: pointer;
     transition: all .3s;
+    height: 1.4vw;
 }
 .add span{
-    font-size: 1.5vw;
+    font-size: 1.3vw;
 }
 .btn{
     background-color: white;
     border-radius: 10vw;
-    width: 2vw;
-    height: 2vw;
+    width: 1.5vw;
+    height: 1.5vw;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,7 +43,7 @@
     transition: all .3s;
 }
 .img{
-    height: .8vw;
+    height: 40%;
     width:  auto;
     margin: 0;
 }

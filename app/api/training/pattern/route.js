@@ -45,6 +45,7 @@ export async function POST(req) {
     const session = cookies().get("session").value;
     const formData = await req.formData();
     const name = formData.get("name");
+    const description = formData.get("description");
     const stages = JSON.parse(formData.get("stages"));
     if (!name) {
       return Response.json({ message: "Передайте название" }, { status: 400 });
@@ -77,7 +78,7 @@ export async function POST(req) {
     }
     let pattern;
     try {
-      pattern = await TrainingPattern.create({ name, userId: userSession.id,stages:stages});
+      pattern = await TrainingPattern.create({ name,description, userId: userSession.id,stages:stages});
     } catch (err) {
       console.log(chalk.red(err));
       return Response.json(

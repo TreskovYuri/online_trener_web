@@ -4,7 +4,7 @@
     border-radius: .5vw;
     border: 1px solid var(--input-border);
     outline: none;
-    padding: .5vw 1vw;
+    padding: .5vw ;
     font-size: 0.7vw;
     resize: none;
 }

@@ -12,12 +12,14 @@ import TrainingMobx from "@/mobx/TrainingMobx";
 import CenterModalWind from "@/components/widgets/MODALS/CenterModalWind/CenterModalWind";
 import ContinueModal from "./ContinueModal/ContinueModal";
 import { observer } from "mobx-react-lite";
+import RigthModalDescriptionInput from "@/components/widgets/INPUTS/RigthModalDescriptionInput/RigthModalDescriptionInput";
 
 const AddPatern = observer(() => {
   const router = useRouter()
   const [name, setName] = useState(""); 
+  const [description, setDescription] = useState(""); 
   const [modal,setModal] = useState(false)
-  const [seria,setSeria] = useState([])
+
 
   const save = async () => {
     if (!name) {
@@ -25,6 +27,7 @@ const AddPatern = observer(() => {
       return;
     }
     TrainingMobx.setTrainingName(name)
+    TrainingMobx.setTrainingDescription(description)
     mobx.setAddPattern(false)
     router.push('/admin/addtrainingpattern')
   };
@@ -37,9 +40,7 @@ const AddPatern = observer(() => {
       setTimeout(()=>{
         setModal(true)
       },[500])
-
     }
-
   },[])
 
   const cont = () => {
@@ -60,8 +61,9 @@ const AddPatern = observer(() => {
       }}/>}
       />}
       <div className={css.container}>
-        <RightModalHeader title={'Новый шаблон'}/>
+        <RightModalHeader title={'Новый шаблон'} />
         <div className={css.input}><RigthModalInput type={"text"}  placwholder={"Название"}  input={name} setInput={(e) => setName(e)}/></div>
+        <div className={css.description}><RigthModalDescriptionInput  type={"text"}  placwholder={"Описание"}  input={description} setInput={(e) => setDescription(e)}/></div>
           <div className={css.btnSave}>
             <GradientButtonOval text='Сохранить' callback={save}/>
           </div>
