@@ -36,7 +36,7 @@ const StageSection = observer(({ seria = {} }) => {
               onDragLeave={handleDragLeave}
               onDragOver={handleDragOver}
               onDrop={handleDrop}
-              // onClick={() => addPatternHandlers.addBlockToSeries(seria.title)}
+              onClick={() => addPatternHandlers.addBlockToSeries(seria.title)}
             ></div>
             <Plus className={`${css.plus} `} />
           </div>
